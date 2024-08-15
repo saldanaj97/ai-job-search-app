@@ -6,12 +6,12 @@ const RootLayout: React.FC<{ children: React.ReactNode }> = async ({
   children,
 }) => {
   return (
-    <>
+    <div>
       <Navbar>
         <AuthComponent />
       </Navbar>
       {children}
-    </>
+    </div>
   );
 };
 

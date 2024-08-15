@@ -21,9 +21,11 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
     <div className="flex h-16 items-center justify-between px-6 lg:px-14">
       <div className="flex items-center">
         <Link href={"/"} className="shrink-0">
-          <h1 className="text-2xl font-bold text-accent-foreground">devlink</h1>
+          <h1 className="text-2xl font-bold text-accent-foreground">
+            WannaBeHired.ai
+          </h1>
         </Link>
-        <div className="hidden w-full justify-end gap-1 bg-background px-4 py-2 sm:flex">
+        {/* <div className="hidden w-full justify-end gap-1 bg-background px-4 py-2 sm:flex">
           {routes.map((route, index) => (
             <Link
               key={index}
@@ -33,7 +35,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
               {route.title}
             </Link>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {children}
@@ -62,7 +64,7 @@ const MobileMenu: React.FC<{
   return (
     <div className="absolute right-0 top-16 flex h-[calc(100vh-64px)] w-full flex-col">
       <div className="flex w-full grow flex-col gap-1 bg-background px-4 pb-2 sm:hidden">
-        {routes.map((route, index) => (
+        {/* {routes.map((route, index) => (
           <Link
             key={index}
             href={route.href}
@@ -71,7 +73,7 @@ const MobileMenu: React.FC<{
           >
             {route.title}
           </Link>
-        ))}
+        ))} */}
         {children}
       </div>
       <div className="h-screen w-full bg-background/60 sm:hidden" />
