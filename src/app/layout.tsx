@@ -23,9 +23,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${GeistSans.variable}`}
     >
-      <body
-        className={`container flex min-h-screen min-w-full flex-col border-[12px]`}
-      >
+      <body>
         <TRPCReactProvider cookies={cookies().toString()}>
           <ThemeProvider
             attribute="class"

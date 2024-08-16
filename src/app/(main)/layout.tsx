@@ -6,7 +6,7 @@ const RootLayout: React.FC<{ children: React.ReactNode }> = async ({
   children,
 }) => {
   return (
-    <div>
+    <div className="dark-background min-h-screen">
       <Navbar>
         <AuthComponent />
       </Navbar>
