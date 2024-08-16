@@ -22,7 +22,6 @@ export const TypingEffect = ({
     const type = () => {
       let updatedText = displayedText;
 
-      // TODO: Add a delay before deleting the character
       if (isDeleting) {
         // Deleting
         updatedText = displayedText.slice(0, -1);
@@ -91,14 +90,10 @@ export const TypingEffect = ({
   }, []);
 
   return (
-    <div style={{ display: "inline-block", minWidth: "1ch" }}>
+    <div className="inline-block min-w-[1ch]">
       {displayedText}
       <span
-        style={{
-          visibility: cursorVisible ? "visible" : "hidden",
-          width: "1ch",
-          display: "inline-block",
-        }}
+        className={`inline-block w-[1ch] ${cursorVisible ? "visible" : "invisible"}`}
       >
         |
       </span>

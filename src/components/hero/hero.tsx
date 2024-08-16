@@ -4,15 +4,14 @@ import { FaArrowDown } from "react-icons/fa";
 import { TypingEffect } from "~/components/hero/TypingEffect";
 import { Button } from "~/components/ui/button";
 
+// TODO: Fix the typing effect to stop moving the text down for improved user reading flow
 export default function Hero() {
   return (
-    <div className="container relative mx-auto flex max-w-3xl flex-1 flex-col items-center justify-center text-center">
+    <div className="container relative flex max-w-3xl flex-1 flex-col items-center justify-center text-center">
       {/* Hero Heading */}
-      <h1 className="relative z-10 mb-4 text-6xl font-bold tracking-tight sm:text-8xl">
-        <TypingEffect
-          word="Tired of being overlooked?"
-          simulateErrors={false}
-        />
+      <h1 className="relative z-10 mb-4 text-5xl font-bold tracking-tight sm:h-24 md:h-fit md:w-screen md:text-7xl lg:h-fit lg:text-8xl">
+        Tired of being{" "}
+        <TypingEffect word="overlooked?" simulateErrors={false} />
       </h1>
 
       {/* Hero Subheading */}

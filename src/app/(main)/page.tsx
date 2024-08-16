@@ -10,7 +10,7 @@ export default async function LandingPage() {
   } = await supabase.auth.getUser();
 
   return (
-    <div className="flex flex-col">
+    <div className="flex h-screen flex-col">
       {user ? (
         <div className="flex-column flex items-center justify-center gap-4">
           Hey, {user.email}!
