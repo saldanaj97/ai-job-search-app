@@ -62,15 +62,9 @@
 .light-background,
 .dark-background {
   background-size: 150% 150%;
-  animation: gradient-animation-pulse 25s ease infinite;
+  animation: gradient-animation-pulse 15s ease infinite;
 }
 
-.light-background,
-.dark-background {
-  position: relative;
-  background-size: 150% 150%;
-  animation: gradient-animation-pulse 25s ease infinite;
-}
 /*
 .light-background::before,
 .dark-background::before {
