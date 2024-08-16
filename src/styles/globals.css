@@ -71,7 +71,7 @@
   background-size: 150% 150%;
   animation: gradient-animation-pulse 25s ease infinite;
 }
-
+/*
 .light-background::before,
 .dark-background::before {
   content: "";
@@ -84,7 +84,7 @@
   background: radial-gradient(circle, white 10%, transparent 60%);
   z-index: 1;
   pointer-events: none;
-}
+} */
 
 .light-background {
   background: linear-gradient(140.54deg, #608d00 0%, #d30000 72.37%),
