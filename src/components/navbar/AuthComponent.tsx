@@ -17,7 +17,7 @@ export default async function AuthComponent() {
     <ProfileButton user={user} />
   ) : (
     <div className="hidden items-center gap-2 sm:flex">
-      <Link href={"/login"} className="w-full sm:w-auto">
+      <Link href="/login" className="w-full sm:w-auto">
         <Button variant="secondary" size="sm" className="w-full">
           Log In
         </Button>

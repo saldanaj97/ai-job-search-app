@@ -18,7 +18,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="absolute flex h-16 w-full items-center justify-between px-6 lg:px-14">
+    <div className="absolute z-50 flex h-16 w-full items-center justify-between px-6 lg:px-14">
       <div className="flex items-center">
         <Link href={"/"} className="shrink-0">
           <h1 className="text-2xl font-bold text-accent-foreground">

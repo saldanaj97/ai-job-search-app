@@ -1,6 +1,5 @@
 "use client";
 
-import { FaArrowDown } from "react-icons/fa";
 import { TypingEffect } from "~/components/hero/TypingEffect";
 import { Button } from "~/components/ui/button";
 
@@ -23,9 +22,8 @@ export default function Hero() {
       </p>
 
       {/* Call to Action Button */}
-      <Button className="animate-gradientMove relative z-10 bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg">
+      <Button className="relative z-10 bg-primary text-white shadow-lg">
         Get started!
-        <FaArrowDown className="animate-bounce" size={18} />
       </Button>
     </div>
   );
