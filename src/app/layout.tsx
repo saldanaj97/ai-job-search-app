@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 
 import { ThemeProvider } from "~/components/ThemeProvider";
 import { TRPCReactProvider } from "~/trpc/react";
+import React from "react";
 
 export const metadata = {
   title: "Create T3 App",
