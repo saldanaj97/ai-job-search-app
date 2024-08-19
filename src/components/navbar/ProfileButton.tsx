@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import {type User} from "@supabase/supabase-js";
-import Link from "next/link";
-import {useRouter} from "next/navigation";
-import React, {useEffect, useState} from "react";
-import {createClient} from "~/utils/supabase/client";
-import {Avatar, AvatarFallback, AvatarImage} from "../ui/avatar";
+import { type User } from '@supabase/supabase-js';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import { createClient } from '~/utils/supabase/client';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
-export default function ProfileButton({user}: { user: User }) {
+export default function ProfileButton({ user }: { user: User }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const router = useRouter();
@@ -28,21 +28,18 @@ export default function ProfileButton({user}: { user: User }) {
       }
     };
 
-    document.addEventListener("mousedown", handleOutsideClick);
+    document.addEventListener('mousedown', handleOutsideClick);
 
     return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, [ref]);
 
   if (!user) return null;
   return (
-    <div ref={ref} className="hidden sm:block">
-      <Avatar
-        className="hover:cursor-pointer"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        <AvatarImage src="https://wallpapers.com/images/high/funny-profile-picture-7k1legjukiz1lju7.webp"/>
+    <div ref={ref} className="hidden md:flex flex-row justify-end">
+      <Avatar className="hover:cursor-pointer" onClick={() => setMenuOpen(!menuOpen)}>
+        <AvatarImage src="https://wallpapers.com/images/high/funny-profile-picture-7k1legjukiz1lju7.webp" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
       {menuOpen && (
@@ -50,7 +47,7 @@ export default function ProfileButton({user}: { user: User }) {
           <div className="flex items-center">
             <div className="pr-4">
               <Avatar onClick={() => setMenuOpen(!menuOpen)}>
-                <AvatarImage src="https://wallpapers.com/images/high/funny-profile-picture-7k1legjukiz1lju7.webp"/>
+                <AvatarImage src="https://wallpapers.com/images/high/funny-profile-picture-7k1legjukiz1lju7.webp" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
             </div>
@@ -59,22 +56,14 @@ export default function ProfileButton({user}: { user: User }) {
               <p className="text-md text-muted-foreground">{user?.email}</p>
             </div>
           </div>
-          <hr className="my-2 border-t-2 border-slate-600"/>
+          <hr className="my-2 border-t-2 border-slate-600" />
           <p className="py-2 text-lg text-muted-foreground">
-            <Link
-              onClick={() => setMenuOpen(false)}
-              className="hover:text-muted-foreground/70"
-              href="/profile"
-            >
+            <Link onClick={() => setMenuOpen(false)} className="hover:text-muted-foreground/70" href="/profile">
               Profile
             </Link>
           </p>
           <p className="py-2 text-lg text-muted-foreground">
-            <Link
-              onClick={() => setMenuOpen(false)}
-              className="hover:text-muted-foreground/70"
-              href="/settings"
-            >
+            <Link onClick={() => setMenuOpen(false)} className="hover:text-muted-foreground/70" href="/settings">
               Settings
             </Link>
           </p>

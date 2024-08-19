@@ -1,16 +1,16 @@
-"use client";
-import {Bars3Icon, XMarkIcon} from "@heroicons/react/24/solid";
-import Link from "next/link";
-import React, {useState} from "react";
-import AuthComponent from "./AuthComponent";
+'use client';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/solid';
+import Link from 'next/link';
+import React, { useState } from 'react';
+import AuthComponent from './AuthComponent';
 
 const routes: { title: string; href: string }[] = [
-  {title: "Features", href: "#"},
-  {title: "Resources", href: "#"},
-  {title: "Pricing", href: "#"},
+  { title: 'Features', href: '#' },
+  { title: 'Resources', href: '#' },
+  { title: 'Pricing', href: '#' },
 ];
 
-export default function Navbar({children}: { children: React.ReactNode }) {
+export default function Navbar({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -18,19 +18,19 @@ export default function Navbar({children}: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="absolute z-50 flex h-16 w-full items-center justify-between px-6 lg:px-14">
-      <div className="flex items-center">
-        <Link href={"/"} className="shrink-0">
-          <h1 className="text-2xl font-bold text-accent-foreground">
-            WannaBeHired.ai
-          </h1>
-        </Link>
-        <div className="hidden w-full justify-end gap-1 bg-transparent px-4 py-2 sm:flex">
+    <div className=" z-50 flex h-16 w-full items-center justify-between px-6 lg:px-14">
+      <Link href={'/'} className="shrink-0">
+        <h1 className="text-2xl font-bold text-accent-foreground w-[200px]">WannaBeHired.ai</h1>
+      </Link>
+
+      {/* Center the links with auto margins */}
+      <div className="hidden md:flex grow justify-center">
+        <div className="flex gap-4">
           {routes.map((route, index) => (
             <Link
               key={index}
               href={route.href}
-              className={`inline-flex h-10 w-full items-center px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-accent-foreground sm:w-auto`}
+              className={`inline-flex h-10 items-center px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-accent-foreground`}
             >
               {route.title}
             </Link>
@@ -38,20 +38,16 @@ export default function Navbar({children}: { children: React.ReactNode }) {
         </div>
       </div>
 
-      {children}
+      <div className="shrink-0 w-[200px]">{children}</div>
 
       {menuOpen && (
         <MobileMenu toggleMenu={toggleMenu}>
-          <AuthComponent/>
+          <AuthComponent />
         </MobileMenu>
       )}
 
-      <button onClick={toggleMenu} className="sm:hidden">
-        {menuOpen ? (
-          <XMarkIcon className="h-7 w-7"/>
-        ) : (
-          <Bars3Icon className="h-7 w-7"/>
-        )}
+      <button onClick={toggleMenu} className="md:hidden">
+        {menuOpen ? <XMarkIcon className="h-7 w-7" /> : <Bars3Icon className="h-7 w-7" />}
       </button>
     </div>
   );
@@ -60,23 +56,23 @@ export default function Navbar({children}: { children: React.ReactNode }) {
 const MobileMenu: React.FC<{
   toggleMenu: () => void;
   children: React.ReactNode;
-}> = ({toggleMenu, children}) => {
+}> = ({ toggleMenu, children }) => {
   return (
     <div className="absolute right-0 top-16 flex h-[calc(100vh-64px)] w-full flex-col">
       <div className="flex w-full grow flex-col gap-1 bg-background px-4 pb-2 sm:hidden">
-        {/* {routes.map((route, index) => (
-         <Link
-         key={index}
-         href={route.href}
-         onClick={toggleMenu}
-         className={`inline-flex h-10 w-full items-center text-sm text-muted-foreground transition-colors hover:text-accent-foreground sm:w-auto`}
-         >
-         {route.title}
-         </Link>
-         ))} */}
+        {routes.map((route, index) => (
+          <Link
+            key={index}
+            href={route.href}
+            // onClick={toggleMenu}
+            className={`inline-flex h-10 w-full items-center text-sm text-muted-foreground transition-colors hover:text-accent-foreground sm:w-auto`}
+          >
+            {route.title}
+          </Link>
+        ))}
         {children}
       </div>
-      <div className="h-screen w-full bg-background/60 sm:hidden"/>
+      <div className="h-screen w-full bg-background/60 sm:hidden" />
     </div>
   );
 };

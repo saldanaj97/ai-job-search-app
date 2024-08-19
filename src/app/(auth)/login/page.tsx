@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import {Button} from "~/components/ui/button";
-import {Form, FormControl, FormField, FormItem, FormLabel, FormMessage,} from "~/components/ui/form";
+import Link from 'next/link';
+import { Button } from '~/components/ui/button';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
 
-import {zodResolver} from "@hookform/resolvers/zod";
-import {useState} from "react";
-import {useForm} from "react-hook-form";
-import {z} from "zod";
-import {Input} from "~/components/ui/input";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { Input } from '~/components/ui/input';
 
-import {OAuthButton} from "~/components/auth/OAuthButton";
-import {signIn} from "../actions";
+import { OAuthButton } from '~/components/auth/OAuthButton';
+import { signIn } from '../actions';
 
 const registerSchema = z.object({
   email: z.string().email(),
@@ -24,8 +24,8 @@ export default function Login() {
   const form = useForm<LoginInput>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
   });
 
@@ -40,7 +40,7 @@ export default function Login() {
 
   return (
     <div className="flex">
-      <div className="hidden h-screen grow bg-secondary/15 lg:block"/>
+      <div className="hidden h-screen grow bg-secondary/15 lg:block" />
       <div className="h-screen w-full bg-background lg:w-1/2">
         <div className="flex h-full items-center justify-center">
           <div className="w-full max-w-md p-8">
@@ -53,39 +53,26 @@ export default function Login() {
                 <FormField
                   control={form.control}
                   name="email"
-                  render={({field}) => (
+                  render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-muted-foreground">
-                        Email Address
-                      </FormLabel>
+                      <FormLabel className="text-muted-foreground">Email Address</FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="Your email address"
-                          {...field}
-                          autoComplete="on"
-                        />
+                        <Input placeholder="Your email address" {...field} autoComplete="on" />
                       </FormControl>
-                      <FormMessage/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
                 <FormField
                   control={form.control}
                   name="password"
-                  render={({field}) => (
+                  render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-muted-foreground">
-                        Password
-                      </FormLabel>
+                      <FormLabel className="text-muted-foreground">Password</FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="Your password"
-                          type="password"
-                          autoComplete="on"
-                          {...field}
-                        />
+                        <Input placeholder="Your password" type="password" autoComplete="on" {...field} />
                       </FormControl>
-                      <FormMessage/>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -94,20 +81,18 @@ export default function Login() {
                 </Button>
                 {error && (
                   <div className="mb-3 mt-1 rounded-md border border-destructive bg-destructive/10 p-3">
-                    <p className="text-center text-sm font-medium text-destructive">
-                      {error}
-                    </p>
+                    <p className="text-center text-sm font-medium text-destructive">{error}</p>
                   </div>
                 )}
               </form>
             </Form>
             <div className="flex items-center gap-2 py-4">
-              <hr className="w-full"/>
+              <hr className="w-full" />
               <p className="text-xs text-muted-foreground">OR</p>
-              <hr className="w-full"/>
+              <hr className="w-full" />
             </div>
-            <OAuthButton provider={"google"}/>
-            <OAuthButton provider={"github"}/>
+            <OAuthButton provider={'google'} />
+            <OAuthButton provider={'github'} />
             <p className="py-4 text-center text-sm text-muted-foreground underline">
               <Link href="/signup">Don&apos;t have an account? Sign up</Link>
             </p>
