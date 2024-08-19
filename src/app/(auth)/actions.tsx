@@ -1,9 +1,9 @@
 "use server";
 
-import { cookies, headers } from "next/headers";
-import { createClient } from "~/utils/supabase/server";
-import { type LoginInput } from "./login/page";
-import type { SignupInput } from "./signup/page";
+import {cookies, headers} from "next/headers";
+import {createClient} from "~/utils/supabase/server";
+import {type LoginInput} from "./login/page";
+import type {SignupInput} from "./signup/page";
 
 const supabase = createClient(cookies());
 const origin = headers().get("origin");
@@ -11,7 +11,7 @@ const origin = headers().get("origin");
 export const signUp = async (data: SignupInput) => {
   "use server";
 
-  const { error } = await supabase.auth.signUp({
+  const {error} = await supabase.auth.signUp({
     email: data.email,
     password: data.password,
     options: {
@@ -29,7 +29,7 @@ export const signUp = async (data: SignupInput) => {
 export const signIn = async (data: LoginInput) => {
   "use server";
 
-  const { error } = await supabase.auth.signInWithPassword({
+  const {error} = await supabase.auth.signInWithPassword({
     email: data.email,
     password: data.password,
   });

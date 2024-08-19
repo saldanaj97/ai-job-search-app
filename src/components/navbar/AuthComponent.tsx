@@ -1,20 +1,20 @@
 "use server";
 
-import { cookies } from "next/headers";
+import {cookies} from "next/headers";
 import Link from "next/link";
-import { createClient } from "~/utils/supabase/server";
-import { Button } from "../ui/button";
+import {createClient} from "~/utils/supabase/server";
+import {Button} from "../ui/button";
 import ProfileButton from "./ProfileButton";
 
 export default async function AuthComponent() {
   const supabase = createClient(cookies());
 
   const {
-    data: { user },
+    data: {user},
   } = await supabase.auth.getUser();
 
   return user ? (
-    <ProfileButton user={user} />
+    <ProfileButton user={user}/>
   ) : (
     <div className="hidden items-center gap-2 sm:flex">
       <Link href="/login" className="w-full sm:w-auto">

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
 interface TypingEffectProps {
   word: string;
@@ -6,9 +6,9 @@ interface TypingEffectProps {
 }
 
 export const TypingEffect = ({
-  word,
-  simulateErrors = true,
-}: TypingEffectProps) => {
+                               word,
+                               simulateErrors = true,
+                             }: TypingEffectProps) => {
   const [displayedText, setDisplayedText] = useState("");
   const [typingIndex, setTypingIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);

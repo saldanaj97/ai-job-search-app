@@ -1,19 +1,19 @@
 "use client";
 
-import { type Provider } from "@supabase/supabase-js";
-import { redirect, usePathname } from "next/navigation";
+import {type Provider} from "@supabase/supabase-js";
+import {redirect, usePathname} from "next/navigation";
 import React from "react";
-import { FaGithub } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
-import { Button } from "~/components/ui/button";
-import { createClient } from "~/utils/supabase/client";
+import {FaGithub} from "react-icons/fa";
+import {FcGoogle} from "react-icons/fc";
+import {Button} from "~/components/ui/button";
+import {createClient} from "~/utils/supabase/client";
 
-export const OAuthButton: React.FC<{ provider: Provider }> = ({ provider }) => {
+export const OAuthButton: React.FC<{ provider: Provider }> = ({provider}) => {
   const pathname = usePathname();
   const supabase = createClient();
 
   const handleLogin = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
+    const {error} = await supabase.auth.signInWithOAuth({
       provider: provider,
       options: {
         redirectTo: `${location.origin}/auth/callback?next=${pathname}`,
@@ -33,7 +33,7 @@ export const OAuthButton: React.FC<{ provider: Provider }> = ({ provider }) => {
         onClick={() => handleLogin().catch(console.error)}
       >
         <div className="flex items-center gap-2">
-          <FcGoogle className="h-5 w-5" />
+          <FcGoogle className="h-5 w-5"/>
           <p>Sign in with Google</p>
         </div>
       </Button>
@@ -48,7 +48,7 @@ export const OAuthButton: React.FC<{ provider: Provider }> = ({ provider }) => {
         onClick={handleLogin}
       >
         <div className="flex items-center gap-2">
-          <FaGithub className="h-5 w-5" />
+          <FaGithub className="h-5 w-5"/>
           <p>Sign in with GitHub</p>
         </div>
       </Button>

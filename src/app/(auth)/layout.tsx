@@ -1,16 +1,16 @@
-import { cookies } from "next/headers";
+import {cookies} from "next/headers";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import {redirect} from "next/navigation";
 import React from "react";
-import { createClient } from "~/utils/supabase/server";
+import {createClient} from "~/utils/supabase/server";
 
 const RootLayout: React.FC<{ children: React.ReactNode }> = async ({
-  children,
-}) => {
+                                                                     children,
+                                                                   }) => {
   const supabase = createClient(cookies());
 
   const {
-    data: { user },
+    data: {user},
   } = await supabase.auth.getUser();
 
   if (user) {
