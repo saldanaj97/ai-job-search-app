@@ -1,7 +1,8 @@
 import { type User } from '@supabase/supabase-js';
+import React from 'react';
 
-export default function DashboardPage({ ...props }: { user: User }) {
-  const { email } = props.user;
+const DashboardPage: React.FC<{ user: User }> = ({ user }: { user: User }) => {
+  const { email } = user;
 
   return (
     <div className="flex h-screen flex-col">
@@ -11,4 +12,6 @@ export default function DashboardPage({ ...props }: { user: User }) {
       <div>Hello, {email}</div>
     </div>
   );
-}
+};
+
+export default DashboardPage;
