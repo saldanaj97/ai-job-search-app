@@ -42,7 +42,11 @@ export const OAuthButton: React.FC<{ provider: Provider }> = ({ provider }) => {
 
   if (provider === 'github') {
     return (
-      <Button variant="outline" className="mb-2 w-full font-normal text-muted-foreground" onClick={handleLogin}>
+      <Button
+        variant="outline"
+        className="mb-2 w-full font-normal text-muted-foreground"
+        onClick={handleLogin}
+      >
         <div className="flex items-center gap-2">
           <FaGithub className="h-5 w-5" />
           <p>Sign in with GitHub</p>

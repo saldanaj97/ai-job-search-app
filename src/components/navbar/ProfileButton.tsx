@@ -37,8 +37,11 @@ export default function ProfileButton({ user }: { user: User }) {
 
   if (!user) return null;
   return (
-    <div ref={ref} className="hidden md:flex flex-row justify-end">
-      <Avatar className="hover:cursor-pointer" onClick={() => setMenuOpen(!menuOpen)}>
+    <div ref={ref} className="hidden flex-row justify-end md:flex">
+      <Avatar
+        className="hover:cursor-pointer"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
         <AvatarImage src="https://wallpapers.com/images/high/funny-profile-picture-7k1legjukiz1lju7.webp" />
         <AvatarFallback>CN</AvatarFallback>
       </Avatar>
@@ -58,12 +61,20 @@ export default function ProfileButton({ user }: { user: User }) {
           </div>
           <hr className="my-2 border-t-2 border-slate-600" />
           <p className="py-2 text-lg text-muted-foreground">
-            <Link onClick={() => setMenuOpen(false)} className="hover:text-muted-foreground/70" href="/profile">
+            <Link
+              onClick={() => setMenuOpen(false)}
+              className="hover:text-muted-foreground/70"
+              href="/profile"
+            >
               Profile
             </Link>
           </p>
           <p className="py-2 text-lg text-muted-foreground">
-            <Link onClick={() => setMenuOpen(false)} className="hover:text-muted-foreground/70" href="/settings">
+            <Link
+              onClick={() => setMenuOpen(false)}
+              className="hover:text-muted-foreground/70"
+              href="/settings"
+            >
               Settings
             </Link>
           </p>

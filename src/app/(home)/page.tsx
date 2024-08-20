@@ -11,5 +11,9 @@ export default async function LandingPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  return <div className="flex h-screen flex-col">{user ? <DashboardPage user={user} /> : <Hero />}</div>;
+  return (
+    <div className="flex h-screen flex-col">
+      {user ? <DashboardPage user={user} /> : <Hero />}
+    </div>
+  );
 }

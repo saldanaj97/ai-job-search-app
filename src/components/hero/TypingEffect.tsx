@@ -5,7 +5,10 @@ interface TypingEffectProps {
   simulateErrors?: boolean;
 }
 
-export const TypingEffect = ({ word, simulateErrors = true }: TypingEffectProps) => {
+export const TypingEffect = ({
+  word,
+  simulateErrors = true,
+}: TypingEffectProps) => {
   const [displayedText, setDisplayedText] = useState('');
   const [typingIndex, setTypingIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -13,7 +16,8 @@ export const TypingEffect = ({ word, simulateErrors = true }: TypingEffectProps)
   const [cursorVisible, setCursorVisible] = useState(true);
 
   useEffect(() => {
-    const getRandomTimeout = () => Math.floor(Math.random() * (300 - 50 + 1) + 50); // Random timeout between 50ms and 300ms
+    const getRandomTimeout = () =>
+      Math.floor(Math.random() * (300 - 50 + 1) + 50); // Random timeout between 50ms and 300ms
 
     const type = () => {
       let updatedText = displayedText;
@@ -44,8 +48,14 @@ export const TypingEffect = ({ word, simulateErrors = true }: TypingEffectProps)
           setTypingIndex(typingIndex + 1);
 
           // Randomly introduce an error if simulateErrors is true
-          if (simulateErrors && Math.random() < 0.1 && typingIndex < word.length) {
-            const errorChar = String.fromCharCode(Math.floor(Math.random() * 26) + 97); // Random lowercase letter
+          if (
+            simulateErrors &&
+            Math.random() < 0.1 &&
+            typingIndex < word.length
+          ) {
+            const errorChar = String.fromCharCode(
+              Math.floor(Math.random() * 26) + 97
+            ); // Random lowercase letter
             updatedText = displayedText + errorChar;
             setDisplayedText(updatedText);
             setErrorIndex(updatedText.length - 1); // Mark the error index
@@ -62,7 +72,14 @@ export const TypingEffect = ({ word, simulateErrors = true }: TypingEffectProps)
     const typingTimeout = setTimeout(type, getRandomTimeout());
 
     return () => clearTimeout(typingTimeout);
-  }, [displayedText, typingIndex, isDeleting, word, errorIndex, simulateErrors]);
+  }, [
+    displayedText,
+    typingIndex,
+    isDeleting,
+    word,
+    errorIndex,
+    simulateErrors,
+  ]);
 
   useEffect(() => {
     const cursorBlink = setInterval(() => {
@@ -75,7 +92,11 @@ export const TypingEffect = ({ word, simulateErrors = true }: TypingEffectProps)
   return (
     <div className="inline-block min-w-[1ch]">
       {displayedText}
-      <span className={`inline-block w-[1ch] ${cursorVisible ? 'visible' : 'invisible'}`}>|</span>
+      <span
+        className={`inline-block w-[1ch] ${cursorVisible ? 'visible' : 'invisible'}`}
+      >
+        |
+      </span>
     </div>
   );
 };

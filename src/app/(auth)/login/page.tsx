@@ -2,7 +2,14 @@
 
 import Link from 'next/link';
 import { Button } from '~/components/ui/button';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '~/components/ui/form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '~/components/ui/form';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
@@ -55,9 +62,15 @@ export default function Login() {
                   name="email"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-muted-foreground">Email Address</FormLabel>
+                      <FormLabel className="text-muted-foreground">
+                        Email Address
+                      </FormLabel>
                       <FormControl>
-                        <Input placeholder="Your email address" {...field} autoComplete="on" />
+                        <Input
+                          placeholder="Your email address"
+                          {...field}
+                          autoComplete="on"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -68,9 +81,16 @@ export default function Login() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-muted-foreground">Password</FormLabel>
+                      <FormLabel className="text-muted-foreground">
+                        Password
+                      </FormLabel>
                       <FormControl>
-                        <Input placeholder="Your password" type="password" autoComplete="on" {...field} />
+                        <Input
+                          placeholder="Your password"
+                          type="password"
+                          autoComplete="on"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -81,7 +101,9 @@ export default function Login() {
                 </Button>
                 {error && (
                   <div className="mb-3 mt-1 rounded-md border border-destructive bg-destructive/10 p-3">
-                    <p className="text-center text-sm font-medium text-destructive">{error}</p>
+                    <p className="text-center text-sm font-medium text-destructive">
+                      {error}
+                    </p>
                   </div>
                 )}
               </form>

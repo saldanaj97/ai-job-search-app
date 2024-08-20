@@ -36,7 +36,10 @@ export type RouterInputs = inferRouterInputs<AppRouter>;
  */
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
 
-export function TRPCReactProvider(props: { children: React.ReactNode; cookies?: any }) {
+export function TRPCReactProvider(props: {
+  children: React.ReactNode;
+  cookies?: any;
+}) {
   const queryClient = getQueryClient();
 
   const [trpcClient] = useState(() =>
@@ -44,7 +47,8 @@ export function TRPCReactProvider(props: { children: React.ReactNode; cookies?: 
       links: [
         loggerLink({
           enabled: (op) =>
-            process.env.NODE_ENV === 'development' || (op.direction === 'down' && op.result instanceof Error),
+            process.env.NODE_ENV === 'development' ||
+            (op.direction === 'down' && op.result instanceof Error),
         }),
         unstable_httpBatchStreamLink({
           transformer: SuperJSON,
@@ -56,7 +60,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode; cookies?: 
           },
         }),
       ],
-    }),
+    })
   );
 
   return (

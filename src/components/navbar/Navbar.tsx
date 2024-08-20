@@ -6,7 +6,10 @@ import AuthComponent from './AuthComponent';
 
 const routes: { title: string; href: string }[] = [
   { title: 'Features', href: '#' },
-  { title: 'Resources', href: '#' },
+  {
+    title: 'Resources',
+    href: '#',
+  },
   { title: 'Pricing', href: '#' },
 ];
 
@@ -18,13 +21,15 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className=" z-50 flex h-16 w-full items-center justify-between px-6 lg:px-14">
+    <div className="z-50 flex h-16 w-full items-center justify-between px-6 lg:px-14">
       <Link href={'/'} className="shrink-0">
-        <h1 className="text-2xl font-bold text-accent-foreground w-[200px]">WannaBeHired.ai</h1>
+        <h1 className="w-[200px] text-2xl font-bold text-accent-foreground">
+          WannaBeHired.ai
+        </h1>
       </Link>
 
       {/* Center the links with auto margins */}
-      <div className="hidden md:flex grow justify-center">
+      <div className="hidden grow justify-center md:flex">
         <div className="flex gap-4">
           {routes.map((route, index) => (
             <Link
@@ -38,7 +43,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
         </div>
       </div>
 
-      <div className="shrink-0 w-[200px]">{children}</div>
+      <div className="w-[200px] shrink-0">{children}</div>
 
       {menuOpen && (
         <MobileMenu toggleMenu={toggleMenu}>
@@ -47,7 +52,11 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
       )}
 
       <button onClick={toggleMenu} className="md:hidden">
-        {menuOpen ? <XMarkIcon className="h-7 w-7" /> : <Bars3Icon className="h-7 w-7" />}
+        {menuOpen ? (
+          <XMarkIcon className="h-7 w-7" />
+        ) : (
+          <Bars3Icon className="h-7 w-7" />
+        )}
       </button>
     </div>
   );
