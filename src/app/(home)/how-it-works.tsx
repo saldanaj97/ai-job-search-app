@@ -27,7 +27,7 @@ const features: Feature[] = [
   },
 ];
 
-const Feature = ({ features }: { features: Feature[] }) => {
+const FeatureList = ({ features }: { features: Feature[] }) => {
   return (
     <div className="flex flex-row gap-12">
       {features.map((feature, index) => (
@@ -51,7 +51,7 @@ export default function HowItWorks() {
         <h3 className="max-w-3xl text-center text-[40px] font-bold tracking-tight">
           Unlock Your Job Search Potential with AI-Powered Optimization
         </h3>
-        <Feature features={features} />
+        <FeatureList features={features} />
       </div>
     </div>
   );
