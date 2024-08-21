@@ -46,7 +46,7 @@ const Feature = ({ features }: { features: Feature[] }) => {
 
 export default function HowItWorks() {
   return (
-    <div className="flex h-screen flex-col justify-around p-16">
+    <div className="flex h-screen flex-col justify-around px-16">
       <div className="flex flex-col items-center gap-20">
         <h3 className="max-w-3xl text-center text-[40px] font-bold tracking-tight">
           Unlock Your Job Search Potential with AI-Powered Optimization
