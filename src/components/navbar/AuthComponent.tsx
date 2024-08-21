@@ -21,14 +21,14 @@ export default async function AuthComponent() {
     </div>
   ) : (
     <div className="hidden items-center justify-end gap-4 sm:flex">
-      <Link href="/login" className="w-full sm:w-auto">
-        <Button variant="secondary" size="sm" className="w-full">
-          Log In
-        </Button>
-      </Link>
       <Link href="/signup" className="w-full sm:w-auto">
         <Button variant="default" size="sm" className="w-full">
           Sign Up
+        </Button>
+      </Link>
+      <Link href="/login" className="w-full sm:w-auto">
+        <Button variant="secondary" size="sm" className="w-full">
+          Log In
         </Button>
       </Link>
     </div>
