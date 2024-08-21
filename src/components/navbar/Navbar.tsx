@@ -32,7 +32,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
             <Link
               key={index}
               href={route.href}
-              className={`inline-flex h-10 items-center px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-accent-foreground`}
+              className={`inline-flex h-10 items-center px-4 py-2 text-[16px] text-muted-foreground transition-colors hover:text-accent-foreground`}
             >
               {route.title}
             </Link>
