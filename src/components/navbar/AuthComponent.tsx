@@ -20,7 +20,7 @@ export default async function AuthComponent() {
       <ProfileButton user={user} />
     </div>
   ) : (
-    <div className="hidden items-center gap-2 sm:flex">
+    <div className="hidden items-center justify-end gap-4 sm:flex">
       <Link href="/login" className="w-full sm:w-auto">
         <Button variant="secondary" size="sm" className="w-full">
           Log In
