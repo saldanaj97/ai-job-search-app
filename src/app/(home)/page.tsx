@@ -3,6 +3,7 @@ import Hero from '~/components/hero/hero';
 import { createClient } from '~/utils/supabase/server';
 import DashboardPage from '../dashboard/page';
 import HowItWorks from './how-it-works';
+import MainFeatures from './main-features';
 
 // TODO: Update the welcome message to be the users name instead of email (if they have one in the db)
 export default async function LandingPage() {
@@ -20,6 +21,7 @@ export default async function LandingPage() {
         <>
           <Hero />
           <HowItWorks />
+          <MainFeatures />
         </>
       )}
     </div>
