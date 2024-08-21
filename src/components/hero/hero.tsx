@@ -5,7 +5,7 @@ import { Button } from '~/components/ui/button';
 
 export default function Hero() {
   return (
-    <div className="container relative z-30 flex max-w-3xl flex-1 flex-col items-center justify-center text-center">
+    <div className="container z-30 flex h-screen max-w-3xl flex-col items-center justify-center text-center">
       <div className="flex flex-col gap-6">
         <h1 className="z-10 text-[56px] font-bold tracking-tight">
           Tired of being{' '}

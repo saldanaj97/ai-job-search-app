@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import Hero from '~/components/hero/hero';
 import { createClient } from '~/utils/supabase/server';
 import DashboardPage from '../dashboard/page';
+import HowItWorks from './how-it-works';
 
 // TODO: Update the welcome message to be the users name instead of email (if they have one in the db)
 export default async function LandingPage() {
@@ -12,8 +13,15 @@ export default async function LandingPage() {
   } = await supabase.auth.getUser();
 
   return (
-    <div className="flex h-screen flex-col">
-      {user ? <DashboardPage user={user} /> : <Hero />}
+    <div className="flex flex-col">
+      {user ? (
+        <DashboardPage user={user} />
+      ) : (
+        <>
+          <Hero />
+          <HowItWorks />
+        </>
+      )}
     </div>
   );
 }
