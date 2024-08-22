@@ -6,7 +6,6 @@ import { CallToAction } from './cta';
 import HowItWorks from './how-it-works';
 import MainFeatures from './main-features';
 
-// TODO: Update the welcome message to be the users name instead of email (if they have one in the db)
 export default async function LandingPage() {
   const supabase = createClient(cookies());
 
