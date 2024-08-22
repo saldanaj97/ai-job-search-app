@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import Hero from '~/components/hero/hero';
 import { createClient } from '~/utils/supabase/server';
 import DashboardPage from '../dashboard/page';
+import { CallToAction } from './cta';
 import HowItWorks from './how-it-works';
 import MainFeatures from './main-features';
 
@@ -22,6 +23,7 @@ export default async function LandingPage() {
           <Hero />
           <HowItWorks />
           <MainFeatures />
+          <CallToAction />
         </>
       )}
     </div>
