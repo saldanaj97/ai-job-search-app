@@ -1,0 +1,56 @@
+[
+  {
+    "subtitle": "Attract",
+    "title": "Stand Out with Compelling LinkedIn Optimization",
+    "description": "Generate an attention-grabbing LinkedIn profile that will impress recruiters and incrase your chances of getting contacted.",
+    "details": [
+      {
+        "icon": "↗️",
+        "feature_name": "SEO Optimization",
+        "description": "Increase your visibility on LinkedIn and get noticed by recruiters."
+      },
+      {
+        "icon": "👽",
+        "feature_name": "Get Noticed",
+        "description": "Create an enagaging LinkedIn profile that stands out from the competition."
+      }
+    ],
+    "imageLocation": "/placeholder.png"
+  },
+  {
+    "subtitle": "Optimize",
+    "title": "Craft Professional Resumes and Cover Letters",
+    "description": "Create compelling resumes and cover letters with our advanced AI technology, increasing your chances of landing interviews.",
+    "details": [
+      {
+        "icon": "↗️",
+        "feature_name": "SEO Optimization",
+        "description": "Increase your visibility on LinkedIn and get noticed by recruiters."
+      },
+      {
+        "icon": "👽",
+        "feature_name": "Get Noticed",
+        "description": "Create an enagaging LinkedIn profile that stands out from the competition."
+      }
+    ],
+    "imageLocation": "/placeholder.png"
+  },
+  {
+    "subtitle": "Organize",
+    "title": "Stay Organized with Our Job Tracking Dashboard",
+    "description": "Easily keep trakc of your job applications and follow-ups wihth our intuitive job tracking dashboard. Stay organized and never miss and opportunity.",
+    "details": [
+      {
+        "icon": "↗️",
+        "feature_name": "SEO Optimization",
+        "description": "Increase your visibility on LinkedIn and get noticed by recruiters."
+      },
+      {
+        "icon": "👽",
+        "feature_name": "Get Noticed",
+        "description": "Create an enagaging LinkedIn profile that stands out from the competition."
+      }
+    ],
+    "imageLocation": "/placeholder.png"
+  }
+]

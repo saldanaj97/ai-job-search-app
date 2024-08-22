@@ -1,9 +1,18 @@
 import Link from 'next/link';
+import features from '~/copywriting/landing-page-features-list.json';
 
 type Detail = {
   icon: string;
   feature_name: string;
   description: string;
+};
+
+type Feature = {
+  subtitle: string;
+  title: string;
+  description: string;
+  details: Detail[];
+  imageLocation: string;
 };
 
 const details: Detail[] = [
@@ -21,23 +30,23 @@ const details: Detail[] = [
   },
 ];
 
-const SectionTitle = ({}) => {
+const SectionTitle = ({ feature }: { feature: Feature }) => {
+  if (!feature) {
+    return;
+  }
+
   return (
     <div className="flex h-full flex-col gap-8">
-      <p className="font-semibold">Attract</p>
+      <p className="font-semibold">{feature.subtitle}</p>
       <div className="flex flex-col gap-4">
-        <h2 className="text-5xl font-bold">
-          Stand Out with Compelling LinkedIn Optimization
-        </h2>
-        <p className="text-lg">
-          Generate an attention-grabbing LinkedIn profile that will impress
-          recruiters and incrase your chances of getting contacted.
-        </p>
+        <h2 className="text-5xl font-bold">{feature.title}</h2>
+        <p className="text-lg">{feature.description}</p>
       </div>
     </div>
   );
 };
 
+// TODO: Make sure to go back and edit the icons in the JSON file
 const DetailList = ({ details }: { details: Detail[] }) => {
   return (
     <div className="flex flex-row gap-6">
@@ -52,6 +61,7 @@ const DetailList = ({ details }: { details: Detail[] }) => {
   );
 };
 
+// TODO Buttons not linked to correct pages
 const Buttons = ({}) => {
   return (
     <div className="flex flex-row gap-2 pt-4">
@@ -65,23 +75,46 @@ const Buttons = ({}) => {
   );
 };
 
-export default function MainFeatures() {
+const FeatureComponent = ({
+  feature,
+  index,
+}: {
+  feature: Feature;
+  index: number;
+}) => {
   return (
-    <div className="flex h-screen w-full justify-evenly px-16 py-28">
-      <div className="flex h-full flex-row items-center justify-center gap-20">
-        <div className="flex flex-col gap-6">
-          <SectionTitle />
+    <div className="flex h-full flex-row items-center justify-center gap-20">
+      <div className="flex flex-col gap-6">
+        <div key={index}>
+          <SectionTitle feature={feature} />
           <DetailList details={details} />
           <Buttons />
         </div>
-        <div className="flex-grow-1 flex flex-shrink-0 flex-row gap-6">
-          <img
-            src="/placeholder.png"
-            alt="Placeholder"
-            className="h-[640px] w-[616px]"
-          />
-        </div>
+      </div>
+      <div className="flex-grow-1 flex flex-shrink-0 flex-row gap-6">
+        <img
+          src={feature.imageLocation}
+          alt="Placeholder"
+          className="h-[640px] w-[616px]"
+        />
       </div>
     </div>
+  );
+};
+
+export default async function MainFeatures() {
+  // TODO: Add skeleton loading state
+  if (!features) {
+    return;
+  }
+
+  return (
+    <>
+      {features.map((feature, index) => (
+        <div className="flex h-screen w-full justify-evenly px-16 py-28">
+          <FeatureComponent feature={feature} index={index} />
+        </div>
+      ))}
+    </>
   );
 }
