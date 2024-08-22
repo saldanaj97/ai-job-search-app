@@ -3,9 +3,10 @@ import '~/styles/globals.css';
 import { GeistSans } from 'geist/font/sans';
 import { cookies } from 'next/headers';
 
-import { ThemeProvider } from '~/components/ThemeProvider';
-import { TRPCReactProvider } from '~/trpc/react';
 import React from 'react';
+import { ThemeProvider } from '~/components/ThemeProvider';
+import { Footer } from '~/components/ui/footer';
+import { TRPCReactProvider } from '~/trpc/react';
 
 export const metadata = {
   title: 'WannabeHired.ai',
@@ -34,6 +35,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Footer />
           </ThemeProvider>
         </TRPCReactProvider>
       </body>
