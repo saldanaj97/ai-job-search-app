@@ -1,4 +1,5 @@
-// TODO: Across the board edit the links and buttons to lead to the correct place
+// TODO: - Across the board edit the links and buttons to lead to the correct place
+//       - Fix the global padding issue
 
 const Newsletter = () => {
   return (

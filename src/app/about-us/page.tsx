@@ -18,7 +18,7 @@ type Feature = {
 
 const Header = () => {
   return (
-    <div className="flex flex-col justify-start gap-20 bg-transparent py-28">
+    <div className="flex flex-col justify-start gap-20 bg-transparent px-20 py-28">
       <div className="flex justify-start gap-20">
         <div className="flex flex-col items-start justify-start gap-4">
           <div className="text-center text-base font-semibold">Empowerment</div>
@@ -54,16 +54,18 @@ const Header = () => {
 
 const Mission = () => {
   return (
-    <div className="flex flex-col items-center justify-start gap-20 bg-transparent px-16 py-28">
-      <div className="flex flex-col items-center justify-start gap-6">
-        <div className="flex text-center text-[40px] font-bold leading-[48px]">
-          Empowering job seekers with AI tools to optimize their job search.
-        </div>
-        <div className="flex text-center text-lg font-normal leading-[27px]">
-          At WannabeEmployed.ai, our mission is to increase your chances of
-          landing interviews by providing AI-powered tools that help you craft
-          compelling LinkedIn headlines, resumes, and cover letters. Our job
-          tracking dashboard keeps your job search organized and efficient.
+    <div className="flex flex-row justify-center px-16 py-28">
+      <div className="flex max-w-3xl flex-col items-center justify-start gap-20 bg-transparent">
+        <div className="flex flex-col items-center justify-start gap-6">
+          <div className="flex text-center text-[40px] font-bold">
+            Empowering job seekers with AI tools to optimize their job search.
+          </div>
+          <div className="flex text-center text-lg font-normal">
+            At WannabeEmployed.ai, our mission is to increase your chances of
+            landing interviews by providing AI-powered tools that help you craft
+            compelling LinkedIn headlines, resumes, and cover letters. Our job
+            tracking dashboard keeps your job search organized and efficient.
+          </div>
         </div>
       </div>
     </div>
@@ -72,7 +74,7 @@ const Mission = () => {
 
 const FeatureComponent = ({ feature }: { feature: Feature }) => {
   return (
-    <div className="flex h-full flex-row items-center justify-center gap-20">
+    <div className="flex h-full flex-row items-center justify-center gap-20 px-20">
       <div className="flex flex-col gap-6">
         <div className="flex h-full flex-col gap-8">
           <p className="text-[80px] font-semibold">{feature.subtitle}</p>
@@ -103,7 +105,7 @@ const FeatureComponent = ({ feature }: { feature: Feature }) => {
 
 const CallToAction = ({}) => {
   return (
-    <div className="my-28">
+    <div className="px-20 py-28">
       <Card className="gap-2 bg-transparent p-16">
         <CardHeader className="gap-6 text-center">
           <CardTitle className="text-5xl font-bold">
@@ -126,6 +128,7 @@ const CallToAction = ({}) => {
   );
 };
 
+// TODO: To clean up, put the padding from each component into the component itself
 export default function AboutUs() {
   const feature = {
     subtitle: '🚀',
@@ -136,7 +139,7 @@ export default function AboutUs() {
   };
 
   return (
-    <div className="flex flex-col px-20">
+    <div className="flex flex-col justify-center">
       <Header />
       <Mission />
       <FeatureComponent feature={feature} />

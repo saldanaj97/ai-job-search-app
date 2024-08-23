@@ -4,8 +4,9 @@ import { GeistSans } from 'geist/font/sans';
 import { cookies } from 'next/headers';
 
 import React from 'react';
+import AuthComponent from '~/components/navbar/AuthComponent';
+import Navbar from '~/components/navbar/Navbar';
 import { ThemeProvider } from '~/components/ThemeProvider';
-import { Footer } from '~/components/ui/footer';
 import { TRPCReactProvider } from '~/trpc/react';
 
 export const metadata = {
@@ -34,8 +35,10 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Navbar>
+              <AuthComponent />
+            </Navbar>
             {children}
-            <Footer />
           </ThemeProvider>
         </TRPCReactProvider>
       </body>
