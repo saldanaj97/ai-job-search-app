@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import AuthComponent from './AuthComponent';
 
 const routes: { title: string; href: string }[] = [
-  { title: 'About Us', href: '#' },
+  { title: 'About Us', href: '/about-us' },
   { title: 'Services', href: '#' },
   { title: 'FAQs', href: '#' },
 ];
@@ -18,7 +18,7 @@ export default function Navbar({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="absolute z-50 flex h-16 w-full items-center justify-between px-6 lg:px-16">
+    <div className="top-0 z-50 flex h-16 w-full items-center justify-between px-6 lg:px-16">
       <Link href={'/'} className="shrink-0">
         <h1 className="w-[200px] text-2xl font-bold text-accent-foreground">
           WannaBeHired.ai
