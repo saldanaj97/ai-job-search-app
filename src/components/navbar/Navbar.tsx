@@ -6,7 +6,7 @@ import AuthComponent from './AuthComponent';
 
 const routes: { title: string; href: string }[] = [
   { title: 'About Us', href: '/about-us' },
-  { title: 'Services', href: '#' },
+  { title: 'Services', href: '/services' },
   { title: 'FAQs', href: '#' },
 ];
 
