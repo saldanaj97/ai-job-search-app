@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import AuthComponent from './AuthComponent';
 
+// TODO - Make the services routes a dropdown on hover
 const routes: { title: string; href: string }[] = [
   { title: 'About Us', href: '/about-us' },
   { title: 'Services', href: '/services' },
