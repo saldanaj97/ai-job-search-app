@@ -102,13 +102,13 @@ function FeatureComponent({
   );
 }
 
-export default async function MainFeatures() {
+export default function MainFeatures() {
   // TODO: Add skeleton loading state
   if (!features) {
     return;
   }
 
-  features.map((feature, index) => (
+  return features.map((feature, index) => (
     <div className="flex h-screen w-full justify-evenly px-16 py-28">
       <FeatureComponent feature={feature} index={index} />
     </div>

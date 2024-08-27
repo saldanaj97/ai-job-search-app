@@ -1,6 +1,6 @@
 'use client';
 
-import { TypingEffect } from '~/components/hero/TypingEffect';
+import TypingEffect from '~/components/hero/TypingEffect';
 import { Button } from '~/components/ui/button';
 
 export default function Hero() {
