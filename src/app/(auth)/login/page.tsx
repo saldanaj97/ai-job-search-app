@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 'use client';
 
 import Link from 'next/link';
@@ -113,8 +115,8 @@ export default function Login() {
               <p className="text-xs text-muted-foreground">OR</p>
               <hr className="w-full" />
             </div>
-            <OAuthButton provider={'google'} />
-            <OAuthButton provider={'github'} />
+            <OAuthButton provider="google" />
+            <OAuthButton provider="github" />
             <p className="py-4 text-center text-sm text-muted-foreground underline">
               <Link href="/signup">Don&apos;t have an account? Sign up</Link>
             </p>

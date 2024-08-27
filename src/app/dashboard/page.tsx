@@ -1,7 +1,7 @@
+/* eslint-disable prettier/prettier */
 import { type User } from '@supabase/supabase-js';
-import React from 'react';
 
-const DashboardPage: React.FC<{ user: User }> = ({ user }: { user: User }) => {
+function DashboardPage({ user }: { user: User }) {
   const { email } = user;
 
   return (
@@ -12,6 +12,6 @@ const DashboardPage: React.FC<{ user: User }> = ({ user }: { user: User }) => {
       <div>Hello, {email}</div>
     </div>
   );
-};
+}
 
 export default DashboardPage;

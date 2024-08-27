@@ -30,9 +30,9 @@ const details: Detail[] = [
   },
 ];
 
-const SectionTitle = ({ feature }: { feature: Feature }) => {
+function SectionTitle({ feature }: { feature: Feature }) {
   if (!feature) {
-    return;
+    return null;
   }
 
   return (
@@ -44,14 +44,14 @@ const SectionTitle = ({ feature }: { feature: Feature }) => {
       </div>
     </div>
   );
-};
+}
 
 // TODO: Make sure to go back and edit the icons in the JSON file
-const DetailList = ({ details }: { details: Detail[] }) => {
+function DetailList({ details: detailList }: { details: Detail[] }) {
   return (
     <div className="flex flex-row gap-6">
-      {details.map((detail, index) => (
-        <div key={index} className="flex flex-col gap-4">
+      {details.map((detail) => (
+        <div key={detail.feature_name} className="flex flex-col gap-4">
           <div className="text-[48px]">{detail.icon}</div>
           <div className="text-xl font-bold">{detail.feature_name}</div>
           <p className="text-lg">{detail.description}</p>
@@ -59,10 +59,10 @@ const DetailList = ({ details }: { details: Detail[] }) => {
       ))}
     </div>
   );
-};
+}
 
 // TODO Buttons not linked to correct pages
-const Buttons = ({}) => {
+function Buttons() {
   return (
     <div className="flex flex-row gap-2 pt-4">
       <Link href="/" className="rounded-lg px-6 py-3 text-white">
@@ -73,15 +73,15 @@ const Buttons = ({}) => {
       </Link>
     </div>
   );
-};
+}
 
-const FeatureComponent = ({
+function FeatureComponent({
   feature,
   index,
 }: {
   feature: Feature;
   index: number;
-}) => {
+}) {
   return (
     <div className="flex h-full flex-row items-center justify-center gap-20">
       <div className="flex flex-col gap-6">
@@ -100,7 +100,7 @@ const FeatureComponent = ({
       </div>
     </div>
   );
-};
+}
 
 export default async function MainFeatures() {
   // TODO: Add skeleton loading state
@@ -108,13 +108,9 @@ export default async function MainFeatures() {
     return;
   }
 
-  return (
-    <>
-      {features.map((feature, index) => (
-        <div className="flex h-screen w-full justify-evenly px-16 py-28">
-          <FeatureComponent feature={feature} index={index} />
-        </div>
-      ))}
-    </>
-  );
+  features.map((feature, index) => (
+    <div className="flex h-screen w-full justify-evenly px-16 py-28">
+      <FeatureComponent feature={feature} index={index} />
+    </div>
+  ));
 }

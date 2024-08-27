@@ -3,7 +3,7 @@ import { Footer } from '~/components/ui/footer';
 
 // TODO - Add Icons where needed
 
-const Header = () => {
+function Header() {
   return (
     <div className="inline-flex w-full flex-col items-start justify-start gap-20 bg-black/50 px-16 py-28">
       <div className="flex flex-col items-start justify-start gap-6">
@@ -32,9 +32,9 @@ const Header = () => {
       </div>
     </div>
   );
-};
+}
 
-const Feature1 = () => {
+function Feature1() {
   return (
     <div className="bg-Background color-primary flex flex-col items-center justify-start gap-20 px-16 py-28">
       <div className="flex flex-col items-center justify-start gap-4">
@@ -83,6 +83,7 @@ const Feature1 = () => {
           <img
             className="shrink grow basis-0"
             src="https://via.placeholder.com/610x540"
+            alt=""
           />
           <div className="inline-flex w-72 flex-col items-center justify-start gap-16">
             <div className="flex flex-col items-center justify-start gap-6">
@@ -92,8 +93,8 @@ const Feature1 = () => {
                   Save Time
                 </div>
                 <div className="text-Text-primary self-stretch text-center text-base font-normal leading-normal">
-                  Let our AI generate compelling LinkedIn headlines and "About
-                  Me" sections for you.
+                  Let our AI generate compelling LinkedIn headlines and
+                  &quot;About Me&quot; sections for you.
                 </div>
               </div>
             </div>
@@ -104,7 +105,7 @@ const Feature1 = () => {
                   Stand Out
                 </div>
                 <div className="text-Text-primary self-stretch text-center text-base font-normal leading-normal">
-                  Craft resumes and cover letters that grab employers'
+                  Craft resumes and cover letters that grab employers&apos;
                   attention.
                 </div>
               </div>
@@ -124,9 +125,9 @@ const Feature1 = () => {
       </div>
     </div>
   );
-};
+}
 
-const Feature2 = () => {
+function Feature2() {
   return (
     <div className="bg-Background color-primary flex flex-col items-start justify-start gap-20 px-16 py-28">
       <div className="inline-flex items-center justify-start gap-20 self-stretch">
@@ -166,19 +167,21 @@ const Feature2 = () => {
         <img
           className="shrink grow basis-0"
           src="https://via.placeholder.com/616x640"
+          alt=""
         />
       </div>
     </div>
   );
-};
+}
 
-const Feature3 = () => {
+function Feature3() {
   return (
     <div className="bg-Background color-primary flex flex-col items-center justify-start gap-20 px-16 py-28">
       <div className="inline-flex items-center justify-start gap-20 self-stretch">
         <img
           className="shrink grow basis-0"
           src="https://via.placeholder.com/616x640"
+          alt=""
         />
         <div className="inline-flex shrink grow basis-0 flex-col items-start justify-start gap-8">
           <div className="flex flex-col items-start justify-start gap-6 self-stretch">
@@ -215,9 +218,9 @@ const Feature3 = () => {
       </div>
     </div>
   );
-};
+}
 
-const CallToAction = () => {
+function CallToAction() {
   return (
     <div className="bg-Background color-primary flex flex-col items-start justify-start gap-20 px-16 py-28">
       <div className="inline-flex items-center justify-start gap-20 self-stretch">
@@ -247,13 +250,14 @@ const CallToAction = () => {
         <img
           className="shrink grow basis-0"
           src="https://via.placeholder.com/616x400"
+          alt=""
         />
       </div>
     </div>
   );
-};
+}
 
-export const ResumeServicesPage = () => {
+export function ResumeServicesPage() {
   return (
     <div className="inline-flex flex-col items-start justify-start">
       <Header />
@@ -264,6 +268,6 @@ export const ResumeServicesPage = () => {
       <Footer />
     </div>
   );
-};
+}
 
 export default ResumeServicesPage;

@@ -1,7 +1,7 @@
 // TODO: - Across the board edit the links and buttons to lead to the correct place
 //       - Fix the global padding issue
 
-const Newsletter = () => {
+function Newsletter() {
   return (
     <div className="flex flex-row justify-between">
       <div className="flex flex-col">
@@ -31,9 +31,9 @@ const Newsletter = () => {
       </div>
     </div>
   );
-};
+}
 
-const Links = () => {
+function Links() {
   return (
     <div className="flex flex-row justify-between gap-10">
       <div className="w-1/4">
@@ -79,9 +79,9 @@ const Links = () => {
       </div>
     </div>
   );
-};
+}
 
-const Credits = () => {
+function Credits() {
   return (
     <div className="flex flex-row justify-between border-t-2 pt-8">
       <div className="flex flex-row gap-6 text-[14px]">
@@ -104,9 +104,9 @@ const Credits = () => {
       </div>
     </div>
   );
-};
+}
 
-export const Footer = () => {
+export function Footer() {
   return (
     <div className="flex flex-col gap-20 px-16 py-20">
       <Newsletter />
@@ -114,4 +114,4 @@ export const Footer = () => {
       <Credits />
     </div>
   );
-};
+}

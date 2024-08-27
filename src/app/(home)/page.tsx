@@ -21,7 +21,7 @@ export default async function LandingPage() {
         <>
           <Hero />
           <HowItWorks />
-          <MainFeatures />
+          {await MainFeatures()} {/* Await the MainFeatures component */}
           <CallToAction />
         </>
       )}

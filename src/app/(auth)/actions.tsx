@@ -24,6 +24,12 @@ export const signUp = async (data: SignupInput) => {
       error: error.message,
     };
   }
+
+  return {
+    success: true,
+    message:
+      'Sign up successful! Please check your email for a confirmation link.',
+  };
 };
 
 export const signIn = async (data: LoginInput) => {
@@ -33,9 +39,15 @@ export const signIn = async (data: LoginInput) => {
     email: data.email,
     password: data.password,
   });
+
   if (error) {
     return {
       error: error.message,
     };
   }
+
+  return {
+    success: true,
+    message: 'Sign in successful!',
+  };
 };

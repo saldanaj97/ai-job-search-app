@@ -16,7 +16,7 @@ type Feature = {
   imageLocation: string;
 };
 
-const Header = () => {
+function Header() {
   return (
     <div className="flex flex-col justify-start gap-20 bg-transparent px-20 py-28">
       <div className="flex justify-start gap-20">
@@ -34,9 +34,10 @@ const Header = () => {
             our AI-powered job application assistant is designed to help users
             optimize their job search and increase their chances of landing
             interviews. With our platform, you can generate compelling LinkedIn
-            headlines and "About Me" sections, craft resumes and cover letters
-            using AI, and track your job applications all in one place. Join us
-            on this journey and let us help you take your career to new heights.
+            headlines and &quot;About Me&quot; sections, craft resumes and cover
+            letters using AI, and track your job applications all in one place.
+            Join us on this journey and let us help you take your career to new
+            heights.
           </div>
           <div className="flex justify-start gap-4 pt-4">
             <div className="flex items-center justify-center gap-2 border border-black bg-black px-6 py-3">
@@ -50,9 +51,9 @@ const Header = () => {
       </div>
     </div>
   );
-};
+}
 
-const Mission = () => {
+function Mission() {
   return (
     <div className="flex flex-row justify-center px-16 py-28">
       <div className="flex max-w-3xl flex-col items-center justify-start gap-20 bg-transparent">
@@ -70,9 +71,9 @@ const Mission = () => {
       </div>
     </div>
   );
-};
+}
 
-const FeatureComponent = ({ feature }: { feature: Feature }) => {
+function FeatureComponent({ feature }: { feature: Feature }) {
   return (
     <div className="flex h-full flex-row items-center justify-center gap-20 px-20">
       <div className="flex flex-col gap-6">
@@ -101,9 +102,9 @@ const FeatureComponent = ({ feature }: { feature: Feature }) => {
       </div>
     </div>
   );
-};
+}
 
-const CallToAction = ({}) => {
+function CallToAction() {
   return (
     <div className="px-20 py-28">
       <Card className="gap-2 bg-transparent p-16">
@@ -117,16 +118,16 @@ const CallToAction = ({}) => {
         </CardHeader>
         <CardFooter className="flex flex-row justify-center gap-4 py-4">
           <Button>
-            <Link href={'/'}>Get Started</Link>
+            <Link href="/">Get Started</Link>
           </Button>
           <Button className="bg-secondary">
-            <Link href={'/'}>Learn More</Link>
+            <Link href="/">Learn More</Link>
           </Button>
         </CardFooter>
       </Card>
     </div>
   );
-};
+}
 
 // TODO: To clean up, put the padding from each component into the component itself
 export default function AboutUs() {

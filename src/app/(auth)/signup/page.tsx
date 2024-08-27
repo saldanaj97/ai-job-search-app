@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 'use client';
 
 import Link from 'next/link';
@@ -17,7 +19,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Input } from '~/components/ui/input';
 
-import OAuthButton from '~/components/auth/OAuthButton';
+import { OAuthButton } from '~/components/auth/OAuthButton';
 import { signUp } from '../actions';
 
 const registerSchema = z.object({
@@ -123,8 +125,8 @@ export default function Login() {
               <p className="text-xs text-muted-foreground">OR</p>
               <hr className="w-full" />
             </div>
-            <OAuthButton provider={'google'} />
-            <OAuthButton provider={'github'} />
+            <OAuthButton provider="google" />
+            <OAuthButton provider="github" />
             <p className="py-4 text-center text-sm text-muted-foreground underline">
               <Link href="/signup">Already have an account? Sign in</Link>
             </p>

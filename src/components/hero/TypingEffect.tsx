@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 
 interface TypingEffectProps {
   word: string;
-  simulateErrors?: boolean;
+  simulateErrors: boolean;
 }
 
-export const TypingEffect = ({
+export default function TypingEffect({
   word,
-  simulateErrors = true,
-}: TypingEffectProps) => {
+  simulateErrors,
+}: TypingEffectProps) {
   const [displayedText, setDisplayedText] = useState('');
   const [typingIndex, setTypingIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -32,39 +32,37 @@ export const TypingEffect = ({
           setIsDeleting(false);
           setErrorIndex(null); // Reset error index
         }
+      } else if (simulateErrors && errorIndex !== null) {
+        // Correcting errors
+        updatedText = displayedText.slice(0, -1);
+        setDisplayedText(updatedText);
+
+        if (updatedText.length === errorIndex) {
+          setErrorIndex(null);
+        }
       } else {
-        if (simulateErrors && errorIndex !== null) {
-          // Correcting errors
-          updatedText = displayedText.slice(0, -1);
+        // Typing forward
+        updatedText = word.slice(0, typingIndex + 1);
+        setDisplayedText(updatedText);
+        setTypingIndex(typingIndex + 1);
+
+        // Randomly introduce an error if simulateErrors is true
+        if (
+          simulateErrors &&
+          Math.random() < 0.1 &&
+          typingIndex < word.length
+        ) {
+          const errorChar = String.fromCharCode(
+            Math.floor(Math.random() * 26) + 97
+          ); // Random lowercase letter
+          updatedText = displayedText + errorChar;
           setDisplayedText(updatedText);
+          setErrorIndex(updatedText.length - 1); // Mark the error index
+        }
 
-          if (updatedText.length === errorIndex) {
-            setErrorIndex(null);
-          }
-        } else {
-          // Typing forward
-          updatedText = word.slice(0, typingIndex + 1);
-          setDisplayedText(updatedText);
-          setTypingIndex(typingIndex + 1);
-
-          // Randomly introduce an error if simulateErrors is true
-          if (
-            simulateErrors &&
-            Math.random() < 0.1 &&
-            typingIndex < word.length
-          ) {
-            const errorChar = String.fromCharCode(
-              Math.floor(Math.random() * 26) + 97
-            ); // Random lowercase letter
-            updatedText = displayedText + errorChar;
-            setDisplayedText(updatedText);
-            setErrorIndex(updatedText.length - 1); // Mark the error index
-          }
-
-          // If finished typing, start deleting after a pause
-          if (typingIndex >= word.length) {
-            setTimeout(() => setIsDeleting(true), 1500); // Pause before deleting
-          }
+        // If finished typing, start deleting after a pause
+        if (typingIndex >= word.length) {
+          setTimeout(() => setIsDeleting(true), 1500); // Pause before deleting
         }
       }
     };
@@ -99,4 +97,4 @@ export const TypingEffect = ({
       </span>
     </div>
   );
-};
+}

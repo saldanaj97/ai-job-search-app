@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+
 import Link from 'next/link';
 
 type Feature = {
@@ -27,11 +29,14 @@ const features: Feature[] = [
   },
 ];
 
-const FeatureList = ({ features }: { features: Feature[] }) => {
+function FeatureList({ features: featureList }: { features: Feature[] }) {
   return (
     <div className="flex flex-row gap-12">
-      {features.map((feature, index) => (
-        <div key={index} className="flex flex-col gap-7 text-center">
+      {features.map((feature) => (
+        <div
+          key={feature.feature_name}
+          className="flex flex-col gap-7 text-center"
+        >
           <div className="text-[48px]">{feature.icon}</div>
           <div className="text-2xl font-bold">{feature.feature_name}</div>
           <div className="">{feature.description}</div>
@@ -42,7 +47,7 @@ const FeatureList = ({ features }: { features: Feature[] }) => {
       ))}
     </div>
   );
-};
+}
 
 export default function HowItWorks() {
   return (

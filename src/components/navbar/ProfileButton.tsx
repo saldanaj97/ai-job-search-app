@@ -81,6 +81,7 @@ export default function ProfileButton({ user }: { user: User }) {
 
           <div className="py-2 text-lg text-muted-foreground">
             <button
+              type="button"
               className="hover:text-muted-foreground/70"
               onClick={() =>
                 signOut().then(() => {

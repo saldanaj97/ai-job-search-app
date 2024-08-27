@@ -9,7 +9,7 @@ import {
 } from '~/components/ui/card';
 
 // TODO: Implement the correct links for the buttons
-export const CallToAction = ({}) => {
+export function CallToAction({}) {
   return (
     <div className="mx-16 my-28">
       <Card className="gap-2 bg-transparent p-16">
@@ -23,13 +23,13 @@ export const CallToAction = ({}) => {
         </CardHeader>
         <CardFooter className="flex flex-row justify-center gap-4 py-4">
           <Button>
-            <Link href={'/'}>Get Started</Link>
+            <Link href="/">Get Started</Link>
           </Button>
           <Button className="bg-secondary">
-            <Link href={'/'}>Learn More</Link>
+            <Link href="/">Learn More</Link>
           </Button>
         </CardFooter>
       </Card>
     </div>
   );
-};
+}

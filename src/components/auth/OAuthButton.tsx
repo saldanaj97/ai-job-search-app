@@ -1,5 +1,3 @@
-'use client';
-
 import { type Provider } from '@supabase/supabase-js';
 import { redirect, usePathname } from 'next/navigation';
 import React from 'react';
@@ -8,21 +6,28 @@ import { FcGoogle } from 'react-icons/fc';
 import { Button } from '~/components/ui/button';
 import { createClient } from '~/utils/supabase/client';
 
-export const OAuthButton: React.FC<{ provider: Provider }> = ({ provider }) => {
+export function OAuthButton({
+  provider,
+}: {
+  provider: Provider;
+}): React.ReactElement | null {
   const pathname = usePathname();
   const supabase = createClient();
 
   const handleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
-      provider: provider,
+      provider,
       options: {
-        redirectTo: `${location.origin}/auth/callback?next=${pathname}`,
+        redirectTo: `${window.location.origin}/auth/callback?next=${pathname}`,
       },
     });
 
     if (error) {
       return redirect('/login?message=Could not authenticate user');
     }
+
+    // Successful login handling
+    return redirect(`/auth/callback?next=${pathname}`);
   };
 
   if (provider === 'google') {
@@ -45,7 +50,7 @@ export const OAuthButton: React.FC<{ provider: Provider }> = ({ provider }) => {
       <Button
         variant="outline"
         className="mb-2 w-full font-normal text-muted-foreground"
-        onClick={handleLogin}
+        onClick={() => handleLogin().catch(console.error)}
       >
         <div className="flex items-center gap-2">
           <FaGithub className="h-5 w-5" />
@@ -54,6 +59,9 @@ export const OAuthButton: React.FC<{ provider: Provider }> = ({ provider }) => {
       </Button>
     );
   }
-};
+
+  // Return null if no valid provider is matched
+  return null;
+}
 
 export default OAuthButton;

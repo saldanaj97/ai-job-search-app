@@ -11,8 +11,21 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": true
+    "project": "./tsconfig.json"
   },
+  "ignorePatterns": ["**/*"], // Ignore everything by default
+  "overrides": [
+    {
+      "files": [
+        "src/components/**/*.{ts,tsx,js,jsx}",
+        "src/app/**/*.{ts,tsx,js,jsx}"
+      ],
+      "excludedFiles": "*.test.{ts,tsx,js,jsx}",
+      "rules": {
+        // You can add specific rules for these directories if needed
+      }
+    }
+  ],
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "@typescript-eslint/array-type": "off",

@@ -1,6 +1,6 @@
 import { Footer } from '~/components/ui/footer';
 
-const Header = () => {
+function Header() {
   return (
     <div className="flex w-full flex-col items-start justify-start gap-20 bg-black/50 px-16 py-28">
       <div className="flex flex-col items-start justify-start gap-6">
@@ -31,9 +31,9 @@ const Header = () => {
       </div>
     </div>
   );
-};
+}
 
-const Feature1 = () => {
+function Feature1() {
   return (
     <div className="mb-20 flex flex-col items-center justify-start gap-20 px-16 py-28">
       <div className="flex flex-col items-center justify-start gap-4">
@@ -43,9 +43,9 @@ const Feature1 = () => {
           </div>
           <div className="flex self-stretch text-center text-lg font-normal">
             Our job tracking table provides a clear overview of your job search
-            progress, allowing you to easily see which applications you've
-            submitted, which interviews you've had, and which offers you've
-            received.
+            progress, allowing you to easily see which applications you&apos;ve
+            submitted, which interviews you&apos;ve had, and which offers
+            you&apos;ve received.
           </div>
         </div>
         <div className="flex items-center justify-start gap-6 pt-4">
@@ -62,21 +62,24 @@ const Feature1 = () => {
         <img
           className="absolute left-0 h-[192px] w-[928px] object-cover"
           src="https://via.placeholder.com/928x192"
+          alt=""
         />
         <img
           className="absolute left-[128px] top-0 h-[704px] w-[1056px] object-cover"
           src="https://via.placeholder.com/1056x704"
+          alt=""
         />
         <img
           className="absolute bottom-0 right-0 h-[192px] w-[192px] object-cover"
           src="https://via.placeholder.com/192x192"
+          alt=""
         />
       </div>
     </div>
   );
-};
+}
 
-const CallToAction = () => {
+function CallToAction() {
   return (
     <div className="flex flex-col items-start justify-start gap-20 px-16 py-28">
       <div className="flex items-center justify-start gap-20 self-stretch">
@@ -104,13 +107,14 @@ const CallToAction = () => {
         <img
           className="shrink grow basis-0"
           src="https://via.placeholder.com/616x400"
+          alt=""
         />
       </div>
     </div>
   );
-};
+}
 
-export const JobTrackerPage = () => {
+export function JobTrackerPage() {
   return (
     <div className="flex flex-col items-start justify-start">
       <Header />
@@ -119,6 +123,6 @@ export const JobTrackerPage = () => {
       <Footer />
     </div>
   );
-};
+}
 
 export default JobTrackerPage;
