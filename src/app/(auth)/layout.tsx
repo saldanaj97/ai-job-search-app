@@ -11,7 +11,7 @@ async function RootLayout({ children }: { children: React.ReactNode }) {
   } = await supabase.auth.getUser();
 
   if (user) {
-    redirect('/');
+    redirect('/dashboard');
   }
   return <div>{children}</div>;
 }
