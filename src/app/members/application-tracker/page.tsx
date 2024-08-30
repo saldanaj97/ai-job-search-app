@@ -12,7 +12,7 @@ async function getJobApplications() {
   const data = await fs.readFile(
     path.join(
       process.cwd(),
-      'src/app/application-tracker/data/job-applications.json'
+      'src/app/members/application-tracker/data/job-applications.json'
     )
   );
 
@@ -22,7 +22,7 @@ async function getJobApplications() {
 }
 
 export default async function TaskPage() {
-  const tasks = await getJobApplications();
+  const jobApplications = await getJobApplications();
 
   return (
     <>
@@ -47,12 +47,11 @@ export default async function TaskPage() {
           <div>
             <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>
             <p className="text-muted-foreground">
-              Here&apos;s a list of your tasks for this month!
+              Here&apos;s a list of all the jobs you are currently tracking!
             </p>
           </div>
-          <div className="flex items-center space-x-2">{/* <UserNav /> */}</div>
         </div>
-        <DataTable data={tasks} columns={columns} />
+        <DataTable data={jobApplications} columns={columns} />
       </div>
     </>
   );

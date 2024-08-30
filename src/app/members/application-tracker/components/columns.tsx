@@ -1,51 +1,55 @@
 'use client';
 
 import { ColumnDef } from '@tanstack/react-table';
-
+import { Checkbox } from '~/components/ui/checkbox';
 import { JobApplication } from '../data/schema';
 import { DataTableColumnHeader } from './data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
 
 export const columns: ColumnDef<JobApplication>[] = [
-  // {
-  //   id: 'select',
-  //   header: ({ table }) => (
-  //     <Checkbox
-  //       checked={
-  //         table.getIsAllPageRowsSelected() ||
-  //         (table.getIsSomePageRowsSelected() && 'indeterminate')
-  //       }
-  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-  //       aria-label="Select all"
-  //       className="translate-y-[2px]"
-  //     />
-  //   ),
-  //   cell: ({ row }) => (
-  //     <Checkbox
-  //       checked={row.getIsSelected()}
-  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
-  //       aria-label="Select row"
-  //       className="translate-y-[2px]"
-  //     />
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  // },
   {
-    accessorKey: 'job.title',
+    id: 'select',
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && 'indeterminate')
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+        className="translate-y-[2px]"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+        className="translate-y-[2px]"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: 'job', // Access the entire job object
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Job Title" />
     ),
-    cell: ({ row }) => (
-      <div className="font-medium">{row.getValue('job.title')}</div>
-    ),
+    cell: ({ row }) => {
+      const job = row.getValue('job') as { title: string };
+      return <div>{job.title}</div>;
+    },
   },
   {
-    accessorKey: 'job.company',
+    accessorKey: 'job', // Access the entire job object
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Company Name" />
     ),
-    cell: ({ row }) => <div>{row.getValue('job.company')}</div>,
+    cell: ({ row }) => {
+      const job = row.getValue('job') as { company: string };
+      return <div>{job.company}</div>;
+    },
   },
   {
     accessorKey: 'status',

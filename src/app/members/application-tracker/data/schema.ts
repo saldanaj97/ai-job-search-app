@@ -24,7 +24,7 @@ export const JobApplicationSchema = z.object({
   }),
   appliedOn: z.union([z.string(), z.date()]).transform((val) => new Date(val)),
   lastHeard: z.union([z.string(), z.date()]).transform((val) => new Date(val)),
-  status: z.string(),
+  status: ApplicationStatusSchema,
   followedUp: z.boolean(),
   followUpCount: z.number(),
 });
