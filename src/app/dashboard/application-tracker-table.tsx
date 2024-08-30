@@ -178,44 +178,48 @@ const jobApplications = [
 
 export function ApplicationTrackerTable() {
   return (
-    <Table>
-      <TableCaption>A list of your submitted job applications. </TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Job Title</TableHead>
-          <TableHead>Company Name</TableHead>
-          <TableHead className="">Status</TableHead>
-          <TableHead className="text-center">Applied On</TableHead>
-          <TableHead className="text-center">Last Heard</TableHead>
-          <TableHead className="text-center">Followed Up</TableHead>
-          <TableHead className="text-center">Follow Up Count</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {jobApplications.map((application, index) => (
-          <TableRow key={index}>
-            <TableCell className="font-medium">
-              {application.job.title}
-            </TableCell>
-            <TableCell>{application.job.company}</TableCell>
-            <TableCell className="">{application.status}</TableCell>
-            <TableCell className="text-center">
-              {application.appliedOn.toLocaleDateString()}
-            </TableCell>
-            <TableCell className="text-center">
-              {application.lastHeard.toLocaleDateString()}
-            </TableCell>
-            <TableCell className="text-center">
-              <Checkbox checked={application.followedUp} />
-            </TableCell>
-            <TableCell className="text-center">
-              {application.followUpCount}
-            </TableCell>
+    <div>
+      <p className="text-center text-2xl font-semibold">
+        Job Application Tracker
+      </p>
+      <Table>
+        <TableCaption>A list of your submitted job applications. </TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Job Title</TableHead>
+            <TableHead>Company Name</TableHead>
+            <TableHead className="">Status</TableHead>
+            <TableHead className="text-center">Applied On</TableHead>
+            <TableHead className="text-center">Last Heard</TableHead>
+            <TableHead className="text-center">Followed Up</TableHead>
+            <TableHead className="text-center">Follow Up Count</TableHead>
           </TableRow>
-        ))}
-      </TableBody>
-
-      <TableFooter></TableFooter>
-    </Table>
+        </TableHeader>
+        <TableBody>
+          {jobApplications.map((application, index) => (
+            <TableRow key={index}>
+              <TableCell className="font-medium">
+                {application.job.title}
+              </TableCell>
+              <TableCell>{application.job.company}</TableCell>
+              <TableCell className="">{application.status}</TableCell>
+              <TableCell className="text-center">
+                {application.appliedOn.toLocaleDateString()}
+              </TableCell>
+              <TableCell className="text-center">
+                {application.lastHeard.toLocaleDateString()}
+              </TableCell>
+              <TableCell className="text-center">
+                <Checkbox checked={application.followedUp} />
+              </TableCell>
+              <TableCell className="text-center">
+                {application.followUpCount}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <TableFooter></TableFooter>
+      </Table>
+    </div>
   );
 }

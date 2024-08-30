@@ -1,0 +1,132 @@
+[
+  {
+    "job": {
+      "title": "Frontend Developer",
+      "company": "Tech Innovators Inc.",
+      "description": {
+        "responsibilities": [
+          "Build and maintain web applications",
+          "Collaborate with design teams",
+          "Ensure cross-browser compatibility"
+        ],
+        "requirements": [
+          "Proficient in React",
+          "Experience with CSS/HTML",
+          "Familiarity with REST APIs"
+        ]
+      },
+      "remote": true,
+      "location": "Dallas, TX",
+      "salary": "$85,000"
+    },
+    "appliedOn": "2024-08-15T00:00:00.000Z",
+    "lastHeard": "2024-08-22T00:00:00.000Z",
+    "status": "Interviewing",
+    "followedUp": true,
+    "followUpCount": 0
+  },
+  {
+    "job": {
+      "title": "Backend Engineer",
+      "company": "Data Wizards LLC",
+      "description": {
+        "responsibilities": [
+          "Develop and optimize server-side logic",
+          "Manage database architecture",
+          "Ensure high performance"
+        ],
+        "requirements": [
+          "Strong knowledge of Node.js",
+          "Experience with PostgreSQL",
+          "Familiarity with cloud services"
+        ]
+      },
+      "remote": false,
+      "location": "Austin, TX",
+      "salary": "$95,000"
+    },
+    "appliedOn": "2024-08-10T00:00:00.000Z",
+    "lastHeard": "2024-08-20T00:00:00.000Z",
+    "status": "Applied",
+    "followedUp": false,
+    "followUpCount": 3
+  },
+  {
+    "job": {
+      "title": "Full Stack Developer",
+      "company": "Future Tech Solutions",
+      "description": {
+        "responsibilities": [
+          "Work on both frontend and backend",
+          "Develop APIs",
+          "Collaborate with cross-functional teams"
+        ],
+        "requirements": [
+          "Experience with JavaScript frameworks",
+          "Understanding of database systems",
+          "Strong problem-solving skills"
+        ]
+      },
+      "remote": true,
+      "location": "Remote",
+      "salary": "$100,000"
+    },
+    "appliedOn": "2024-07-30T00:00:00.000Z",
+    "lastHeard": "2024-08-05T00:00:00.000Z",
+    "status": "Offer",
+    "followedUp": true,
+    "followUpCount": 2
+  },
+  {
+    "job": {
+      "title": "DevOps Engineer",
+      "company": "Cloud Pioneers",
+      "description": {
+        "responsibilities": [
+          "Manage CI/CD pipelines",
+          "Automate infrastructure",
+          "Monitor system performance"
+        ],
+        "requirements": [
+          "Proficient in AWS",
+          "Experience with Docker/Kubernetes",
+          "Knowledge of scripting languages"
+        ]
+      },
+      "remote": false,
+      "location": "San Francisco, CA",
+      "salary": "$120,000"
+    },
+    "appliedOn": "2024-08-01T00:00:00.000Z",
+    "lastHeard": "2024-08-12T00:00:00.000Z",
+    "status": "Rejected",
+    "followedUp": true,
+    "followUpCount": 4
+  },
+  {
+    "job": {
+      "title": "UI/UX Designer",
+      "company": "Creative Minds",
+      "description": {
+        "responsibilities": [
+          "Design user interfaces",
+          "Create prototypes",
+          "Conduct user research"
+        ],
+        "requirements": [
+          "Proficient in Figma",
+          "Experience with user-centered design",
+          "Strong visual design skills"
+        ]
+      },
+      "remote": true,
+      "location": "New York, NY",
+      "salary": "$75,000"
+    },
+    "appliedOn": "2024-08-05T00:00:00.000Z",
+    "lastHeard": "2024-08-15T00:00:00.000Z",
+    "status": "Withdrawn",
+    "followedUp": false,
+    "followUpCount": 1
+  }
+]
