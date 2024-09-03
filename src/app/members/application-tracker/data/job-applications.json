@@ -128,5 +128,265 @@
     "status": "Withdrawn",
     "followedUp": false,
     "followUpCount": 1
+  },
+  {
+    "job": {
+      "title": "Data Scientist",
+      "company": "Analytics Experts",
+      "description": {
+        "responsibilities": [
+          "Analyze large datasets",
+          "Build predictive models",
+          "Communicate insights to stakeholders"
+        ],
+        "requirements": [
+          "Strong knowledge of Python",
+          "Experience with machine learning",
+          "Familiarity with data visualization tools"
+        ]
+      },
+      "remote": true,
+      "location": "Boston, MA",
+      "salary": "$110,000"
+    },
+    "appliedOn": "2024-08-12T00:00:00.000Z",
+    "lastHeard": "2024-08-19T00:00:00.000Z",
+    "status": "Interviewing",
+    "followedUp": true,
+    "followUpCount": 2
+  },
+  {
+    "job": {
+      "title": "Mobile App Developer",
+      "company": "AppMasters",
+      "description": {
+        "responsibilities": [
+          "Develop and maintain mobile applications",
+          "Collaborate with design and backend teams",
+          "Ensure performance and security of apps"
+        ],
+        "requirements": [
+          "Proficient in Flutter",
+          "Experience with RESTful APIs",
+          "Knowledge of mobile architecture"
+        ]
+      },
+      "remote": false,
+      "location": "Chicago, IL",
+      "salary": "$90,000"
+    },
+    "appliedOn": "2024-08-07T00:00:00.000Z",
+    "lastHeard": "2024-08-14T00:00:00.000Z",
+    "status": "Offer",
+    "followedUp": true,
+    "followUpCount": 3
+  },
+  {
+    "job": {
+      "title": "Product Manager",
+      "company": "Innovatech",
+      "description": {
+        "responsibilities": [
+          "Lead product development teams",
+          "Define product vision and strategy",
+          "Collaborate with stakeholders"
+        ],
+        "requirements": [
+          "Experience in product management",
+          "Strong communication skills",
+          "Ability to manage cross-functional teams"
+        ]
+      },
+      "remote": true,
+      "location": "Seattle, WA",
+      "salary": "$130,000"
+    },
+    "appliedOn": "2024-08-09T00:00:00.000Z",
+    "lastHeard": "2024-08-16T00:00:00.000Z",
+    "status": "Applied",
+    "followedUp": false,
+    "followUpCount": 1
+  },
+  {
+    "job": {
+      "title": "Cybersecurity Analyst",
+      "company": "SecureTech",
+      "description": {
+        "responsibilities": [
+          "Monitor and analyze security threats",
+          "Implement security measures",
+          "Conduct vulnerability assessments"
+        ],
+        "requirements": [
+          "Proficient in network security",
+          "Experience with SIEM tools",
+          "Strong problem-solving skills"
+        ]
+      },
+      "remote": false,
+      "location": "Los Angeles, CA",
+      "salary": "$105,000"
+    },
+    "appliedOn": "2024-08-03T00:00:00.000Z",
+    "lastHeard": "2024-08-10T00:00:00.000Z",
+    "status": "Rejected",
+    "followedUp": false,
+    "followUpCount": 0
+  },
+  {
+    "job": {
+      "title": "Technical Writer",
+      "company": "DocuWrite",
+      "description": {
+        "responsibilities": [
+          "Write and edit technical documents",
+          "Collaborate with engineers and designers",
+          "Ensure documentation accuracy"
+        ],
+        "requirements": [
+          "Experience in technical writing",
+          "Proficient in MS Word and Markdown",
+          "Strong attention to detail"
+        ]
+      },
+      "remote": true,
+      "location": "Remote",
+      "salary": "$70,000"
+    },
+    "appliedOn": "2024-08-06T00:00:00.000Z",
+    "lastHeard": "2024-08-13T00:00:00.000Z",
+    "status": "Withdrawn",
+    "followedUp": true,
+    "followUpCount": 2
+  },
+  {
+    "job": {
+      "title": "Machine Learning Engineer",
+      "company": "AI Solutions Inc.",
+      "description": {
+        "responsibilities": [
+          "Design and implement machine learning models",
+          "Collaborate with data scientists",
+          "Optimize algorithms for performance"
+        ],
+        "requirements": [
+          "Proficient in Python",
+          "Experience with TensorFlow or PyTorch",
+          "Strong understanding of algorithms"
+        ]
+      },
+      "remote": true,
+      "location": "Remote",
+      "salary": "$115,000"
+    },
+    "appliedOn": "2024-08-18T00:00:00.000Z",
+    "lastHeard": "2024-08-25T00:00:00.000Z",
+    "status": "Applied",
+    "followedUp": true,
+    "followUpCount": 1
+  },
+  {
+    "job": {
+      "title": "Cloud Architect",
+      "company": "Global Cloud Services",
+      "description": {
+        "responsibilities": [
+          "Design cloud infrastructure solutions",
+          "Ensure security and compliance",
+          "Collaborate with development teams"
+        ],
+        "requirements": [
+          "Experience with AWS and Azure",
+          "Strong understanding of cloud security",
+          "Proficient in infrastructure as code"
+        ]
+      },
+      "remote": false,
+      "location": "Atlanta, GA",
+      "salary": "$140,000"
+    },
+    "appliedOn": "2024-08-15T00:00:00.000Z",
+    "lastHeard": "2024-08-22T00:00:00.000Z",
+    "status": "Interviewing",
+    "followedUp": true,
+    "followUpCount": 2
+  },
+  {
+    "job": {
+      "title": "Software Test Engineer",
+      "company": "Quality Assurance Group",
+      "description": {
+        "responsibilities": [
+          "Develop and execute test plans",
+          "Automate testing processes",
+          "Identify and report bugs"
+        ],
+        "requirements": [
+          "Experience in software testing",
+          "Proficient in automated testing tools",
+          "Strong analytical skills"
+        ]
+      },
+      "remote": true,
+      "location": "Phoenix, AZ",
+      "salary": "$80,000"
+    },
+    "appliedOn": "2024-08-12T00:00:00.000Z",
+    "lastHeard": "2024-08-20T00:00:00.000Z",
+    "status": "Rejected",
+    "followedUp": false,
+    "followUpCount": 0
+  },
+  {
+    "job": {
+      "title": "Business Analyst",
+      "company": "Enterprise Solutions",
+      "description": {
+        "responsibilities": [
+          "Analyze business processes",
+          "Develop business requirements",
+          "Collaborate with stakeholders"
+        ],
+        "requirements": [
+          "Experience in business analysis",
+          "Strong communication skills",
+          "Proficient in data analysis tools"
+        ]
+      },
+      "remote": false,
+      "location": "Denver, CO",
+      "salary": "$95,000"
+    },
+    "appliedOn": "2024-08-10T00:00:00.000Z",
+    "lastHeard": "2024-08-17T00:00:00.000Z",
+    "status": "Offer",
+    "followedUp": true,
+    "followUpCount": 1
+  },
+  {
+    "job": {
+      "title": "Data Engineer",
+      "company": "Big Data Analytics",
+      "description": {
+        "responsibilities": [
+          "Build and maintain data pipelines",
+          "Ensure data integrity and quality",
+          "Collaborate with data scientists"
+        ],
+        "requirements": [
+          "Experience with ETL processes",
+          "Proficient in SQL and Python",
+          "Knowledge of data warehousing"
+        ]
+      },
+      "remote": true,
+      "location": "Remote",
+      "salary": "$105,000"
+    },
+    "appliedOn": "2024-08-08T00:00:00.000Z",
+    "lastHeard": "2024-08-15T00:00:00.000Z",
+    "status": "Interviewing",
+    "followedUp": true,
+    "followUpCount": 2
   }
 ]
