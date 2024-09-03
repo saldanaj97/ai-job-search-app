@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
     provider = "prisma-client-js"
 }
@@ -10,16 +7,28 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Test {
-    id   Int    @id @default(autoincrement())
-    name String
+model User {
+    id              Int              @id @default(autoincrement())
+    email           String           @unique
+    password        String
+    jobApplications JobApplication[] @relation("UserJobApplications")
+    createdAt       DateTime         @default(now())
+    updatedAt       DateTime         @updatedAt
 }
 
-model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-
-    @@index([name])
+model JobApplication {
+    id            Int       @id @default(autoincrement())
+    jobTitle      String
+    company       String
+    location      String?
+    salary        String?
+    appliedOn     DateTime
+    lastHeard     DateTime?
+    status        String
+    followedUp    Boolean   @default(false)
+    followUpCount Int       @default(0)
+    userId        Int
+    user          User      @relation("UserJobApplications", fields: [userId], references: [id])
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
 }
