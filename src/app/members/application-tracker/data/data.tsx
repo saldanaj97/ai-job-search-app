@@ -2,12 +2,12 @@ import {
   ArrowDownIcon,
   ArrowRightIcon,
   ArrowUpIcon,
-  CheckCircledIcon,
-  CircleIcon,
   CrossCircledIcon,
-  QuestionMarkCircledIcon,
-  StopwatchIcon,
+  EnvelopeClosedIcon,
+  Pencil1Icon,
+  PlusIcon,
 } from '@radix-ui/react-icons';
+import { BackpackIcon } from 'lucide-react';
 
 export const labels = [
   {
@@ -26,29 +26,29 @@ export const labels = [
 
 export const statuses = [
   {
-    value: 'backlog',
-    label: 'Backlog',
-    icon: QuestionMarkCircledIcon,
+    value: 'interviewing',
+    label: 'Interviewing',
+    icon: BackpackIcon,
   },
   {
-    value: 'todo',
-    label: 'Todo',
-    icon: CircleIcon,
+    value: 'applied',
+    label: 'Applied',
+    icon: Pencil1Icon,
   },
   {
-    value: 'in progress',
-    label: 'In Progress',
-    icon: StopwatchIcon,
+    value: 'offer',
+    label: 'Offer',
+    icon: EnvelopeClosedIcon,
   },
   {
-    value: 'done',
-    label: 'Done',
-    icon: CheckCircledIcon,
-  },
-  {
-    value: 'canceled',
-    label: 'Canceled',
+    value: 'rejected',
+    label: 'Rejected',
     icon: CrossCircledIcon,
+  },
+  {
+    value: 'other',
+    label: 'Other',
+    icon: PlusIcon,
   },
 ];
 
