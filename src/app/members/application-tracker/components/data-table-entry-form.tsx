@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { DialogClose } from '@radix-ui/react-dialog';
 import { Button } from '~/components/ui/button';
 import {
   Form,
@@ -14,6 +15,13 @@ import {
   FormMessage,
 } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select';
 import { JobApplicationSchema } from '../data/schema';
 
 export function JobApplicationEntryForm() {
@@ -120,7 +128,7 @@ export function JobApplicationEntryForm() {
           name="lastHeard"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Last Heard</FormLabel>
+              <FormLabel>Last Heard From</FormLabel>
               <FormControl>
                 <Input
                   type="date"
@@ -143,21 +151,36 @@ export function JobApplicationEntryForm() {
             <FormItem>
               <FormLabel>Status</FormLabel>
               <FormControl>
-                <select {...field}>
-                  <option value="Applied">Applied</option>
-                  <option value="Interviewing">Interviewing</option>
-                  <option value="Offer">Offer</option>
-                  <option value="Rejected">Rejected</option>
-                  <option value="Withdrawn">Withdrawn</option>
-                  <option value="Other">Other</option>
-                </select>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Applied">Applied</SelectItem>
+                    <SelectItem value="Interviewing">Interviewing</SelectItem>
+                    <SelectItem value="Offer">Offer</SelectItem>
+                    <SelectItem value="Rejected">Rejected</SelectItem>
+                    <SelectItem value="Withdrawn">Withdrawn</SelectItem>
+                    <SelectItem value="Other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
+        <div className="flex w-full flex-row justify-center gap-8">
+          <Button type="submit">Submit</Button>
+          <DialogClose asChild>
+            <Button type="button" variant="secondary">
+              Close
+            </Button>
+          </DialogClose>
+        </div>
       </form>
-      <Button type="submit">Submit</Button>
     </Form>
   );
 }

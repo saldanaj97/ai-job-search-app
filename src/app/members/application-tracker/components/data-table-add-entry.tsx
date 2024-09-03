@@ -2,10 +2,8 @@ import { PlusCircle } from 'lucide-react';
 import { Button } from '~/components/ui/button';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -34,14 +32,6 @@ export function DataTableNewEntry() {
         </DialogHeader>
 
         <JobApplicationEntryForm />
-
-        <DialogFooter className="sm:justify-start">
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
