@@ -8,6 +8,7 @@ import { Button } from '~/components/ui/button';
 import { DataTableViewOptions } from './data-table-view-options';
 
 import { priorities, statuses } from '../data/data';
+import { DataTableNewEntry } from './data-table-add-entry';
 import { DataTableFacetedFilter } from './data-table-faceted-filter';
 
 interface DataTableToolbarProps<TData> {
@@ -55,6 +56,7 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
+      <DataTableNewEntry />
       <DataTableViewOptions table={table} />
     </div>
   );
