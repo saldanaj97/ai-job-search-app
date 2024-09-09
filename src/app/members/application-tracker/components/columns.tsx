@@ -37,8 +37,8 @@ export const columns: ColumnDef<JobApplication>[] = [
       <DataTableColumnHeader column={column} title="Job Title" />
     ),
     cell: ({ row }) => {
-      const job = row.getValue('jobTitle') as { title: string };
-      return <div>{job.title}</div>;
+      const job: string = row.getValue('jobTitle');
+      return <div>{job}</div>;
     },
   },
   {
@@ -47,8 +47,8 @@ export const columns: ColumnDef<JobApplication>[] = [
       <DataTableColumnHeader column={column} title="Company Name" />
     ),
     cell: ({ row }) => {
-      const job = row.getValue('company') as { company: string };
-      return <div>{job.company}</div>;
+      const company: string = row.getValue('company');
+      return <div>{company}</div>;
     },
   },
   {
