@@ -1,23 +1,30 @@
-import { promises as fs } from 'fs';
-import path from 'path';
-import { z } from 'zod';
-
+import { getAllJobApplications } from './actions';
 import { columns } from './components/columns';
 import { DataTable } from './components/data-table';
-import { JobApplicationSchema } from './data/schema';
 
-// Simulate a database read for tasks.
+// // Simulate a database read for tasks.
+// async function getJobApplications() {
+//   const data = await fs.readFile(
+//     path.join(
+//       process.cwd(),
+//       'src/app/members/application-tracker/data/job-applications.json'
+//     )
+//   );
+
+//   const applications = JSON.parse(data.toString());
+
+//   return z.array(JobApplicationSchema).parse(applications);
+// }
+
 async function getJobApplications() {
-  const data = await fs.readFile(
-    path.join(
-      process.cwd(),
-      'src/app/members/application-tracker/data/job-applications.json'
-    )
-  );
+  const { data, error } = await getAllJobApplications();
 
-  const applications = JSON.parse(data.toString());
+  if (error) {
+    console.error('error', error);
+    return [];
+  }
 
-  return z.array(JobApplicationSchema).parse(applications);
+  return data;
 }
 
 export default async function TaskPage() {
@@ -33,7 +40,7 @@ export default async function TaskPage() {
           </p>
         </div>
       </div>
-      <DataTable data={jobApplications} columns={columns} />
+      <DataTable data={jobApplications || []} columns={columns} />
     </div>
   );
 }

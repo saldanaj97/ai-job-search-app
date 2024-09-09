@@ -10,12 +10,8 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
-
-import { JobApplicationSchema } from '../data/schema';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;
@@ -24,7 +20,7 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const application = JobApplicationSchema.parse(row.original);
+  // const application = JobApplicationSchema.parse(row.original);
 
   return (
     <DropdownMenu>
@@ -42,9 +38,9 @@ export function DataTableRowActions<TData>({
         <DropdownMenuItem>Make a copy</DropdownMenuItem>
         <DropdownMenuItem>Favorite</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuSub>
+        {/* <DropdownMenuSub>
           <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
-          {/* <DropdownMenuSubContent>
+<DropdownMenuSubContent>
             <DropdownMenuRadioGroup value={task.label}>
               {labels.map((label) => (
                 <DropdownMenuRadioItem key={label.value} value={label.value}>
@@ -52,8 +48,8 @@ export function DataTableRowActions<TData>({
                 </DropdownMenuRadioItem>
               ))}
             </DropdownMenuRadioGroup>
-          </DropdownMenuSubContent> */}
-        </DropdownMenuSub>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>*/}
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           Delete

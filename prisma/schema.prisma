@@ -8,9 +8,9 @@ datasource db {
 }
 
 model User {
-    id              Int              @id @default(autoincrement())
+    id              String           @id @default(uuid())
+    name            String?
     email           String           @unique
-    password        String
     jobApplications JobApplication[] @relation("UserJobApplications")
     createdAt       DateTime         @default(now())
     updatedAt       DateTime         @updatedAt
@@ -19,7 +19,7 @@ model User {
 model JobApplication {
     id            Int       @id @default(autoincrement())
     jobTitle      String
-    company       String
+    company       String?
     location      String?
     salary        String?
     appliedOn     DateTime
@@ -27,7 +27,7 @@ model JobApplication {
     status        String
     followedUp    Boolean   @default(false)
     followUpCount Int       @default(0)
-    userId        Int
+    userId        String
     user          User      @relation("UserJobApplications", fields: [userId], references: [id])
     createdAt     DateTime  @default(now())
     updatedAt     DateTime  @updatedAt

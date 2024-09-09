@@ -9,22 +9,20 @@ const ApplicationStatusSchema = z.enum([
   'Other',
 ]);
 
-// Define your schema (example, assuming JobApplicationSchema is already defined)
+// Define the updated JobApplication schema
 export const JobApplicationSchema = z.object({
-  job: z.object({
-    title: z.string(),
-    company: z.string(),
-    description: z.object({
-      responsibilities: z.array(z.string()),
-      requirements: z.array(z.string()),
-    }),
-    remote: z.boolean(),
-    location: z.string(),
-    salary: z.string(),
-  }),
+  jobTitle: z.string(), // Corresponds to job.title
+  company: z.string(), // Corresponds to job.company
+  // description: z.object({
+  //   responsibilities: z.array(z.string()), // Responsibilities and requirements are now in the description field
+  //   requirements: z.array(z.string()),
+  // }),
+  remote: z.boolean(), // Corresponds to job.remote
+  location: z.string(), // Corresponds to job.location
+  salary: z.string(), // Corresponds to job.salary
   appliedOn: z.union([z.string(), z.date()]).transform((val) => new Date(val)),
   lastHeard: z.union([z.string(), z.date()]).transform((val) => new Date(val)),
-  status: ApplicationStatusSchema,
+  status: ApplicationStatusSchema, // Use the enum schema for application status
   followedUp: z.boolean(),
   followUpCount: z.number(),
 });

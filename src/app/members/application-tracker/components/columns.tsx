@@ -32,22 +32,22 @@ export const columns: ColumnDef<JobApplication>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: 'job', // Access the entire job object
+    accessorKey: 'jobTitle', // Access the entire job object
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Job Title" />
     ),
     cell: ({ row }) => {
-      const job = row.getValue('job') as { title: string };
+      const job = row.getValue('jobTitle') as { title: string };
       return <div>{job.title}</div>;
     },
   },
   {
-    accessorKey: 'job', // Access the entire job object
+    accessorKey: 'company', // Access the entire job object
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Company Name" />
     ),
     cell: ({ row }) => {
-      const job = row.getValue('job') as { company: string };
+      const job = row.getValue('company') as { company: string };
       return <div>{job.company}</div>;
     },
   },
@@ -68,9 +68,7 @@ export const columns: ColumnDef<JobApplication>[] = [
       />
     ),
     cell: ({ row }) => (
-      <div className="text-center">
-        {(row.getValue('appliedOn') as Date).toLocaleDateString()}
-      </div>
+      <div className="text-center">{row.getValue('appliedOn')}</div>
     ),
   },
   {
@@ -83,9 +81,7 @@ export const columns: ColumnDef<JobApplication>[] = [
       />
     ),
     cell: ({ row }) => (
-      <div className="text-center">
-        {(row.getValue('lastHeard') as Date).toLocaleDateString()}
-      </div>
+      <div className="text-center">{row.getValue('lastHeard')}</div>
     ),
   },
   {

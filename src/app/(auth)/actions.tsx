@@ -9,8 +9,6 @@ const supabase = createClient(cookies());
 const origin = headers().get('origin');
 
 export const signUp = async (data: SignupInput) => {
-  'use server';
-
   const { error } = await supabase.auth.signUp({
     email: data.email,
     password: data.password,
@@ -33,8 +31,6 @@ export const signUp = async (data: SignupInput) => {
 };
 
 export const signIn = async (data: LoginInput) => {
-  'use server';
-
   const { error } = await supabase.auth.signInWithPassword({
     email: data.email,
     password: data.password,

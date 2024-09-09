@@ -1,13 +1,20 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import { Form, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 import { DialogClose } from '@radix-ui/react-dialog';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@radix-ui/react-select';
+import { useState } from 'react';
 import { Button } from '~/components/ui/button';
 import {
-  Form,
   FormControl,
   FormField,
   FormItem,
@@ -15,30 +22,27 @@ import {
   FormMessage,
 } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '~/components/ui/select';
+import { addNewJobApplication } from '../actions';
 import { JobApplicationSchema } from '../data/schema';
 
+export type JobApplicationInput = z.infer<typeof JobApplicationSchema>;
+
 export function JobApplicationEntryForm() {
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
   const form = useForm<z.infer<typeof JobApplicationSchema>>({
     resolver: zodResolver(JobApplicationSchema),
     defaultValues: {
-      job: {
-        title: '',
-        company: '',
-        description: {
-          responsibilities: [],
-          requirements: [],
-        },
-        remote: false,
-        location: '',
-        salary: '',
-      },
+      jobTitle: '',
+      company: '',
+      // description: {
+      //   responsibilities: [],
+      //   requirements: [],
+      // },
+      remote: false,
+      location: '',
+      salary: '',
       appliedOn: new Date(),
       lastHeard: new Date(),
       status: 'Applied',
@@ -47,16 +51,24 @@ export function JobApplicationEntryForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof JobApplicationSchema>) {
-    console.log(values);
+  async function onSubmit(data: z.infer<typeof JobApplicationSchema>) {
+    const result = await addNewJobApplication(data);
+    if (result?.error) {
+      console.error(result.error);
+      setError(result.error);
+      return;
+    }
+    setSuccess('Job application added!');
   }
 
   return (
     <Form {...form}>
+      {error && <FormMessage>{error}</FormMessage>}
+      {success && <FormMessage>{success}</FormMessage>}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
-          name="job.title"
+          name="jobTitle"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Job Title</FormLabel>
@@ -69,7 +81,7 @@ export function JobApplicationEntryForm() {
         />
         <FormField
           control={form.control}
-          name="job.company"
+          name="company"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Company</FormLabel>
@@ -82,7 +94,7 @@ export function JobApplicationEntryForm() {
         />
         <FormField
           control={form.control}
-          name="job.location"
+          name="location"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Location</FormLabel>
@@ -95,7 +107,7 @@ export function JobApplicationEntryForm() {
         />
         <FormField
           control={form.control}
-          name="job.salary"
+          name="salary"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Salary</FormLabel>
