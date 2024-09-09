@@ -9,23 +9,12 @@ const ApplicationStatusSchema = z.enum([
   'Other',
 ]);
 
-// const dateOrNull = z
-//   .union([z.string(), z.date(), z.null()])
-//   .refine((val) => val === null || !isNaN(new Date(val).getTime()), {
-//     message: 'Invalid date format',
-//   })
-//   .transform((val) => {
-//     if (val === null) return null;
-//     const date = new Date(val);
-//     return date.toISOString(); // Format date as ISO string
-//   });
-
 export const JobApplicationSchema = z.object({
-  id: z.string().optional(), // ID is often auto-generated, so making it optional
-  jobTitle: z.string().nonempty('Job Title is required'), // Add validation messages
+  id: z.string().optional(),
+  jobTitle: z.string().nonempty('Job Title is required'),
   company: z.string().nonempty('Company is required'),
   location: z.string().nonempty('Location is required'),
-  salary: z.string().optional(), // Salary may be optional
+  salary: z.string().optional(),
   appliedOn: z
     .union([
       z.date(),
@@ -38,7 +27,7 @@ export const JobApplicationSchema = z.object({
       z.string().refine((val) => !isNaN(Date.parse(val)), 'Invalid date'),
     ]) // Same for lastHeard
     .transform((val) => (val instanceof Date ? val : new Date(val))),
-  status: ApplicationStatusSchema, // Make sure this schema is correctly imported or defined
+  status: ApplicationStatusSchema,
   followedUp: z.boolean(),
   followUpCount: z.number().min(0, 'Follow up count cannot be negative'), // Adding a validation rule for non-negative numbers
 });
