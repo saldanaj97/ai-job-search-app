@@ -1,18 +1,10 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, useForm } from 'react-hook-form';
-import { z } from 'zod';
-
 import { DialogClose } from '@radix-ui/react-dialog';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@radix-ui/react-select';
 import { useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
+import { z } from 'zod';
 import { Button } from '~/components/ui/button';
 import {
   FormControl,
@@ -36,15 +28,10 @@ export function JobApplicationEntryForm() {
     defaultValues: {
       jobTitle: '',
       company: '',
-      // description: {
-      //   responsibilities: [],
-      //   requirements: [],
-      // },
-      remote: false,
       location: '',
       salary: '',
-      appliedOn: new Date(),
-      lastHeard: new Date(),
+      appliedOn: new Date().toISOString().split('T')[0],
+      lastHeard: new Date().toISOString(),
       status: 'Applied',
       followedUp: false,
       followUpCount: 0,
@@ -62,7 +49,7 @@ export function JobApplicationEntryForm() {
   }
 
   return (
-    <Form {...form}>
+    <FormProvider {...form}>
       {error && <FormMessage>{error}</FormMessage>}
       {success && <FormMessage>{success}</FormMessage>}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -125,11 +112,7 @@ export function JobApplicationEntryForm() {
             <FormItem>
               <FormLabel>Applied On</FormLabel>
               <FormControl>
-                <Input
-                  type="date"
-                  {...field}
-                  value={field.value.toISOString().split('T')[0]}
-                />
+                <Input type="date" {...field} value={'2021-01-01'} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -142,21 +125,13 @@ export function JobApplicationEntryForm() {
             <FormItem>
               <FormLabel>Last Heard From</FormLabel>
               <FormControl>
-                <Input
-                  type="date"
-                  {...field}
-                  value={
-                    field.value instanceof Date
-                      ? field.value.toISOString().split('T')[0]
-                      : field.value
-                  }
-                />
+                <Input type="date" {...field} value={'2021-01-01'} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormField
+        {/* <FormField
           control={form.control}
           name="status"
           render={({ field }) => (
@@ -183,7 +158,7 @@ export function JobApplicationEntryForm() {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         <div className="flex w-full flex-row justify-center gap-8">
           <Button type="submit">Submit</Button>
           <DialogClose asChild>
@@ -193,6 +168,6 @@ export function JobApplicationEntryForm() {
           </DialogClose>
         </div>
       </form>
-    </Form>
+    </FormProvider>
   );
 }

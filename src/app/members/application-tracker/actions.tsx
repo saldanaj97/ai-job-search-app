@@ -50,7 +50,7 @@ export const addNewJobApplication = async (data: JobApplicationInput) => {
   }
 
   // Add user_id to the job application data
-  const jobApplicationData = { ...data, user_id: user.id };
+  const jobApplicationData = { ...data, userId: user.id };
 
   // Insert the new job application
   const { error } = await supabase

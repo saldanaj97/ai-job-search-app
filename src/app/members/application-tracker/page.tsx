@@ -2,7 +2,7 @@ import { getAllJobApplications } from './actions';
 import { columns } from './components/columns';
 import { DataTable } from './components/data-table';
 
-// // Simulate a database read for tasks.
+// Simulate a database read for tasks.
 // async function getJobApplications() {
 //   const data = await fs.readFile(
 //     path.join(
