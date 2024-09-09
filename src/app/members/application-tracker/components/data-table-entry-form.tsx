@@ -30,8 +30,8 @@ export function JobApplicationEntryForm() {
       company: '',
       location: '',
       salary: '',
-      appliedOn: new Date().toISOString().split('T')[0],
-      lastHeard: new Date().toISOString(),
+      appliedOn: new Date(),
+      lastHeard: new Date(),
       status: 'Applied',
       followedUp: false,
       followUpCount: 0,
@@ -39,6 +39,7 @@ export function JobApplicationEntryForm() {
   });
 
   async function onSubmit(data: z.infer<typeof JobApplicationSchema>) {
+    console.log('Submitting data:', data);
     const result = await addNewJobApplication(data);
     if (result?.error) {
       console.error(result.error);
@@ -112,7 +113,12 @@ export function JobApplicationEntryForm() {
             <FormItem>
               <FormLabel>Applied On</FormLabel>
               <FormControl>
-                <Input type="date" {...field} value={'2021-01-01'} />
+                <Input
+                  type="date"
+                  value={field.value.toISOString().split('T')[0]}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -125,7 +131,12 @@ export function JobApplicationEntryForm() {
             <FormItem>
               <FormLabel>Last Heard From</FormLabel>
               <FormControl>
-                <Input type="date" {...field} value={'2021-01-01'} />
+                <Input
+                  type="date"
+                  value={field.value.toISOString().split('T')[0]}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
