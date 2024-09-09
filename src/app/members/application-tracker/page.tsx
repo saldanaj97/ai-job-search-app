@@ -2,33 +2,8 @@ import { getAllJobApplications } from './actions';
 import { columns } from './components/columns';
 import { DataTable } from './components/data-table';
 
-// Simulate a database read for tasks.
-// async function getJobApplications() {
-//   const data = await fs.readFile(
-//     path.join(
-//       process.cwd(),
-//       'src/app/members/application-tracker/data/job-applications.json'
-//     )
-//   );
-
-//   const applications = JSON.parse(data.toString());
-
-//   return z.array(JobApplicationSchema).parse(applications);
-// }
-
-async function getJobApplications() {
+export default async function JobApplicationTracker() {
   const { data, error } = await getAllJobApplications();
-
-  if (error) {
-    console.error('error', error);
-    return [];
-  }
-
-  return data;
-}
-
-export default async function TaskPage() {
-  const jobApplications = await getJobApplications();
 
   return (
     <div className="hidden h-full flex-1 flex-col space-y-8 px-16 py-8 md:flex">
@@ -40,7 +15,7 @@ export default async function TaskPage() {
           </p>
         </div>
       </div>
-      <DataTable data={jobApplications || []} columns={columns} />
+      <DataTable columns={columns} data={data || []} error={error ?? null} />
     </div>
   );
 }

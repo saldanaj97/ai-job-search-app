@@ -46,7 +46,13 @@ export function JobApplicationEntryForm() {
       setError(result.error);
       return;
     }
+    // TODO: Show animation after user has sucessfully submitted the form
     setSuccess('Job application added!');
+    form.reset();
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 3000);
   }
 
   return (

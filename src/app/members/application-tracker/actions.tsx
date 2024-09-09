@@ -4,25 +4,22 @@ import { createClient } from '~/utils/supabase/server';
 import type { JobApplicationInput } from './components/data-table-entry-form';
 
 const supabase = createClient(cookies());
+const {
+  data: { user },
+  error: sessionError,
+} = await supabase.auth.getUser();
 
 export const getAllJobApplications = async () => {
-  // Retrieve the session to get the signed-in user
-  const {
-    data: { user },
-    error: sessionError,
-  } = await supabase.auth.getUser();
-
   if (sessionError || !user) {
     return {
       error: sessionError?.message || 'User is not authenticated',
     };
   }
 
-  // Query the job applications table filtered by the user's ID
   const { data, error } = await supabase
     .from('JobApplication')
     .select('*')
-    .eq('userId', user.id); // Assuming you have a 'user_id' column
+    .eq('userId', user.id);
 
   if (error) {
     return {
@@ -37,22 +34,14 @@ export const getAllJobApplications = async () => {
 };
 
 export const addNewJobApplication = async (data: JobApplicationInput) => {
-  // Retrieve the session to get the signed-in user
-  const {
-    data: { user },
-    error: sessionError,
-  } = await supabase.auth.getUser();
-
   if (sessionError || !user) {
     return {
       error: sessionError?.message || 'User is not authenticated',
     };
   }
 
-  // Add user_id to the job application data
   const jobApplicationData = { ...data, userId: user.id };
 
-  // Insert the new job application
   const { error } = await supabase
     .from('JobApplication')
     .insert(jobApplicationData);
@@ -66,5 +55,37 @@ export const addNewJobApplication = async (data: JobApplicationInput) => {
   return {
     success: true,
     message: 'Job application added!',
+  };
+};
+
+export const deleteJobApplication = async (id: string) => {
+  console.log('Deleting job application with id:', id);
+  console.log('User:', user);
+
+  if (sessionError || !user) {
+    return {
+      error: sessionError?.message || 'User is not authenticated',
+    };
+  }
+
+  // Perform the delete operation
+  const { data, error, status } = await supabase
+    .from('JobApplication')
+    .delete()
+    .eq('id', id);
+
+  if (error) {
+    console.log('Error:', error);
+    return {
+      error: error.message,
+    };
+  }
+
+  console.log('Data:', data);
+  console.log('Status:', status);
+
+  return {
+    success: true,
+    message: 'Job application deleted!',
   };
 };
