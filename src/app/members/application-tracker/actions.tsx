@@ -59,9 +59,6 @@ export const addNewJobApplication = async (data: JobApplicationInput) => {
 };
 
 export const deleteJobApplication = async (id: string) => {
-  console.log('Deleting job application with id:', id);
-  console.log('User:', user);
-
   if (sessionError || !user) {
     return {
       error: sessionError?.message || 'User is not authenticated',
@@ -69,20 +66,13 @@ export const deleteJobApplication = async (id: string) => {
   }
 
   // Perform the delete operation
-  const { data, error, status } = await supabase
-    .from('JobApplication')
-    .delete()
-    .eq('id', id);
+  const { error } = await supabase.from('JobApplication').delete().eq('id', id);
 
   if (error) {
-    console.log('Error:', error);
     return {
       error: error.message,
     };
   }
-
-  console.log('Data:', data);
-  console.log('Status:', status);
 
   return {
     success: true,
