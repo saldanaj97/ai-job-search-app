@@ -2,14 +2,12 @@
 
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Table } from '@tanstack/react-table';
-
-import { Input } from '~/components/ui//input';
 import { Button } from '~/components/ui/button';
-import { DataTableViewOptions } from './data-table-view-options';
-
 import { statuses } from '../data/data';
 import { DataTableNewEntry } from './data-table-add-entry';
 import { DataTableFacetedFilter } from './data-table-faceted-filter';
+import { DataTableInputFilter } from './data-table-input-filter';
+import { DataTableViewOptions } from './data-table-view-options';
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -19,27 +17,25 @@ export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
   const isFiltered = table.getState().columnFilters.length > 0;
+  const statusColumn = table.getColumn('status');
 
-  return (
-    <div className="flex items-center justify-between gap-2">
-      <div className="flex flex-1 items-center space-x-2">
-        <Input
-          placeholder="Filter tasks..."
-          value={
-            (table.getColumn('jobTitle')?.getFilterValue() as string) ?? ''
-          }
-          onChange={(event) =>
-            table.getColumn('jobTitle')?.setFilterValue(event.target.value)
-          }
-          className="h-8 w-[150px] lg:w-[250px]"
-        />
-        {table.getColumn('status') && (
+  const StatusFilter = () => {
+    return (
+      <>
+        {statusColumn && (
           <DataTableFacetedFilter
-            column={table.getColumn('status')}
+            column={statusColumn}
             title="Status"
             options={statuses}
           />
         )}
+      </>
+    );
+  };
+
+  const ResetFilterButton = () => {
+    return (
+      <>
         {isFiltered && (
           <Button
             variant="ghost"
@@ -50,6 +46,16 @@ export function DataTableToolbar<TData>({
             <Cross2Icon className="ml-2 h-4 w-4" />
           </Button>
         )}
+      </>
+    );
+  };
+
+  return (
+    <div className="flex items-center justify-between gap-2">
+      <div className="flex flex-1 items-center space-x-2">
+        <DataTableInputFilter table={table} />
+        <StatusFilter />
+        <ResetFilterButton />
       </div>
       <DataTableNewEntry />
       <DataTableViewOptions table={table} />
