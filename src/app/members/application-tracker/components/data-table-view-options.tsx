@@ -33,7 +33,7 @@ export function DataTableViewOptions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[150px]">
-        <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+        <DropdownMenuLabel>Toggle Columns</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
           .getAllColumns()
@@ -42,7 +42,6 @@ export function DataTableViewOptions<TData>({
               typeof column.accessorFn !== 'undefined' && column.getCanHide()
           )
           .map((column) => {
-            console.log(column);
             return (
               <DropdownMenuCheckboxItem
                 key={column.id}
