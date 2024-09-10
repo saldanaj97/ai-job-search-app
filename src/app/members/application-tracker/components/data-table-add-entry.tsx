@@ -30,7 +30,6 @@ export function DataTableNewEntry() {
             Fill in the form below to add a new application to your tracker.
           </DialogDescription>
         </DialogHeader>
-
         <JobApplicationEntryForm />
       </DialogContent>
     </Dialog>
