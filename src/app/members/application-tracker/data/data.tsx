@@ -26,27 +26,27 @@ export const labels = [
 
 export const statuses = [
   {
-    value: 'interviewing',
+    value: 'Interviewing',
     label: 'Interviewing',
     icon: BackpackIcon,
   },
   {
-    value: 'applied',
+    value: 'Applied',
     label: 'Applied',
     icon: Pencil1Icon,
   },
   {
-    value: 'offer',
+    value: 'Offer',
     label: 'Offer',
     icon: EnvelopeClosedIcon,
   },
   {
-    value: 'rejected',
+    value: 'Rejected',
     label: 'Rejected',
     icon: CrossCircledIcon,
   },
   {
-    value: 'other',
+    value: 'Other',
     label: 'Other',
     icon: PlusIcon,
   },
