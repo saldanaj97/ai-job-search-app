@@ -79,3 +79,30 @@ export const deleteJobApplication = async (id: string) => {
     message: 'Job application deleted!',
   };
 };
+
+export const deleteManyJobApplications = async (ids: number[]) => {
+  console.log('Deleting ids:', ids);
+  if (sessionError || !user) {
+    return {
+      error: sessionError?.message || 'User is not authenticated',
+    };
+  }
+
+  if (ids.length === 0) throw new Error('No ids provided');
+
+  const { error } = await supabase
+    .from('JobApplication')
+    .delete()
+    .in('id', ids);
+
+  if (error) {
+    return {
+      error: error.message,
+    };
+  }
+
+  return {
+    success: true,
+    message: 'Job applications deleted!',
+  };
+};

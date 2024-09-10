@@ -5,6 +5,7 @@ import { Table } from '@tanstack/react-table';
 import { Button } from '~/components/ui/button';
 import { statuses } from '../data/data';
 import { DataTableNewEntry } from './data-table-add-entry';
+import { DeleteMultipleEntryButton } from './data-table-delete-rows';
 import { DataTableFacetedFilter } from './data-table-faceted-filter';
 import { DataTableInputFilter } from './data-table-input-filter';
 import { DataTableViewOptions } from './data-table-view-options';
@@ -57,6 +58,7 @@ export function DataTableToolbar<TData>({
         <StatusFilter />
         <ResetFilterButton />
       </div>
+      <DeleteMultipleEntryButton table={table} />
       <DataTableNewEntry />
       <DataTableViewOptions table={table} />
     </div>
