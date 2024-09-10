@@ -67,22 +67,28 @@ export const columns: ColumnDef<JobApplication>[] = [
         className="text-center"
       />
     ),
-    cell: ({ row }) => (
-      <div className="text-center">{row.getValue('appliedOn')}</div>
-    ),
+    cell: ({ row }) => {
+      const appliedOnDate = new Date(
+        row.getValue('appliedOn')
+      ).toLocaleDateString('en-US');
+      return <div className="text-center">{appliedOnDate}</div>;
+    },
   },
   {
     accessorKey: 'lastHeard',
     header: ({ column }) => (
       <DataTableColumnHeader
         column={column}
-        title="Last Heard"
+        title="Last Heard From"
         className="text-center"
       />
     ),
-    cell: ({ row }) => (
-      <div className="text-center">{row.getValue('lastHeard')}</div>
-    ),
+    cell: ({ row }) => {
+      const lastHeardDate = new Date(
+        row.getValue('lastHeard')
+      ).toLocaleDateString('en-US');
+      return <div className="text-center">{lastHeardDate}</div>;
+    },
   },
   {
     accessorKey: 'followedUp',
