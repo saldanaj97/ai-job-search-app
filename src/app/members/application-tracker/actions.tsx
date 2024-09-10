@@ -81,7 +81,6 @@ export const deleteJobApplication = async (id: string) => {
 };
 
 export const deleteManyJobApplications = async (ids: number[]) => {
-  console.log('Deleting ids:', ids);
   if (sessionError || !user) {
     return {
       error: sessionError?.message || 'User is not authenticated',

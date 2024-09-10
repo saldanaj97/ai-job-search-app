@@ -3,6 +3,7 @@ import { TrashIcon } from 'lucide-react';
 import { Button } from '~/components/ui/button';
 import { deleteManyJobApplications } from '../actions';
 
+// TODO: - Add a confirmation for successful/unsuccessfull deletion (handleDelete function)
 interface DataTableProps<TData> {
   table: Table<TData>;
 }
