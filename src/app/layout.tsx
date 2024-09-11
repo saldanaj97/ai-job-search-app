@@ -33,9 +33,6 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {/* <Navbar>
-              <AuthComponent />
-            </Navbar> */}
             {children}
           </ThemeProvider>
         </TRPCReactProvider>
