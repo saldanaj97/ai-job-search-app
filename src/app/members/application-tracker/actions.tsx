@@ -2,6 +2,7 @@
 import { cookies } from 'next/headers';
 import { createClient } from '~/utils/supabase/server';
 import type { JobApplicationInput } from './components/data-table-entry-form';
+import { EditJobApplication } from './data/schema';
 
 const supabase = createClient(cookies());
 const {
@@ -103,5 +104,32 @@ export const deleteManyJobApplications = async (ids: number[]) => {
   return {
     success: true,
     message: 'Job applications deleted!',
+  };
+};
+
+export const updateJobApplication = async (
+  id: number,
+  data: EditJobApplication
+) => {
+  if (sessionError || !user) {
+    return {
+      error: sessionError?.message || 'User is not authenticated',
+    };
+  }
+
+  const { error } = await supabase
+    .from('JobApplication')
+    .update(data)
+    .eq('id', id);
+
+  if (error) {
+    return {
+      error: error.message,
+    };
+  }
+
+  return {
+    success: true,
+    message: 'Job application updated!',
   };
 };

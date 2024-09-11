@@ -22,9 +22,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
+import { updateJobApplication } from '../actions';
 import { JobApplicationEditSchema } from '../data/schema';
 
-// TODO - Fix the date picker bug where the date is not being updated correctly if its displayed in correct format
+// TODO - Show animation after user has sucessfully submitted the form (in the onSubmit function)
 
 type JobApplicationStatus =
   | 'Applied'
@@ -35,8 +36,8 @@ type JobApplicationStatus =
   | 'Other';
 
 const formatDate = (date: Date | null): string => {
-  let currentDate = (date ?? new Date()).toString().split('T')[0];
-  return currentDate ?? new Date().toString().split('T')[0];
+  let currentDate = (date ?? new Date()).toString().split('T')[0] ?? '';
+  return currentDate;
 };
 
 export function DataTableEditForm({
@@ -46,7 +47,6 @@ export function DataTableEditForm({
 }) {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const originalApplicationData = application;
 
   const form = useForm<z.infer<typeof JobApplicationEditSchema>>({
     resolver: zodResolver(JobApplicationEditSchema),
@@ -64,10 +64,45 @@ export function DataTableEditForm({
     },
   });
 
-  async function onSubmit(data: z.infer<typeof JobApplicationEditSchema>) {
-    console.log(data);
-    if (originalApplicationData.jobTitle !== data.jobTitle)
-      alert('Job title has changed');
+  async function onSubmit(
+    updatedApplicationData: z.infer<typeof JobApplicationEditSchema>
+  ) {
+    const jobApplicationId = application.id;
+    const result = await updateJobApplication(
+      jobApplicationId,
+      updatedApplicationData
+    );
+
+    // Verify whether anything in the existing application has changed
+    // before making unnecessary API calls
+    if (
+      updatedApplicationData.jobTitle === application.jobTitle &&
+      updatedApplicationData.company === application.company &&
+      updatedApplicationData.location === application.location &&
+      updatedApplicationData.salary === application.salary &&
+      updatedApplicationData.appliedOn === formatDate(application.appliedOn) &&
+      updatedApplicationData.lastHeard === formatDate(application.lastHeard) &&
+      updatedApplicationData.status === application.status &&
+      updatedApplicationData.followedUp === application.followedUp &&
+      updatedApplicationData.followUpCount === application.followUpCount
+    ) {
+      setError(
+        'No changes detected. If you want to update the job application, feel free to make your changes below.'
+      );
+      return;
+    }
+
+    if (result?.error) {
+      console.error(result.error);
+      setError(result.error);
+      return;
+    }
+
+    setError(null);
+    setSuccess('Job application updated!');
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   }
 
   return (
@@ -98,7 +133,11 @@ export function DataTableEditForm({
             <FormItem>
               <FormLabel>Company</FormLabel>
               <FormControl>
-                <Input placeholder={field.value ?? ''} {...field} />
+                <Input
+                  placeholder={field.value ?? ''}
+                  value={field.value ?? ''}
+                  onChange={field.onChange}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -113,7 +152,11 @@ export function DataTableEditForm({
             <FormItem>
               <FormLabel>Location</FormLabel>
               <FormControl>
-                <Input placeholder={field.value ?? ''} {...field} />
+                <Input
+                  placeholder={field.value ?? ''}
+                  value={field.value ?? ''}
+                  onChange={field.onChange}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -148,7 +191,7 @@ export function DataTableEditForm({
               <FormControl>
                 <Input
                   type="date"
-                  value={field.value}
+                  value={field.value ?? ''}
                   onChange={(e) => field.onChange(e.target.value)}
                 />
               </FormControl>
@@ -167,7 +210,7 @@ export function DataTableEditForm({
               <FormControl>
                 <Input
                   type="date"
-                  value={field.value}
+                  value={field.value ?? ''}
                   onChange={(e) => field.onChange(e.target.value)}
                 />
               </FormControl>

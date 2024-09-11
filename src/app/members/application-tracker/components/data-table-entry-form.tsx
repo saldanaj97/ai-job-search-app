@@ -19,6 +19,8 @@ import { JobApplicationSchema } from '../data/schema';
 
 export type JobApplicationInput = z.infer<typeof JobApplicationSchema>;
 
+// TODO - Show animation after user has sucessfully submitted the form (in the onSubmit function)
+
 export function JobApplicationEntryForm() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -46,10 +48,8 @@ export function JobApplicationEntryForm() {
       setError(result.error);
       return;
     }
-    // TODO: Show animation after user has sucessfully submitted the form
     setSuccess('Job application added!');
     form.reset();
-
     setTimeout(() => {
       window.location.reload();
     }, 2000);
