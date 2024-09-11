@@ -4,7 +4,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { DialogClose } from '@radix-ui/react-dialog';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { Button } from '~/components/ui/button';
 import {
   FormControl,
@@ -14,10 +13,16 @@ import {
   FormMessage,
 } from '~/components/ui/form';
 import { Input } from '~/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select';
 import { addNewJobApplication } from '../actions';
 import { JobApplicationSchema } from '../data/schema';
-
-export type JobApplicationInput = z.infer<typeof JobApplicationSchema>;
+import { JobApplicationInput } from '../types';
 
 // TODO - Show animation after user has sucessfully submitted the form (in the onSubmit function)
 
@@ -25,7 +30,7 @@ export function JobApplicationEntryForm() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  const form = useForm<z.infer<typeof JobApplicationSchema>>({
+  const form = useForm<JobApplicationInput>({
     resolver: zodResolver(JobApplicationSchema),
     defaultValues: {
       jobTitle: '',
@@ -40,11 +45,10 @@ export function JobApplicationEntryForm() {
     },
   });
 
-  async function onSubmit(data: z.infer<typeof JobApplicationSchema>) {
-    console.log('Submitting data:', data);
+  async function onSubmit(data: JobApplicationInput) {
+    console.log(data);
     const result = await addNewJobApplication(data);
     if (result?.error) {
-      console.error(result.error);
       setError(result.error);
       return;
     }
@@ -55,6 +59,7 @@ export function JobApplicationEntryForm() {
     }, 2000);
   }
 
+  console.log('Form errors:', form.formState.errors);
   return (
     <FormProvider {...form}>
       {error && <FormMessage>{error}</FormMessage>}
@@ -80,7 +85,12 @@ export function JobApplicationEntryForm() {
             <FormItem>
               <FormLabel>Company</FormLabel>
               <FormControl>
-                <Input placeholder="Company" {...field} />
+                <Input
+                  placeholder="Company"
+                  value={field.value ?? ''}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -93,7 +103,12 @@ export function JobApplicationEntryForm() {
             <FormItem>
               <FormLabel>Location</FormLabel>
               <FormControl>
-                <Input placeholder="Location" {...field} />
+                <Input
+                  placeholder="Location"
+                  value={field.value ?? ''}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -106,7 +121,12 @@ export function JobApplicationEntryForm() {
             <FormItem>
               <FormLabel>Salary</FormLabel>
               <FormControl>
-                <Input placeholder="Salary" {...field} />
+                <Input
+                  placeholder="Salary"
+                  value={field.value ?? ''}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -121,7 +141,7 @@ export function JobApplicationEntryForm() {
               <FormControl>
                 <Input
                   type="date"
-                  value={field.value.toISOString().split('T')[0]}
+                  value={field.value?.toISOString().split('T')[0]}
                   onChange={field.onChange}
                   onBlur={field.onBlur}
                 />
@@ -139,7 +159,7 @@ export function JobApplicationEntryForm() {
               <FormControl>
                 <Input
                   type="date"
-                  value={field.value.toISOString().split('T')[0]}
+                  value={field.value?.toISOString().split('T')[0]}
                   onChange={field.onChange}
                   onBlur={field.onBlur}
                 />
@@ -148,7 +168,7 @@ export function JobApplicationEntryForm() {
             </FormItem>
           )}
         />
-        {/* <FormField
+        <FormField
           control={form.control}
           name="status"
           render={({ field }) => (
@@ -175,7 +195,7 @@ export function JobApplicationEntryForm() {
               <FormMessage />
             </FormItem>
           )}
-        /> */}
+        />
         <div className="flex w-full flex-row justify-center gap-8">
           <Button type="submit">Submit</Button>
           <DialogClose asChild>

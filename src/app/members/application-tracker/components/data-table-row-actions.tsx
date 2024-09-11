@@ -11,8 +11,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
-import { deleteJobApplication } from '../actions';
+import { copyJobApplication, deleteJobApplication } from '../actions';
 import { JobApplication } from '../data/schema';
+import { JobApplicationDataCopy } from '../types';
 import { EditJobApplicationForm } from './data-table-edit-entry';
 
 interface DataTableRowActionsProps<TData extends JobApplication> {
@@ -22,8 +23,7 @@ interface DataTableRowActionsProps<TData extends JobApplication> {
 export function DataTableRowActions<TData extends JobApplication>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  // Function to handle deletion with confirmation
-  const handleDelete = async () => {
+  async function handleDelete() {
     const applicationId = row.original.id.toString();
     if (confirm('Are you sure you want to delete this job application?')) {
       if (!applicationId) {
@@ -38,7 +38,26 @@ export function DataTableRowActions<TData extends JobApplication>({
         window.location.reload();
       }
     }
-  };
+  }
+
+  async function handleCopy() {
+    const { createdAt, status, ...applicationData } = row.original;
+
+    // Ensure applicationData matches JobApplicationInput type
+    const applicationDataToCopy: JobApplicationDataCopy = {
+      ...applicationData,
+      status: 'Applied', // Reset for the new copy
+      followUpCount: 0, // Reset for the new copy
+      followedUp: false, // Reset for the new copy1
+    };
+
+    const result = await copyJobApplication(applicationDataToCopy);
+    if (result.error) {
+      alert(`Error: ${result.error}`);
+    } else {
+      window.location.reload();
+    }
+  }
 
   return (
     <Dialog>
@@ -58,7 +77,9 @@ export function DataTableRowActions<TData extends JobApplication>({
               <button className="flex flex-row items-center">Edit</button>
             </DialogTrigger>
           </DropdownMenuItem>
-          <DropdownMenuItem>Make a copy</DropdownMenuItem>
+          <DropdownMenuItem>
+            <button onClick={handleCopy}>Make a copy</button>
+          </DropdownMenuItem>
           <DropdownMenuItem>Watch</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>

@@ -5,4 +5,6 @@ type JobApplicationDataCopy = Omit<
   'id' | 'userId' | 'createdAt' | 'updatedAt'
 >;
 
-export type { JobApplicationDataCopy };
+type JobApplicationInput = Omit<JobApplication, 'id' | 'userId'>;
+
+export type { JobApplicationDataCopy, JobApplicationInput };

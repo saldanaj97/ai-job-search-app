@@ -1,8 +1,8 @@
 'use server';
 import { cookies } from 'next/headers';
 import { createClient } from '~/utils/supabase/server';
-import type { JobApplicationInput } from './components/data-table-entry-form';
 import { EditJobApplication } from './data/schema';
+import { JobApplicationDataCopy, JobApplicationInput } from './types';
 
 const supabase = createClient(cookies());
 const {
@@ -56,6 +56,31 @@ export const addNewJobApplication = async (data: JobApplicationInput) => {
   return {
     success: true,
     message: 'Job application added!',
+  };
+};
+
+export const copyJobApplication = async (data: JobApplicationDataCopy) => {
+  if (sessionError || !user) {
+    return {
+      error: sessionError?.message || 'User is not authenticated',
+    };
+  }
+
+  const jobApplicationData = { ...data, userId: user.id };
+
+  const { error } = await supabase
+    .from('JobApplication')
+    .insert(jobApplicationData);
+
+  if (error) {
+    return {
+      error: error.message,
+    };
+  }
+
+  return {
+    success: true,
+    message: 'Job application copied!',
   };
 };
 
