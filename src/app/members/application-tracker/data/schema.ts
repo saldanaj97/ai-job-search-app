@@ -1,35 +1,60 @@
 import { z } from 'zod';
 
-const ApplicationStatusSchema = z.enum([
-  'Applied',
-  'Interviewing',
-  'Offer',
-  'Rejected',
-  'Withdrawn',
-  'Other',
-]);
-
 export const JobApplicationSchema = z.object({
-  id: z.string().optional(),
-  jobTitle: z.string().nonempty('Job Title is required'),
-  company: z.string().nonempty('Company is required'),
-  location: z.string().nonempty('Location is required'),
-  salary: z.string().optional(),
-  appliedOn: z
-    .union([
-      z.date(),
-      z.string().refine((val) => !isNaN(Date.parse(val)), 'Invalid date'),
-    ]) // Allow both Date objects and valid date strings
-    .transform((val) => (val instanceof Date ? val : new Date(val))), // Ensure it's always a Date
+  id: z.number().int(),
+  jobTitle: z.string().min(1),
+  company: z.string().nullable(),
+  location: z.string().nullable(),
+  salary: z.string().nullable(),
+  appliedOn: z.date(),
+  lastHeard: z.date().nullable(),
+  status: z
+    .enum([
+      'Applied',
+      'Interviewing',
+      'Offer',
+      'Rejected',
+      'Withdrawn',
+      'Other',
+    ])
+    .default('Applied'),
+  followedUp: z.boolean().default(false),
+  followUpCount: z
+    .number()
+    .int()
+    .min(0, 'Follow up count cannot be negative')
+    .default(0),
+  userId: z.string().uuid(),
+  createdAt: z.date().default(() => new Date()),
+  updatedAt: z.date().nullable(),
+});
+
+export const JobApplicationEditSchema = z.object({
+  jobTitle: z.string().min(1, 'Job title is required'),
+  company: z.string().nullable(),
+  location: z.string().nullable(),
+  salary: z.string().nullable(),
+  appliedOn: z.string().refine((date) => !isNaN(Date.parse(date)), {
+    message: 'Invalid date format. Use YYYY-MM-DD',
+  }),
   lastHeard: z
-    .union([
-      z.date(),
-      z.string().refine((val) => !isNaN(Date.parse(val)), 'Invalid date'),
-    ]) // Same for lastHeard
-    .transform((val) => (val instanceof Date ? val : new Date(val))),
-  status: ApplicationStatusSchema,
+    .string()
+    .refine((date) => date === '' || !isNaN(Date.parse(date)), {
+      message: 'Invalid date format. Use YYYY-MM-DD',
+    })
+    .nullable(),
+  status: z.enum([
+    'Applied',
+    'Interviewing',
+    'Offer',
+    'Rejected',
+    'Withdrawn',
+    'Other',
+  ]),
   followedUp: z.boolean(),
-  followUpCount: z.number().min(0, 'Follow up count cannot be negative'), // Adding a validation rule for non-negative numbers
+  followUpCount: z.number().min(0),
+  userId: z.string().uuid({ message: 'Invalid user ID' }),
 });
 
 export type JobApplication = z.infer<typeof JobApplicationSchema>;
+export type EditJobApplication = z.infer<typeof JobApplicationEditSchema>;
