@@ -2,8 +2,7 @@ import { cookies } from 'next/headers';
 import Hero from '~/components/hero/hero';
 import { CallToAction } from '~/components/ui/cta';
 import { createClient } from '~/utils/supabase/server';
-// import DashboardPage from '../dashboard/page';
-import Dashboard from '../members/dashboard/page';
+import Members from '../members/page';
 import HowItWorks from './how-it-works';
 import MainFeatures from './main-features';
 
@@ -17,7 +16,7 @@ export default async function LandingPage() {
   return (
     <div className="flex flex-col">
       {user ? (
-        <Dashboard user={user} />
+        <Members user={user} />
       ) : (
         <>
           <Hero />

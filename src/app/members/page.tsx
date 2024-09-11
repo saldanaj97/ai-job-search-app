@@ -1,10 +1,25 @@
+import { User } from '@supabase/supabase-js';
 import { Metadata } from 'next';
+import { Button } from '~/components/ui/button';
 
 export const metadata: Metadata = {
   title: 'Job Search Toolkit',
   description: 'Tools to help you find your next job.',
 };
 
-export default function Members({}) {
-  return <div></div>;
+export default async function Members({ user }: { user: User }) {
+  return (
+    <div className="flex h-screen flex-col justify-evenly text-center">
+      <div className="flex flex-col gap-8">
+        <div className="text-center">Hi, {user.email}</div>
+        <div className="text-2xl font-semibold">Dashboard Screen</div>
+        <a
+          href="../members/application-tracker"
+          className="flex w-full flex-row justify-center"
+        >
+          <Button>Application Tracker</Button>
+        </a>
+      </div>
+    </div>
+  );
 }

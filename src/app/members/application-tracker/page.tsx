@@ -2,6 +2,8 @@ import { getAllJobApplications } from './actions';
 import { columns } from './components/columns';
 import { DataTable } from './components/data-table';
 
+// TODO - Find better way to display table/data to a mobile user
+
 export default async function JobApplicationTracker() {
   const { data, error } = await getAllJobApplications();
 
