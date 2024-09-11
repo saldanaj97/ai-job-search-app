@@ -7,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from '~/components/ui/card';
-import { Footer } from '~/components/ui/footer';
 
 type Feature = {
   subtitle: string;
@@ -145,7 +144,6 @@ export default function AboutUs() {
       <Mission />
       <FeatureComponent feature={feature} />
       <CallToAction />
-      <Footer />
     </div>
   );
 }
