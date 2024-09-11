@@ -1,5 +1,4 @@
 import { Button } from '~/components/ui/button';
-import { Footer } from '~/components/ui/footer';
 
 // TODO - Add icons for each of the lists in the features
 
@@ -191,7 +190,6 @@ export default async function Services() {
       <FeatureTwo />
       <FeatureThree />
       <CallToAction />
-      <Footer />
     </div>
   );
 }
