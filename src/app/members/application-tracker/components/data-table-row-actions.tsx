@@ -59,7 +59,7 @@ export function DataTableRowActions<TData extends JobApplication>({
             </DialogTrigger>
           </DropdownMenuItem>
           <DropdownMenuItem>Make a copy</DropdownMenuItem>
-          <DropdownMenuItem>Favorite</DropdownMenuItem>
+          <DropdownMenuItem>Watch</DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <button onClick={handleDelete}>Delete</button>

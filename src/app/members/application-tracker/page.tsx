@@ -8,7 +8,7 @@ export default async function JobApplicationTracker() {
   const { data, error } = await getAllJobApplications();
 
   return (
-    <div className="hidden h-full flex-1 flex-col space-y-8 px-16 py-8 md:flex">
+    <div className="hidden h-full flex-col space-y-8 px-6 py-8 md:flex lg:px-16">
       <div className="flex items-center justify-between space-y-2">
         <div>
           <h2 className="text-2xl font-bold tracking-tight">Welcome back!</h2>

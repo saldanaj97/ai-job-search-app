@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { type ReactNode } from 'react';
 import AuthComponent from '~/components/navbar/AuthComponent';
-import Navbar from '~/components/navbar/Navbar';
+import { MemberNavbar } from '~/components/navbar/Navbar';
 
 // TODO - Different navbar for members
 export default async function MembersLayout({
@@ -11,9 +11,9 @@ export default async function MembersLayout({
 }) {
   return (
     <div className="flex h-screen flex-col">
-      <Navbar>
+      <MemberNavbar>
         <AuthComponent />
-      </Navbar>
+      </MemberNavbar>
       <div className="flex-column flex items-center justify-center gap-4">
         {children}
       </div>

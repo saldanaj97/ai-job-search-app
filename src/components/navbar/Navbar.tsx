@@ -41,51 +41,92 @@ function MobileMenu({
   );
 }
 
-export default function Navbar({ children }: { children: React.ReactNode }) {
+export function Navbar({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
-
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   return (
-    <div className="top-0 z-50 flex h-16 w-full items-center justify-between px-6 lg:px-16">
-      <Link href="/" className="shrink-0">
-        <h1 className="w-[200px] text-2xl font-bold text-accent-foreground">
-          WannaBeHired.ai
-        </h1>
-      </Link>
+    <div className="flex w-full justify-center px-4 sm:px-6">
+      <div className="w-full max-w-[1320px]">
+        <div className="flex h-16 items-center justify-between">
+          <Link href="/" className="shrink-0">
+            <h1 className="text-2xl font-bold text-accent-foreground">
+              WannaBeHired.ai
+            </h1>
+          </Link>
 
-      {/* Center the links with auto margins */}
-      <div className="hidden grow justify-center md:flex">
-        <div className="flex gap-4">
-          {routes.map((route) => (
-            <Link
-              key={route.href}
-              href={route.href}
-              className="inline-flex h-10 items-center px-4 py-2 text-[16px] text-muted-foreground transition-colors hover:text-accent-foreground"
-            >
-              {route.title}
-            </Link>
-          ))}
+          <div className="hidden grow justify-center md:flex">
+            <div className="flex gap-4">
+              {routes.map((route) => (
+                <Link
+                  key={route.href}
+                  href={route.href}
+                  className="inline-flex h-10 items-center px-4 py-2 text-[16px] text-muted-foreground transition-colors hover:text-accent-foreground"
+                >
+                  {route.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex items-center">
+            <div className="mr-4 hidden md:block">{children}</div>
+            <button type="button" onClick={toggleMenu} className="md:hidden">
+              {menuOpen ? (
+                <XMarkIcon className="h-7 w-7" />
+              ) : (
+                <Bars3Icon className="h-7 w-7" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
-
-      <div className="w-[200px] shrink-0">{children}</div>
 
       {menuOpen && (
         <MobileMenu toggleMenu={toggleMenu}>
           <AuthComponent />
         </MobileMenu>
       )}
+    </div>
+  );
+}
 
-      <button type="button" onClick={toggleMenu} className="md:hidden">
-        {menuOpen ? (
-          <XMarkIcon className="h-7 w-7" />
-        ) : (
-          <Bars3Icon className="h-7 w-7" />
-        )}
-      </button>
+export function MemberNavbar({ children }: { children: React.ReactNode }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  return (
+    <div className="flex w-full justify-center px-4 sm:px-6">
+      <div className="w-full max-w-[1320px]">
+        <div className="flex h-16 items-center justify-between">
+          <Link href="/" className="shrink-0">
+            <h1 className="text-2xl font-bold text-accent-foreground">
+              WannaBeHired.ai
+            </h1>
+          </Link>
+
+          <div className="flex items-center">
+            <div className="mr-4 hidden md:block">{children}</div>
+            <button type="button" onClick={toggleMenu} className="md:hidden">
+              {menuOpen ? (
+                <XMarkIcon className="h-7 w-7" />
+              ) : (
+                <Bars3Icon className="h-7 w-7" />
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {menuOpen && (
+        <MobileMenu toggleMenu={toggleMenu}>
+          <AuthComponent />
+        </MobileMenu>
+      )}
     </div>
   );
 }
