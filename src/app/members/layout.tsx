@@ -3,6 +3,7 @@ import { type ReactNode } from 'react';
 import AuthComponent from '~/components/navbar/AuthComponent';
 import Navbar from '~/components/navbar/Navbar';
 
+// TODO - Different navbar for members
 export default async function MembersLayout({
   children,
 }: {
