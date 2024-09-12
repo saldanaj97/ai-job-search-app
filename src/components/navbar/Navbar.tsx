@@ -99,7 +99,7 @@ export function MemberNavbar({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="flex w-full justify-center px-4 sm:px-6">
+    <div className="flex w-full justify-center px-4">
       <div className="w-full max-w-[1320px]">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="shrink-0">
@@ -109,7 +109,7 @@ export function MemberNavbar({ children }: { children: React.ReactNode }) {
           </Link>
 
           <div className="flex items-center">
-            <div className="mr-4 hidden md:block">{children}</div>
+            <div className="hidden md:block">{children}</div>
             <button type="button" onClick={toggleMenu} className="md:hidden">
               {menuOpen ? (
                 <XMarkIcon className="h-7 w-7" />
