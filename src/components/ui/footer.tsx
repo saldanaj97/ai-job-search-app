@@ -1,4 +1,4 @@
-// TODO: - Across the board edit the links and buttons to lead to the correct place
+// TODO  - Across the board edit the links and buttons to lead to the correct place
 //       - Fix the global padding issue
 
 function Newsletter() {
@@ -108,10 +108,12 @@ function Credits() {
 
 export function Footer() {
   return (
-    <div className="flex flex-col gap-20 px-16 py-20">
-      <Newsletter />
-      <Links />
-      <Credits />
+    <div className="flex w-full justify-center">
+      <div className="flex w-full max-w-[1320px] flex-col gap-20 px-16 py-20 xl:px-0">
+        <Newsletter />
+        <Links />
+        <Credits />
+      </div>
     </div>
   );
 }
