@@ -26,7 +26,6 @@ export function OAuthButton({
       return redirect('/login?message=Could not authenticate user');
     }
 
-    // Successful login handling
     return redirect(`/auth/callback?next=${pathname}`);
   };
 
