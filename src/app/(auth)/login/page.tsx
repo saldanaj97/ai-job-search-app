@@ -19,6 +19,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Input } from '~/components/ui/input';
 
+import { redirect, usePathname } from 'next/navigation';
 import { OAuthButton } from '~/components/auth/OAuthButton';
 import { signIn } from '../actions';
 
@@ -30,6 +31,8 @@ const registerSchema = z.object({
 export type LoginInput = z.infer<typeof registerSchema>;
 
 export default function Login() {
+  const pathname = usePathname();
+
   const form = useForm<LoginInput>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -42,9 +45,17 @@ export default function Login() {
 
   const onSubmit = async (data: LoginInput) => {
     const result = await signIn(data);
-    if (result?.error) {
-      setError(result.error);
+    console.log(result);
+    if (result.error) {
+      return redirect('/login?message=Could not authenticate user');
     }
+
+    // Successful login handling
+    console.log(
+      'Successful login redirecting to:',
+      `/auth/callback?next=${pathname}`
+    );
+    redirect(`/`);
   };
 
   return (
