@@ -49,10 +49,9 @@ export function DataTableRowActions<
   }
 
   async function handleCopy() {
-    const { id, createdAt, status, ...applicationData } =
+    const { id, created_at, status, ...applicationData } =
       row.original as ExistingJobApplication;
 
-    // Ensure applicationData matches JobApplicationInput type
     const applicationDataToCopy: JobApplicationDataCopy = {
       ...applicationData,
       status: 'Applied', // Reset for the new copy
@@ -60,12 +59,11 @@ export function DataTableRowActions<
       followedUp: false, // Reset for the new copy1
     };
 
-    console.log('Copying application:', applicationDataToCopy);
     const result = await copyJobApplication(applicationDataToCopy);
     if (result.error) {
       alert(`Error: ${result.error}`);
     } else {
-      // window.location.reload();
+      window.location.reload();
     }
   }
 
