@@ -1,15 +1,15 @@
-import { JobApplication } from '@prisma/client';
 import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
 } from '~/components/ui/dialog';
+import { ExistingJobApplication } from '~/types/job-applications';
 import { DataTableEditForm } from './data-table-edit-form';
 
 export function EditJobApplicationForm({
   application,
 }: {
-  application: JobApplication;
+  application: ExistingJobApplication;
 }) {
   return (
     <div className="flex flex-col gap-8">

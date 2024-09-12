@@ -1,11 +1,9 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { JobApplication } from '@prisma/client';
 import { DialogClose } from '@radix-ui/react-dialog';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { Button } from '~/components/ui/button';
 import {
   FormControl,
@@ -22,51 +20,37 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
+import { ExistingJobApplication } from '~/types/job-applications';
 import { updateJobApplication } from '../actions';
-import { JobApplicationEditSchema } from '../data/schema';
+import { EditJobApplicationFormSchema } from '../data/schema';
 
 // TODO - Show animation after user has sucessfully submitted the form (in the onSubmit function)
-
-type JobApplicationStatus =
-  | 'Applied'
-  | 'Interviewing'
-  | 'Offer'
-  | 'Rejected'
-  | 'Withdrawn'
-  | 'Other';
-
-const formatDate = (date: Date | null): string => {
-  let currentDate = (date ?? new Date()).toString().split('T')[0] ?? '';
-  return currentDate;
-};
 
 export function DataTableEditForm({
   application,
 }: {
-  application: JobApplication;
+  application: ExistingJobApplication;
 }) {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  const form = useForm<z.infer<typeof JobApplicationEditSchema>>({
-    resolver: zodResolver(JobApplicationEditSchema),
+  const form = useForm<ExistingJobApplication>({
+    resolver: zodResolver(EditJobApplicationFormSchema),
     defaultValues: {
       jobTitle: application.jobTitle || '',
       company: application.company || '',
       location: application.location || '',
       salary: application.salary || '',
-      appliedOn: formatDate(application.appliedOn),
-      lastHeard: formatDate(application.lastHeard),
-      status: application.status as JobApplicationStatus,
+      appliedOn: application.appliedOn,
+      lastHeard: application.lastHeard,
+      status: application.status,
       followedUp: application.followedUp || false,
       followUpCount: application.followUpCount || 0,
-      userId: application.userId,
+      user_id: application.user_id,
     },
   });
 
-  async function onSubmit(
-    updatedApplicationData: z.infer<typeof JobApplicationEditSchema>
-  ) {
+  async function onSubmit(updatedApplicationData: ExistingJobApplication) {
     const jobApplicationId = application.id;
     const result = await updateJobApplication(
       jobApplicationId,
@@ -80,8 +64,8 @@ export function DataTableEditForm({
       updatedApplicationData.company === application.company &&
       updatedApplicationData.location === application.location &&
       updatedApplicationData.salary === application.salary &&
-      updatedApplicationData.appliedOn === formatDate(application.appliedOn) &&
-      updatedApplicationData.lastHeard === formatDate(application.lastHeard) &&
+      updatedApplicationData.appliedOn === application.appliedOn &&
+      updatedApplicationData.lastHeard === application.lastHeard &&
       updatedApplicationData.status === application.status &&
       updatedApplicationData.followedUp === application.followedUp &&
       updatedApplicationData.followUpCount === application.followUpCount
@@ -105,6 +89,7 @@ export function DataTableEditForm({
     }, 2000);
   }
 
+  console.log('Form errors:', form.formState.errors);
   return (
     <FormProvider {...form}>
       {error && <FormMessage>{error}</FormMessage>}
@@ -135,7 +120,7 @@ export function DataTableEditForm({
               <FormControl>
                 <Input
                   placeholder={field.value ?? ''}
-                  value={field.value ?? ''}
+                  value={field.value ? field.value.toString() : ''}
                   onChange={field.onChange}
                 />
               </FormControl>
@@ -191,7 +176,8 @@ export function DataTableEditForm({
               <FormControl>
                 <Input
                   type="date"
-                  value={field.value ?? ''}
+                  placeholder={field.value}
+                  value={field.value}
                   onChange={(e) => field.onChange(e.target.value)}
                 />
               </FormControl>
@@ -210,7 +196,8 @@ export function DataTableEditForm({
               <FormControl>
                 <Input
                   type="date"
-                  value={field.value ?? ''}
+                  placeholder={field.value ?? ''}
+                  value={field.value}
                   onChange={(e) => field.onChange(e.target.value)}
                 />
               </FormControl>
@@ -229,7 +216,7 @@ export function DataTableEditForm({
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
-                    <SelectValue placeholder={application.status} />
+                    <SelectValue placeholder={field.value} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Applied">Applied</SelectItem>

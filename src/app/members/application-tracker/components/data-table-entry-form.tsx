@@ -20,9 +20,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
+import { NewJobApplication } from '~/types/job-applications';
 import { addNewJobApplication } from '../actions';
-import { JobApplicationSchema } from '../data/schema';
-import { JobApplicationInput } from '../types';
+import { JobApplicationFormSchema } from '../data/schema';
 
 // TODO - Show animation after user has sucessfully submitted the form (in the onSubmit function)
 
@@ -30,23 +30,22 @@ export function JobApplicationEntryForm() {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
-  const form = useForm<JobApplicationInput>({
-    resolver: zodResolver(JobApplicationSchema),
+  const form = useForm<NewJobApplication>({
+    resolver: zodResolver(JobApplicationFormSchema),
     defaultValues: {
       jobTitle: '',
       company: '',
       location: '',
       salary: '',
-      appliedOn: new Date(),
-      lastHeard: new Date(),
+      appliedOn: new Date().toDateString(),
+      lastHeard: '',
       status: 'Applied',
       followedUp: false,
       followUpCount: 0,
     },
   });
 
-  async function onSubmit(data: JobApplicationInput) {
-    console.log(data);
+  async function onSubmit(data: NewJobApplication) {
     const result = await addNewJobApplication(data);
     if (result?.error) {
       setError(result.error);
@@ -141,7 +140,7 @@ export function JobApplicationEntryForm() {
               <FormControl>
                 <Input
                   type="date"
-                  value={field.value?.toISOString().split('T')[0]}
+                  value={field.value?.toString().split('T')[0]}
                   onChange={field.onChange}
                   onBlur={field.onBlur}
                 />
@@ -159,7 +158,7 @@ export function JobApplicationEntryForm() {
               <FormControl>
                 <Input
                   type="date"
-                  value={field.value?.toISOString().split('T')[0]}
+                  value={field.value?.toString().split('T')[0]}
                   onChange={field.onChange}
                   onBlur={field.onBlur}
                 />

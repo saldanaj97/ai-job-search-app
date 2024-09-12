@@ -3,11 +3,11 @@
 import { ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '~/components/ui/checkbox';
 import { statuses } from '../data/data';
-import { JobApplication } from '../data/schema';
+import { JobApplicationForm } from '../data/schema';
 import { DataTableColumnHeader } from './data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
 
-export const columns: ColumnDef<JobApplication>[] = [
+export const columns: ColumnDef<JobApplicationForm>[] = [
   {
     id: 'select',
     header: ({ table }) => (

@@ -11,20 +11,28 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
+import {
+  ExistingJobApplication,
+  JobApplicationDataCopy,
+  NewJobApplication,
+} from '~/types/job-applications';
 import { copyJobApplication, deleteJobApplication } from '../actions';
-import { JobApplication } from '../data/schema';
-import { JobApplicationDataCopy } from '../types';
 import { EditJobApplicationForm } from './data-table-edit-entry';
 
-interface DataTableRowActionsProps<TData extends JobApplication> {
+//TODO - Add type for the application parameter in the edit form component
+
+interface DataTableRowActionsProps<
+  TData extends NewJobApplication | ExistingJobApplication,
+> {
   row: Row<TData>;
 }
 
-export function DataTableRowActions<TData extends JobApplication>({
-  row,
-}: DataTableRowActionsProps<TData>) {
+export function DataTableRowActions<
+  TData extends NewJobApplication | ExistingJobApplication,
+>({ row }: DataTableRowActionsProps<TData>) {
   async function handleDelete() {
-    const applicationId = row.original.id.toString();
+    const application = row.original as ExistingJobApplication;
+    const applicationId = application.id;
     if (confirm('Are you sure you want to delete this job application?')) {
       if (!applicationId) {
         alert('Error: Application ID not found!');
@@ -41,7 +49,8 @@ export function DataTableRowActions<TData extends JobApplication>({
   }
 
   async function handleCopy() {
-    const { createdAt, status, ...applicationData } = row.original;
+    const { id, createdAt, status, ...applicationData } =
+      row.original as ExistingJobApplication;
 
     // Ensure applicationData matches JobApplicationInput type
     const applicationDataToCopy: JobApplicationDataCopy = {
@@ -51,12 +60,17 @@ export function DataTableRowActions<TData extends JobApplication>({
       followedUp: false, // Reset for the new copy1
     };
 
+    console.log('Copying application:', applicationDataToCopy);
     const result = await copyJobApplication(applicationDataToCopy);
     if (result.error) {
       alert(`Error: ${result.error}`);
     } else {
-      window.location.reload();
+      // window.location.reload();
     }
+  }
+
+  async function handleWatch() {
+    console.log('Watched!');
   }
 
   return (
@@ -80,7 +94,9 @@ export function DataTableRowActions<TData extends JobApplication>({
           <DropdownMenuItem>
             <button onClick={handleCopy}>Make a copy</button>
           </DropdownMenuItem>
-          <DropdownMenuItem>Watch</DropdownMenuItem>
+          <DropdownMenuItem>
+            <button onClick={handleWatch}>Watch</button>
+          </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <button onClick={handleDelete}>Delete</button>
@@ -89,7 +105,9 @@ export function DataTableRowActions<TData extends JobApplication>({
       </DropdownMenu>
 
       <DialogContent className="fixed z-50 flex flex-col items-center justify-center sm:max-w-md">
-        <EditJobApplicationForm application={row.original as JobApplication} />
+        <EditJobApplicationForm
+          application={row.original as ExistingJobApplication}
+        />
       </DialogContent>
     </Dialog>
   );

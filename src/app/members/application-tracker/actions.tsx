@@ -1,7 +1,7 @@
 'use server';
 import { cookies } from 'next/headers';
 import { createClient } from '~/utils/supabase/server';
-import { EditJobApplication } from './data/schema';
+import { EditJobApplicationForm } from './data/schema';
 import { JobApplicationDataCopy, JobApplicationInput } from './types';
 
 const supabase = createClient(cookies());
@@ -20,7 +20,7 @@ export const getAllJobApplications = async () => {
   const { data, error } = await supabase
     .from('JobApplication')
     .select('*')
-    .eq('userId', user.id);
+    .eq('user_id', user.id);
 
   if (error) {
     return {
@@ -41,7 +41,7 @@ export const addNewJobApplication = async (data: JobApplicationInput) => {
     };
   }
 
-  const jobApplicationData = { ...data, userId: user.id };
+  const jobApplicationData = { ...data, user_id: user.id };
 
   const { error } = await supabase
     .from('JobApplication')
@@ -66,7 +66,7 @@ export const copyJobApplication = async (data: JobApplicationDataCopy) => {
     };
   }
 
-  const jobApplicationData = { ...data, userId: user.id };
+  const jobApplicationData = { ...data, user_id: user.id };
 
   const { error } = await supabase
     .from('JobApplication')
@@ -81,6 +81,29 @@ export const copyJobApplication = async (data: JobApplicationDataCopy) => {
   return {
     success: true,
     message: 'Job application copied!',
+  };
+};
+
+export const addToWatchList = async (id: string) => {
+  if (sessionError || !user) {
+    return {
+      error: sessionError?.message || 'User is not authenticated',
+    };
+  }
+
+  const { error } = await supabase
+    .from('JobApplication')
+    .update({ watching: true });
+
+  if (error) {
+    return {
+      error: error.message,
+    };
+  }
+
+  return {
+    success: true,
+    message: 'Job added to watch list!',
   };
 };
 
@@ -133,8 +156,8 @@ export const deleteManyJobApplications = async (ids: number[]) => {
 };
 
 export const updateJobApplication = async (
-  id: number,
-  data: EditJobApplication
+  id: string,
+  data: EditJobApplicationForm
 ) => {
   if (sessionError || !user) {
     return {
