@@ -1,8 +1,11 @@
 'use server';
 import { cookies } from 'next/headers';
+import {
+  JobApplicationDataCopy,
+  JobApplicationInput,
+} from '~/types/job-applications';
 import { createClient } from '~/utils/supabase/server';
 import { EditJobApplicationForm } from './data/schema';
-import { JobApplicationDataCopy, JobApplicationInput } from './types';
 
 const supabase = createClient(cookies());
 const {
@@ -84,7 +87,7 @@ export const copyJobApplication = async (data: JobApplicationDataCopy) => {
   };
 };
 
-export const addToWatchList = async (id: string) => {
+export const watchJobApplication = async (id: string) => {
   if (sessionError || !user) {
     return {
       error: sessionError?.message || 'User is not authenticated',
