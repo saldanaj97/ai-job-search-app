@@ -25,17 +25,19 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${GeistSans.variable}`}
     >
-      <body>
-        <TRPCReactProvider cookies={cookies().toString()}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </TRPCReactProvider>
+      <body className="flex w-full justify-center">
+        <div className="w-full max-w-[1320px]">
+          <TRPCReactProvider cookies={cookies().toString()}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </TRPCReactProvider>
+        </div>
       </body>
     </html>
   );
