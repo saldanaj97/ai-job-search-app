@@ -68,9 +68,9 @@ export const columns: ColumnDef<JobApplicationForm>[] = [
 
       return (
         <div className="flex w-[100px] items-center">
-          {status.icon && (
+          {/* {status.icon && (
             <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
-          )}
+          )} */}
           <span>{status.label}</span>
         </div>
       );
@@ -109,7 +109,16 @@ export const columns: ColumnDef<JobApplicationForm>[] = [
       const lastHeardDate = new Date(
         row.getValue('lastHeard')
       ).toLocaleDateString('en-US');
-      return <div className="text-center">{lastHeardDate}</div>;
+      return (
+        <div>
+          {lastHeardDate !== 'Invalid Date' ? (
+            <div className="text-center">{lastHeardDate}</div>
+          ) : (
+            <div className="text-center">-</div>
+          )}
+        </div>
+      );
+      // return <div className="text-center">{lastHeardDate}</div>;
     },
   },
   {
