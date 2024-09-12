@@ -3,15 +3,18 @@ import { Metadata } from 'next';
 import { Button } from '~/components/ui/button';
 
 export const metadata: Metadata = {
-  title: 'Job Search Toolkit',
-  description: 'Tools to help you find your next job.',
+  title: 'Dashboard',
+  description: 'Member Dashboard',
 };
 
-export default async function Members({ user }: { user: User }) {
+export default function Members({ user }: { user: User }) {
+  if (!user) {
+    return <div>Loading User Data...</div>;
+  }
   return (
     <div className="flex h-screen flex-col justify-evenly text-center">
       <div className="flex flex-col gap-8">
-        <div className="text-center">Hi, {user.email}</div>
+        <div className="text-center">Hi, Bulby</div>
         <div className="text-2xl font-semibold">Dashboard Screen</div>
         <a
           href="../members/application-tracker"
