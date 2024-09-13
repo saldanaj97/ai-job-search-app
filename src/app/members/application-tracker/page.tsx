@@ -1,11 +1,14 @@
-import { getAllJobApplications } from './actions';
+'use client';
+
+import { api } from '~/trpc/react';
 import { columns } from './components/columns';
 import { DataTable } from './components/data-table';
 
 // TODO - Find better way to display table/data to a mobile user
 
-export default async function JobApplicationTracker() {
-  const { data, error } = await getAllJobApplications();
+export default function JobApplicationTracker() {
+  const [jobApplications] =
+    api.applicationTable.getAllJobApplications.useSuspenseQuery();
 
   return (
     <div className="hidden h-full flex-col space-y-8 px-6 py-8 md:flex lg:px-16">
@@ -17,7 +20,7 @@ export default async function JobApplicationTracker() {
           </p>
         </div>
       </div>
-      <DataTable columns={columns} data={data || []} error={error ?? null} />
+      <DataTable data={jobApplications} columns={columns} error={''} />
     </div>
   );
 }

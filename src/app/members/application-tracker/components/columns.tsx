@@ -2,14 +2,16 @@
 
 import { ColumnDef, Row } from '@tanstack/react-table';
 import { Checkbox } from '~/components/ui/checkbox';
-import { ExistingJobApplication } from '~/types/job-applications';
+import {
+  ColumnHeaders,
+  ExistingJobApplication,
+} from '~/types/job-applications';
 import { statuses } from '../data/data';
-import { JobApplicationForm } from '../data/schema';
 import { DataTableColumnHeader } from './data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
 import { DataWatchingToggleSwitch } from './data-watching-toggle-switch';
 
-export const columns: ColumnDef<JobApplicationForm>[] = [
+export const columns: ColumnDef<ColumnHeaders>[] = [
   {
     id: 'select',
     header: ({ table }) => (
