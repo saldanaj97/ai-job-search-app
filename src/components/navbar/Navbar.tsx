@@ -99,25 +99,23 @@ export function MemberNavbar({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <div className="flex w-full justify-center px-4">
-      <div className="w-full max-w-[1320px]">
-        <div className="flex h-16 items-center justify-between">
-          <Link href="/" className="shrink-0">
-            <h1 className="text-2xl font-bold text-accent-foreground">
-              WannaBeHired.ai
-            </h1>
-          </Link>
+    <div className="[1484px]:px-0 flex w-full justify-center px-4">
+      <div className="flex h-16 w-full max-w-[1484px] items-center justify-between">
+        <Link href="/" className="shrink-0">
+          <h1 className="text-2xl font-bold text-accent-foreground">
+            WannaBeHired.ai
+          </h1>
+        </Link>
 
-          <div className="flex items-center">
-            <div className="hidden md:block">{children}</div>
-            <button type="button" onClick={toggleMenu} className="md:hidden">
-              {menuOpen ? (
-                <XMarkIcon className="h-7 w-7" />
-              ) : (
-                <Bars3Icon className="h-7 w-7" />
-              )}
-            </button>
-          </div>
+        <div className="flex items-center">
+          <div className="hidden md:block">{children}</div>
+          <button type="button" onClick={toggleMenu} className="md:hidden">
+            {menuOpen ? (
+              <XMarkIcon className="h-7 w-7" />
+            ) : (
+              <Bars3Icon className="h-7 w-7" />
+            )}
+          </button>
         </div>
       </div>
 

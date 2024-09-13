@@ -26,7 +26,7 @@ export default function RootLayout({
       className={`${GeistSans.variable}`}
     >
       <body className="flex w-full justify-center">
-        <div className="w-full max-w-[1320px]">
+        <div className="w-full max-w-[1620px]">
           <TRPCReactProvider cookies={cookies().toString()}>
             <ThemeProvider
               attribute="class"

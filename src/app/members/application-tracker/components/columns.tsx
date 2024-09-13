@@ -6,6 +6,7 @@ import { statuses } from '../data/data';
 import { JobApplicationForm } from '../data/schema';
 import { DataTableColumnHeader } from './data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
+import { DataWatchingToggleSwitch } from './data-watching-toggle-switch';
 
 export const columns: ColumnDef<JobApplicationForm>[] = [
   {
@@ -18,7 +19,7 @@ export const columns: ColumnDef<JobApplicationForm>[] = [
         }
         onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
         aria-label="Select all"
-        className="translate-y-[2px]"
+        className="m-4"
       />
     ),
     cell: ({ row }) => (
@@ -26,7 +27,7 @@ export const columns: ColumnDef<JobApplicationForm>[] = [
         checked={row.getIsSelected()}
         onCheckedChange={(value) => row.toggleSelected(!!value)}
         aria-label="Select row"
-        className="translate-y-[2px]"
+        className="m-4"
       />
     ),
     enableSorting: false,
@@ -35,11 +36,17 @@ export const columns: ColumnDef<JobApplicationForm>[] = [
   {
     accessorKey: 'jobTitle', // Access the entire job object
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Job Title" />
+      <DataTableColumnHeader
+        column={column}
+        title="Job Title"
+        className="flex w-[100px] items-center justify-center"
+      />
     ),
     cell: ({ row }) => {
       const job: string = row.getValue('jobTitle');
-      return <div>{job}</div>;
+      return (
+        <div className="flex w-[100px] justify-center text-center">{job}</div>
+      );
     },
   },
   {
@@ -49,13 +56,31 @@ export const columns: ColumnDef<JobApplicationForm>[] = [
     ),
     cell: ({ row }) => {
       const company: string = row.getValue('company');
-      return <div>{company}</div>;
+      return <div className="text-center">{company}</div>;
+    },
+  },
+  {
+    accessorKey: 'watching', // Access the entire job object
+    header: ({ column }) => (
+      <DataTableColumnHeader
+        column={column}
+        title="Watching"
+        className="w-[100px]"
+      />
+    ),
+    cell: ({ row }) => {
+      const isWatching: boolean = row.getValue('watching');
+      return <DataWatchingToggleSwitch isWatching={isWatching} />;
     },
   },
   {
     accessorKey: 'status',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Status" />
+      <DataTableColumnHeader
+        column={column}
+        title="Status"
+        className="flex w-[100px] items-center justify-center"
+      />
     ),
     cell: ({ row }) => {
       const status = statuses.find(
@@ -67,8 +92,8 @@ export const columns: ColumnDef<JobApplicationForm>[] = [
       }
 
       return (
-        <div className="flex w-[100px] items-center">
-          <span>{status.label}</span>
+        <div className="flex w-[100px] items-center justify-center">
+          <span className="text-center">{status.label}</span>
         </div>
       );
     },

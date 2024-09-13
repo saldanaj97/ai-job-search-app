@@ -109,7 +109,7 @@ function Credits() {
 export function Footer() {
   return (
     <div className="flex w-full justify-center">
-      <div className="flex w-full max-w-[1320px] flex-col gap-20 px-16 py-20 xl:px-0">
+      <div className="flex w-full max-w-[1484px] flex-col gap-20 px-16 py-20 xl:px-0">
         <Newsletter />
         <Links />
         <Credits />
