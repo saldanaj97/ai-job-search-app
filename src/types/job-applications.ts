@@ -18,7 +18,7 @@ type ExistingJobApplication = {
   location: string | null;
   salary: string | null;
   status: JobApplicationStatus;
-  updatedAt: Date;
+  updated_at: Date;
   user_id: string;
   watching: boolean;
 };
@@ -36,5 +36,6 @@ export type {
   ExistingJobApplication,
   JobApplicationDataCopy,
   JobApplicationInput,
-  NewJobApplication,
+  NewJobApplication
 };
+
