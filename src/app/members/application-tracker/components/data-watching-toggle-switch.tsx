@@ -7,7 +7,7 @@ import { updateJobApplication } from '../actions';
 export function DataWatchingToggleSwitch({
   row,
 }: {
-  row: Row<ExistingJobApplication> & { watching: boolean };
+  row: Row<ExistingJobApplication>;
 }) {
   const [isWatching, setIsWatching] = useState(row.original.watching);
 

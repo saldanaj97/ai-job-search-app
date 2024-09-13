@@ -32,23 +32,23 @@ import { DataTableToolbar } from './data-table-toolbar';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[];
-  error: string | null;
+  data: TData[] | { error: string };
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  error,
 }: DataTableProps<TData, TValue>) {
   const [loading, setLoading] = useState(true);
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [tableData, setTableData] = useState<TData[]>([]);
 
   const table = useReactTable({
-    data,
+    data: tableData,
     columns,
     state: {
       sorting,
@@ -70,9 +70,14 @@ export function DataTable<TData, TValue>({
   });
 
   useEffect(() => {
-    if (data) {
-      setLoading(false);
+    if (Array.isArray(data)) {
+      setTableData(data);
+      setError(null);
+    } else if ('error' in data) {
+      setError(data.error);
+      setTableData([]);
     }
+    setLoading(false);
   }, [data]);
 
   const DataTableEntries = () => (

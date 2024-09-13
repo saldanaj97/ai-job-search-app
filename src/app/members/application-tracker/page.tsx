@@ -20,7 +20,7 @@ export default function JobApplicationTracker() {
           </p>
         </div>
       </div>
-      <DataTable data={jobApplications} columns={columns} error={''} />
+      <DataTable data={jobApplications} columns={columns} />
     </div>
   );
 }

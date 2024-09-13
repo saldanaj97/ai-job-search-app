@@ -1,17 +1,14 @@
 'use client';
 
-import { ColumnDef, Row } from '@tanstack/react-table';
+import { ColumnDef } from '@tanstack/react-table';
 import { Checkbox } from '~/components/ui/checkbox';
-import {
-  ColumnHeaders,
-  ExistingJobApplication,
-} from '~/types/job-applications';
+import { ExistingJobApplication } from '~/types/job-applications';
 import { statuses } from '../data/data';
 import { DataTableColumnHeader } from './data-table-column-header';
 import { DataTableRowActions } from './data-table-row-actions';
 import { DataWatchingToggleSwitch } from './data-watching-toggle-switch';
 
-export const columns: ColumnDef<ColumnHeaders>[] = [
+export const columns: ColumnDef<ExistingJobApplication>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -72,9 +69,7 @@ export const columns: ColumnDef<ColumnHeaders>[] = [
       />
     ),
     cell: ({ row }) => {
-      return (
-        <DataWatchingToggleSwitch row={row as Row<ExistingJobApplication>} />
-      );
+      return <DataWatchingToggleSwitch row={row} />;
     },
   },
   {

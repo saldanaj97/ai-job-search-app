@@ -20,7 +20,7 @@ model JobApplication {
   appliedOn     String
   lastHeard     String?
   followedUp    Boolean              @default(false)
-  followUpCount Int?                 @default(0)
+  followUpCount Int                  @default(0)
   user_id       String               @default(dbgenerated("auth.uid()")) @db.Uuid
   updated_at    DateTime             @default(dbgenerated("(now() AT TIME ZONE 'utc'::text)")) @db.Timestamptz(6)
   watching      Boolean              @default(false)
