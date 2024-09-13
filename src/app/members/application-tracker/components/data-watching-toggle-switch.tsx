@@ -20,6 +20,7 @@ export function DataWatchingToggleSwitch({
       console.error('Error updating job application:', error);
       return;
     }
+    row.original.watching = !isWatching;
     setIsWatching((prev) => !prev);
   }
 
