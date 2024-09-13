@@ -14,22 +14,23 @@ import {
 import {
   ExistingJobApplication,
   JobApplicationDataCopy,
-  NewJobApplication,
 } from '~/types/job-applications';
-import { copyJobApplication, deleteJobApplication } from '../actions';
+import {
+  copyJobApplication,
+  deleteJobApplication,
+  updateJobApplication,
+} from '../actions';
 import { EditJobApplicationForm } from './data-table-edit-entry';
 
 //TODO - Add type for the application parameter in the edit form component
 
-interface DataTableRowActionsProps<
-  TData extends NewJobApplication | ExistingJobApplication,
-> {
+interface DataTableRowActionsProps<TData extends ExistingJobApplication> {
   row: Row<TData>;
 }
 
-export function DataTableRowActions<
-  TData extends NewJobApplication | ExistingJobApplication,
->({ row }: DataTableRowActionsProps<TData>) {
+export function DataTableRowActions<TData extends ExistingJobApplication>({
+  row,
+}: DataTableRowActionsProps<TData>) {
   async function handleDelete() {
     const application = row.original as ExistingJobApplication;
     const applicationId = application.id;
@@ -68,7 +69,16 @@ export function DataTableRowActions<
   }
 
   async function handleWatch() {
-    console.log('Watched!');
+    const isWatching = row.original.watching;
+    const { error } = await updateJobApplication({
+      ...row.original,
+      watching: !isWatching,
+    });
+    if (error) {
+      console.error('Error updating job application:', error);
+      return;
+    }
+    window.location.reload();
   }
 
   return (

@@ -51,11 +51,7 @@ export function DataTableEditForm({
   });
 
   async function onSubmit(updatedApplicationData: ExistingJobApplication) {
-    const jobApplicationId = application.id;
-    const result = await updateJobApplication(
-      jobApplicationId,
-      updatedApplicationData
-    );
+    const result = await updateJobApplication(updatedApplicationData);
 
     // Verify whether anything in the existing application has changed
     // before making unnecessary API calls

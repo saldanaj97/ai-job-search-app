@@ -30,7 +30,7 @@ export const EditJobApplicationFormSchema = z.object({
   followedUp: z.boolean(),
   followUpCount: z.number().int().min(0, 'Follow up count cannot be negative'),
   user_id: z.string().uuid({ message: 'Invalid user ID' }),
-  // watching: z.boolean(),
+  watching: z.boolean(),
   status: JobApplicationStatus,
 });
 

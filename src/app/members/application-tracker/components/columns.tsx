@@ -1,7 +1,8 @@
 'use client';
 
-import { ColumnDef } from '@tanstack/react-table';
+import { ColumnDef, Row } from '@tanstack/react-table';
 import { Checkbox } from '~/components/ui/checkbox';
+import { ExistingJobApplication } from '~/types/job-applications';
 import { statuses } from '../data/data';
 import { JobApplicationForm } from '../data/schema';
 import { DataTableColumnHeader } from './data-table-column-header';
@@ -70,7 +71,9 @@ export const columns: ColumnDef<JobApplicationForm>[] = [
     ),
     cell: ({ row }) => {
       const isWatching: boolean = row.getValue('watching');
-      return <DataWatchingToggleSwitch isWatching={isWatching} />;
+      return (
+        <DataWatchingToggleSwitch row={row as Row<ExistingJobApplication>} />
+      );
     },
   },
   {

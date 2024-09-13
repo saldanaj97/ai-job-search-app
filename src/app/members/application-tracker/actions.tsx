@@ -1,11 +1,11 @@
 'use server';
 import { cookies } from 'next/headers';
 import {
+  ExistingJobApplication,
   JobApplicationDataCopy,
   JobApplicationInput,
 } from '~/types/job-applications';
 import { createClient } from '~/utils/supabase/server';
-import { EditJobApplicationForm } from './data/schema';
 
 const supabase = createClient(cookies());
 const {
@@ -159,8 +159,7 @@ export const deleteManyJobApplications = async (ids: number[]) => {
 };
 
 export const updateJobApplication = async (
-  id: string,
-  data: EditJobApplicationForm
+  data: ExistingJobApplication
 ) => {
   if (sessionError || !user) {
     return {
@@ -171,7 +170,7 @@ export const updateJobApplication = async (
   const { error } = await supabase
     .from('JobApplication')
     .update(data)
-    .eq('id', id);
+    .eq('id', data.id);
 
   if (error) {
     return {
