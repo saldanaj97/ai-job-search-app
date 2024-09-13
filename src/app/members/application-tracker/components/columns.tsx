@@ -79,7 +79,6 @@ export const columns: ColumnDef<JobApplicationForm>[] = [
       return value.includes(row.getValue(id));
     },
   },
-  // cell: ({ row }) => <div>{row.getValue('status')}</div>,
   {
     accessorKey: 'appliedOn',
     header: ({ column }) => (
