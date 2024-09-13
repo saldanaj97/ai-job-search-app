@@ -70,7 +70,6 @@ export const columns: ColumnDef<JobApplicationForm>[] = [
       />
     ),
     cell: ({ row }) => {
-      const isWatching: boolean = row.getValue('watching');
       return (
         <DataWatchingToggleSwitch row={row as Row<ExistingJobApplication>} />
       );

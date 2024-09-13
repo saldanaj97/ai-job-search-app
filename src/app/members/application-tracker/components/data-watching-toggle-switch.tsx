@@ -1,14 +1,15 @@
 import { EyeNoneIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { Row } from '@tanstack/react-table';
+import { useState } from 'react';
 import { ExistingJobApplication } from '~/types/job-applications';
 import { updateJobApplication } from '../actions';
 
 export function DataWatchingToggleSwitch({
   row,
 }: {
-  row: Row<ExistingJobApplication>;
+  row: Row<ExistingJobApplication> & { watching: boolean };
 }) {
-  const isWatching = row.original.watching;
+  const [isWatching, setIsWatching] = useState(row.original.watching);
 
   async function handleWatchingToggle() {
     const { error } = await updateJobApplication({
@@ -17,7 +18,9 @@ export function DataWatchingToggleSwitch({
     });
     if (error) {
       console.error('Error updating job application:', error);
+      return;
     }
+    setIsWatching((prev) => !prev);
   }
 
   return (
