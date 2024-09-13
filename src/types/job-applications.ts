@@ -2,7 +2,7 @@ type ExistingJobApplication = {
   appliedOn: string;
   company: string | null;
   created_at: Date | null;
-  followUpCount: number | null;
+  followUpCount: number;
   followedUp: boolean;
   id: string;
   jobTitle: string;

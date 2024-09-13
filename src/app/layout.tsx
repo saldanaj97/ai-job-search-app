@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 
 import React from 'react';
 import ThemeProvider from '~/components/ThemeProvider';
+import { Toaster } from '~/components/ui/toaster';
 import { TRPCReactProvider } from '~/trpc/react';
 
 export const metadata = {
@@ -35,6 +36,7 @@ export default function RootLayout({
               disableTransitionOnChange
             >
               {children}
+              <Toaster />
             </ThemeProvider>
           </TRPCReactProvider>
         </div>

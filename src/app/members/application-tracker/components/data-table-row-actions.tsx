@@ -1,7 +1,7 @@
 'use client';
-
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { Row } from '@tanstack/react-table';
+import { useCallback, useState } from 'react';
 import { Button } from '~/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '~/components/ui/dialog';
 import {
@@ -11,18 +11,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/ui/dropdown-menu';
+import { useToast } from '~/hooks/use-toast';
+import { api } from '~/trpc/react';
 import {
   ExistingJobApplication,
   JobApplicationDataCopy,
 } from '~/types/job-applications';
-import {
-  copyJobApplication,
-  deleteJobApplication,
-  updateJobApplication,
-} from '../actions';
 import { EditJobApplicationForm } from './data-table-edit-entry';
-
-//TODO - Add type for the application parameter in the edit form component
 
 interface DataTableRowActionsProps<TData extends ExistingJobApplication> {
   row: Row<TData>;
@@ -31,55 +26,74 @@ interface DataTableRowActionsProps<TData extends ExistingJobApplication> {
 export function DataTableRowActions<TData extends ExistingJobApplication>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  async function handleDelete() {
-    const application = row.original as ExistingJobApplication;
-    const applicationId = application.id;
-    if (confirm('Are you sure you want to delete this job application?')) {
-      if (!applicationId) {
-        alert('Error: Application ID not found!');
-        return;
-      }
-      const result = await deleteJobApplication(applicationId);
-      if (result.error) {
-        alert(`Error: ${result.error}`);
-      } else {
-        alert('Job application deleted!');
-        window.location.reload();
-      }
-    }
-  }
+  const utils = api.useUtils();
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
 
-  async function handleCopy() {
-    const { id, created_at, status, ...applicationData } =
-      row.original as ExistingJobApplication;
+  const deleteMutation = api.applicationTable.deleteJobApplication.useMutation({
+    onSuccess: () => utils.applicationTable.getAllJobApplications.invalidate(),
+  });
 
-    const applicationDataToCopy: JobApplicationDataCopy = {
-      ...applicationData,
-      status: 'Applied', // Reset for the new copy
-      followUpCount: 0, // Reset for the new copy
-      followedUp: false, // Reset for the new copy1
-    };
+  const copyMutation = api.applicationTable.copyJobApplication.useMutation({
+    onSuccess: () => utils.applicationTable.getAllJobApplications.invalidate(),
+  });
 
-    const result = await copyJobApplication(applicationDataToCopy);
-    if (result.error) {
-      alert(`Error: ${result.error}`);
-    } else {
-      window.location.reload();
-    }
-  }
+  const updateMutation = api.applicationTable.updateJobApplication.useMutation({
+    onSuccess: () => utils.applicationTable.getAllJobApplications.invalidate(),
+  });
 
-  async function handleWatch() {
-    const isWatching = row.original.watching;
-    const { error } = await updateJobApplication({
-      ...row.original,
-      watching: !isWatching,
-    });
-    if (error) {
-      console.error('Error updating job application:', error);
+  const handleDelete = useCallback(() => {
+    const applicationId = row.original.id;
+    setLoading(true);
+    if (!applicationId) {
+      alert('Error: Application ID not found!');
       return;
     }
-    window.location.reload();
-  }
+    if (confirm('Are you sure you want to delete this job application?')) {
+      deleteMutation.mutate(
+        { id: applicationId },
+        {
+          onSuccess: () => {
+            toast({
+              title: 'Success!',
+              description: `Application for ${row.original.jobTitle} at ${row.original.company} has been deleted!`,
+            });
+          },
+          onError: (error) => alert(`Error: ${error.message}`),
+        }
+      );
+    }
+  }, [row.original, deleteMutation]);
+
+  const handleCopy = useCallback(() => {
+    const { id, created_at, status, ...applicationData } = row.original;
+    const applicationDataToCopy: JobApplicationDataCopy = {
+      ...applicationData,
+      status: 'Applied',
+      followUpCount: 0,
+      followedUp: false,
+    };
+    copyMutation.mutate(applicationDataToCopy, {
+      onSuccess: () => alert('Job application copied!'),
+      onError: (error) => alert(`Error: ${error.message}`),
+    });
+  }, [row.original, copyMutation]);
+
+  const handleWatch = useCallback(() => {
+    const isWatching = row.original.watching;
+    updateMutation.mutate(
+      {
+        ...row.original,
+        watching: !isWatching,
+      },
+      {
+        onError: (error) => {
+          console.error('Error updating job application:', error);
+          alert(`Error: ${error.message}`);
+        },
+      }
+    );
+  }, [row.original, updateMutation]);
 
   return (
     <Dialog>
@@ -100,18 +114,32 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
             </DialogTrigger>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <button onClick={handleCopy}>Make a copy</button>
+            <button
+              onClick={handleCopy}
+              disabled={copyMutation.status === 'pending'}
+            >
+              {copyMutation.status === 'pending' ? 'Copying...' : 'Make a copy'}
+            </button>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <button onClick={handleWatch}>Watch</button>
+            <button
+              onClick={handleWatch}
+              disabled={updateMutation.status === 'pending'}
+            >
+              {updateMutation.status === 'pending' ? 'Updating...' : 'Watch'}
+            </button>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <button onClick={handleDelete}>Delete</button>
+            <button
+              onClick={handleDelete}
+              disabled={deleteMutation.status === 'pending'}
+            >
+              {deleteMutation.status === 'pending' ? 'Deleting...' : 'Delete'}
+            </button>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-
       <DialogContent className="fixed z-50 flex flex-col items-center justify-center sm:max-w-md">
         <EditJobApplicationForm
           application={row.original as ExistingJobApplication}

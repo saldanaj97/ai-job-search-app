@@ -9,6 +9,7 @@ import { DataTable } from './components/data-table';
 export default function JobApplicationTracker() {
   const [jobApplications] =
     api.applicationTable.getAllJobApplications.useSuspenseQuery();
+  const { data } = jobApplications;
 
   return (
     <div className="hidden h-full flex-col space-y-8 px-6 py-8 md:flex lg:px-16">
@@ -20,7 +21,7 @@ export default function JobApplicationTracker() {
           </p>
         </div>
       </div>
-      <DataTable data={jobApplications} columns={columns} />
+      <DataTable data={data ?? []} columns={columns} />
     </div>
   );
 }
