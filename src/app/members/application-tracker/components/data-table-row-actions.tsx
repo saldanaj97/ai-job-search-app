@@ -2,6 +2,7 @@
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { Row } from '@tanstack/react-table';
 import { useCallback, useState } from 'react';
+import { LoadingSpinner } from '~/components/spinner';
 import { Button } from '~/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '~/components/ui/dialog';
 import {
@@ -27,7 +28,7 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
   row,
 }: DataTableRowActionsProps<TData>) {
   const utils = api.useUtils();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
   const deleteMutation = api.applicationTable.deleteJobApplication.useMutation({
@@ -60,6 +61,7 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
             });
           },
           onError: (error) => alert(`Error: ${error.message}`),
+          onSettled: () => setLoading(false),
         }
       );
     }
@@ -73,9 +75,16 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
       followUpCount: 0,
       followedUp: false,
     };
+    setLoading(true);
     copyMutation.mutate(applicationDataToCopy, {
-      onSuccess: () => alert('Job application copied!'),
+      onSuccess: () => {
+        toast({
+          title: 'Success!',
+          description: `Application has been copied!`,
+        });
+      },
       onError: (error) => alert(`Error: ${error.message}`),
+      onSettled: () => setLoading(false),
     });
   }, [row.original, copyMutation]);
 
@@ -87,10 +96,17 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
         watching: !isWatching,
       },
       {
+        onSuccess: () => {
+          toast({
+            title: 'Success!',
+            description: `Added to watchlist!`,
+          });
+        },
         onError: (error) => {
           console.error('Error updating job application:', error);
           alert(`Error: ${error.message}`);
         },
+        onSettled: () => setLoading(false),
       }
     );
   }, [row.original, updateMutation]);
@@ -99,13 +115,19 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
     <Dialog>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button
-            variant="ghost"
-            className="m-4 flex h-8 w-8 p-0 data-[state=open]:bg-muted"
-          >
-            <DotsHorizontalIcon className="h-4 w-4" />
-            <span className="sr-only">Open menu</span>
-          </Button>
+          {!loading ? (
+            <Button
+              variant="ghost"
+              className="m-4 flex h-8 w-8 p-0 data-[state=open]:bg-muted"
+            >
+              <DotsHorizontalIcon className="h-4 w-4" />
+              <span className="sr-only">Open menu</span>
+            </Button>
+          ) : (
+            <div className="m-4 flex h-8 w-8 p-0 data-[state=open]:bg-muted">
+              <LoadingSpinner />
+            </div>
+          )}
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
           <DropdownMenuItem>
