@@ -1,12 +1,13 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { DialogClose } from '@radix-ui/react-dialog';
 import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Button } from '~/components/ui/button';
+import { DialogClose } from '~/components/ui/dialog';
 import {
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -20,19 +21,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
+import { Switch } from '~/components/ui/switch';
+import { toast } from '~/hooks/use-toast';
+import { api } from '~/trpc/react';
 import { ExistingJobApplication } from '~/types/job-applications';
-import { updateJobApplication } from '../actions';
 import { EditJobApplicationFormSchema } from '../data/schema';
-
-// TODO - Show animation after user has sucessfully submitted the form (in the onSubmit function)
 
 export function DataTableEditForm({
   application,
 }: {
   application: ExistingJobApplication;
 }) {
+  const utils = api.useUtils();
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+
+  const updateMutation = api.applicationTable.updateJobApplication.useMutation({
+    onSuccess: () => utils.applicationTable.getAllJobApplications.invalidate(),
+  });
 
   const form = useForm<ExistingJobApplication>({
     resolver: zodResolver(EditJobApplicationFormSchema),
@@ -47,12 +53,12 @@ export function DataTableEditForm({
       followedUp: application.followedUp || false,
       followUpCount: application.followUpCount || 0,
       user_id: application.user_id,
+      watching: application.watching || false,
     },
   });
 
   async function onSubmit(updatedApplicationData: ExistingJobApplication) {
-    const result = await updateJobApplication(updatedApplicationData);
-
+    setSuccess(null);
     // Verify whether anything in the existing application has changed
     // before making unnecessary API calls
     if (
@@ -64,7 +70,8 @@ export function DataTableEditForm({
       updatedApplicationData.lastHeard === application.lastHeard &&
       updatedApplicationData.status === application.status &&
       updatedApplicationData.followedUp === application.followedUp &&
-      updatedApplicationData.followUpCount === application.followUpCount
+      updatedApplicationData.followUpCount === application.followUpCount &&
+      updatedApplicationData.watching === application.watching
     ) {
       setError(
         'No changes detected. If you want to update the job application, feel free to make your changes below.'
@@ -72,32 +79,34 @@ export function DataTableEditForm({
       return;
     }
 
-    if (result?.error) {
-      console.error(result.error);
-      setError(result.error);
-      return;
-    }
-
-    setError(null);
-    setSuccess('Job application updated!');
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
+    updateMutation.mutate(updatedApplicationData, {
+      onSuccess: () => {
+        toast({
+          title: 'Success!',
+          description: `Application for role of ${updatedApplicationData.jobTitle} at ${updatedApplicationData.company} has been updated!`,
+        });
+        setError(null);
+        setSuccess('Job application updated successfully!');
+      },
+      onError: (error) => {
+        console.error('Error updating job application:', error);
+        setError(`Error: ${error.message}`);
+      },
+    });
   }
 
-  console.log('Form errors:', form.formState.errors);
   return (
     <FormProvider {...form}>
       {error && <FormMessage>{error}</FormMessage>}
       {success && <FormMessage>{success}</FormMessage>}
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         {/* Job Title */}
         <FormField
           control={form.control}
           name="jobTitle"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Job Title</FormLabel>
+              <FormLabel className="text-base">Job Title</FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -112,13 +121,9 @@ export function DataTableEditForm({
           name="company"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Company</FormLabel>
+              <FormLabel className="text-base">Company</FormLabel>
               <FormControl>
-                <Input
-                  placeholder={field.value ?? ''}
-                  value={field.value ? field.value.toString() : ''}
-                  onChange={field.onChange}
-                />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -131,13 +136,9 @@ export function DataTableEditForm({
           name="location"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Location</FormLabel>
+              <FormLabel className="text-base">Location</FormLabel>
               <FormControl>
-                <Input
-                  placeholder={field.value ?? ''}
-                  value={field.value ?? ''}
-                  onChange={field.onChange}
-                />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -150,12 +151,9 @@ export function DataTableEditForm({
           name="salary"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Salary</FormLabel>
+              <FormLabel className="text-base">Salary</FormLabel>
               <FormControl>
-                <Input
-                  placeholder={field.value ?? ''}
-                  value={field.value ?? ''}
-                />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -168,12 +166,12 @@ export function DataTableEditForm({
           name="appliedOn"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Applied On</FormLabel>
+              <FormLabel className="text-base">Applied On</FormLabel>
               <FormControl>
                 <Input
                   type="date"
-                  placeholder={field.value}
-                  value={field.value}
+                  {...field}
+                  value={field.value || ''}
                   onChange={(e) => field.onChange(e.target.value)}
                 />
               </FormControl>
@@ -188,12 +186,12 @@ export function DataTableEditForm({
           name="lastHeard"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Last Heard From</FormLabel>
+              <FormLabel className="text-base">Last Heard From</FormLabel>
               <FormControl>
                 <Input
                   type="date"
-                  placeholder={field.value ?? ''}
-                  value={field.value}
+                  {...field}
+                  value={field.value || ''}
                   onChange={(e) => field.onChange(e.target.value)}
                 />
               </FormControl>
@@ -208,7 +206,7 @@ export function DataTableEditForm({
           name="status"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Status</FormLabel>
+              <FormLabel className="text-base">Status</FormLabel>
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
@@ -229,8 +227,30 @@ export function DataTableEditForm({
           )}
         />
 
+        {/* Watching */}
+        <FormField
+          control={form.control}
+          name="watching"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center justify-between">
+              <div className="space-y-0.5">
+                <FormLabel className="text-base">Watching</FormLabel>
+                <FormDescription>
+                  Add this job application to your watchlist
+                </FormDescription>
+              </div>
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
         {/* Submit and Close Buttons */}
-        <div className="flex w-full flex-row justify-center gap-8">
+        <div className="flex w-full flex-row justify-center gap-4 pb-2 pt-4">
           <Button type="submit">Submit</Button>
           <DialogClose asChild>
             <Button type="button" variant="secondary">

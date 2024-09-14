@@ -20,6 +20,8 @@ import {
 } from '~/types/job-applications';
 import { EditJobApplicationForm } from './data-table-edit-entry';
 
+// TODO - Responsive Dialog(https://ui.shadcn.com/docs/components/drawer#responsive-dialog) for mobile
+
 interface DataTableRowActionsProps<TData extends ExistingJobApplication> {
   row: Row<TData>;
 }
@@ -132,7 +134,12 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
         <DropdownMenuContent align="end" className="w-[160px]">
           <DropdownMenuItem>
             <DialogTrigger asChild>
-              <button className="flex flex-row items-center">Edit</button>
+              <button
+                className="flex flex-row items-center"
+                disabled={updateMutation.status === 'pending'}
+              >
+                {updateMutation.status === 'pending' ? 'Editing...' : 'Edit'}
+              </button>
             </DialogTrigger>
           </DropdownMenuItem>
           <DropdownMenuItem>
@@ -162,10 +169,10 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <DialogContent className="fixed z-50 flex flex-col items-center justify-center sm:max-w-md">
-        <EditJobApplicationForm
-          application={row.original as ExistingJobApplication}
-        />
+
+      {/* Edit Form Dialog */}
+      <DialogContent>
+        <EditJobApplicationForm application={row.original} />
       </DialogContent>
     </Dialog>
   );
