@@ -57,7 +57,7 @@ export function DataTableEditForm({
     },
   });
 
-  async function onSubmit(updatedApplicationData: ExistingJobApplication) {
+  function onSubmit(updatedApplicationData: ExistingJobApplication) {
     setSuccess(null);
     // Verify whether anything in the existing application has changed
     // before making unnecessary API calls
@@ -78,6 +78,8 @@ export function DataTableEditForm({
       );
       return;
     }
+    // Keep the same ID as the original application
+    updatedApplicationData.id = application.id;
 
     updateMutation.mutate(updatedApplicationData, {
       onSuccess: () => {
