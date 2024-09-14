@@ -123,7 +123,7 @@ export function DataTableEditForm({
             <FormItem>
               <FormLabel className="text-base">Company</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} value={field.value || ''} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -138,7 +138,7 @@ export function DataTableEditForm({
             <FormItem>
               <FormLabel className="text-base">Location</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} value={field.value || ''} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -153,7 +153,7 @@ export function DataTableEditForm({
             <FormItem>
               <FormLabel className="text-base">Salary</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} value={field.value || ''} />
               </FormControl>
               <FormMessage />
             </FormItem>
