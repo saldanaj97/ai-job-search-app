@@ -90,6 +90,7 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
 
   const handleWatch = () => {
     const isWatching = row.original.watching;
+    setLoading(true);
     updateMutation.mutate(
       {
         ...row.original,
