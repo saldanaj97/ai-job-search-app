@@ -132,6 +132,7 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
           )}
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
+          {/* Edit  */}
           <DropdownMenuItem>
             <DialogTrigger asChild>
               <button
@@ -142,6 +143,8 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
               </button>
             </DialogTrigger>
           </DropdownMenuItem>
+
+          {/* Copy  */}
           <DropdownMenuItem>
             <button
               onClick={handleCopy}
@@ -150,6 +153,8 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
               {copyMutation.status === 'pending' ? 'Copying...' : 'Make a copy'}
             </button>
           </DropdownMenuItem>
+
+          {/* Watch  */}
           <DropdownMenuItem>
             <button
               onClick={handleWatch}
@@ -159,6 +164,8 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
             </button>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
+
+          {/* Delete  */}
           <DropdownMenuItem>
             <button
               onClick={handleDelete}

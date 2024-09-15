@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { DialogClose } from '@radix-ui/react-dialog';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Button } from '~/components/ui/button';
 import {
@@ -20,15 +20,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
+import { useToast } from '~/hooks/use-toast';
+import { api } from '~/trpc/react';
 import { NewJobApplication } from '~/types/job-applications';
-import { addNewJobApplication } from '../actions';
 import { JobApplicationFormSchema } from '../data/schema';
 
 // TODO - Show animation after user has sucessfully submitted the form (in the onSubmit function)
 
 export function JobApplicationEntryForm() {
+  const utils = api.useUtils();
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+  const { toast } = useToast();
+
+  const addMutation = api.applicationTable.addNewJobApplication.useMutation({
+    onSuccess: () => utils.applicationTable.getAllJobApplications.invalidate(),
+  });
 
   const form = useForm<NewJobApplication>({
     resolver: zodResolver(JobApplicationFormSchema),
@@ -45,24 +51,29 @@ export function JobApplicationEntryForm() {
     },
   });
 
-  async function onSubmit(data: NewJobApplication) {
-    const result = await addNewJobApplication(data);
-    if (result?.error) {
-      setError(result.error);
-      return;
-    }
-    setSuccess('Job application added!');
-    form.reset();
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
-  }
+  const onSubmit = useCallback(
+    (data: NewJobApplication) => {
+      addMutation.mutate(data, {
+        onSuccess: () => {
+          setError(null);
+          toast({
+            title: 'Success!',
+            description: `Application for ${data.jobTitle} at ${data.company} has been added!`,
+          });
+          form.reset();
+        },
+        onError: (error) => {
+          setError(error.message);
+        },
+      });
+    },
+    [addMutation]
+  );
 
   console.log('Form errors:', form.formState.errors);
   return (
     <FormProvider {...form}>
       {error && <FormMessage>{error}</FormMessage>}
-      {success && <FormMessage>{success}</FormMessage>}
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}

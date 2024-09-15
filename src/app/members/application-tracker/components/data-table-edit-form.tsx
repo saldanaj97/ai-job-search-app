@@ -57,7 +57,7 @@ export function DataTableEditForm({
     },
   });
 
-  function onSubmit(updatedApplicationData: ExistingJobApplication) {
+  const onSubmit = (updatedApplicationData: ExistingJobApplication) => {
     setSuccess(null);
     // Verify whether anything in the existing application has changed
     // before making unnecessary API calls
@@ -95,7 +95,7 @@ export function DataTableEditForm({
         setError(`Error: ${error.message}`);
       },
     });
-  }
+  };
 
   return (
     <FormProvider {...form}>
