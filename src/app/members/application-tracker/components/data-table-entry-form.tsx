@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { DialogClose } from '@radix-ui/react-dialog';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { Button } from '~/components/ui/button';
 import {
@@ -51,24 +51,21 @@ export function JobApplicationEntryForm() {
     },
   });
 
-  const onSubmit = useCallback(
-    (data: NewJobApplication) => {
-      addMutation.mutate(data, {
-        onSuccess: () => {
-          setError(null);
-          toast({
-            title: 'Success!',
-            description: `Application for ${data.jobTitle} at ${data.company} has been added!`,
-          });
-          form.reset();
-        },
-        onError: (error) => {
-          setError(error.message);
-        },
-      });
-    },
-    [addMutation]
-  );
+  const onSubmit = (data: NewJobApplication) => {
+    addMutation.mutate(data, {
+      onSuccess: () => {
+        setError(null);
+        toast({
+          title: 'Success!',
+          description: `Application for ${data.jobTitle} at ${data.company} has been added!`,
+        });
+        form.reset();
+      },
+      onError: (error) => {
+        setError(error.message);
+      },
+    });
+  };
 
   console.log('Form errors:', form.formState.errors);
   return (

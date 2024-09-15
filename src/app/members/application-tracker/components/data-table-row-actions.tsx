@@ -1,7 +1,7 @@
 'use client';
 import { DotsHorizontalIcon } from '@radix-ui/react-icons';
 import { Row } from '@tanstack/react-table';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { LoadingSpinner } from '~/components/spinner';
 import { Button } from '~/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '~/components/ui/dialog';
@@ -19,8 +19,6 @@ import {
   JobApplicationDataCopy,
 } from '~/types/job-applications';
 import { EditJobApplicationForm } from './data-table-edit-entry';
-
-// TODO - Responsive Dialog(https://ui.shadcn.com/docs/components/drawer#responsive-dialog) for mobile
 
 interface DataTableRowActionsProps<TData extends ExistingJobApplication> {
   row: Row<TData>;
@@ -45,7 +43,7 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
     onSuccess: () => utils.applicationTable.getAllJobApplications.invalidate(),
   });
 
-  const handleDelete = useCallback(() => {
+  const handleDelete = () => {
     const applicationId = row.original.id;
     setLoading(true);
     if (!applicationId) {
@@ -67,9 +65,9 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
         }
       );
     }
-  }, [row.original, deleteMutation]);
+  };
 
-  const handleCopy = useCallback(() => {
+  const handleCopy = () => {
     const { id, created_at, status, ...applicationData } = row.original;
     const applicationDataToCopy: JobApplicationDataCopy = {
       ...applicationData,
@@ -88,9 +86,9 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
       onError: (error) => alert(`Error: ${error.message}`),
       onSettled: () => setLoading(false),
     });
-  }, [row.original, copyMutation]);
+  };
 
-  const handleWatch = useCallback(() => {
+  const handleWatch = () => {
     const isWatching = row.original.watching;
     updateMutation.mutate(
       {
@@ -111,7 +109,7 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
         onSettled: () => setLoading(false),
       }
     );
-  }, [row.original, updateMutation]);
+  };
 
   return (
     <Dialog>
@@ -132,7 +130,6 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
           )}
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
-          {/* Edit  */}
           <DropdownMenuItem>
             <DialogTrigger asChild>
               <button
@@ -144,7 +141,6 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
             </DialogTrigger>
           </DropdownMenuItem>
 
-          {/* Copy  */}
           <DropdownMenuItem>
             <button
               onClick={handleCopy}
@@ -154,7 +150,6 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
             </button>
           </DropdownMenuItem>
 
-          {/* Watch  */}
           <DropdownMenuItem>
             <button
               onClick={handleWatch}
@@ -165,7 +160,6 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
           </DropdownMenuItem>
           <DropdownMenuSeparator />
 
-          {/* Delete  */}
           <DropdownMenuItem>
             <button
               onClick={handleDelete}
@@ -177,7 +171,6 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
         </DropdownMenuContent>
       </DropdownMenu>
 
-      {/* Edit Form Dialog */}
       <DialogContent>
         <EditJobApplicationForm application={row.original} />
       </DialogContent>
