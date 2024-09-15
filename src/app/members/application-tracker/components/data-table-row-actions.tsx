@@ -100,7 +100,7 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
         onSuccess: () => {
           toast({
             title: 'Success!',
-            description: `Added to watchlist!`,
+            description: `${isWatching ? 'Unwatched' : 'Now watching'} application for ${row.original.jobTitle} at ${row.original.company}!`,
           });
         },
         onError: (error) => {
@@ -109,6 +109,36 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
         },
         onSettled: () => setLoading(false),
       }
+    );
+  };
+
+  const DropdownMenuItemButton = ({
+    mutation,
+    mutationFunction,
+    operation,
+  }: {
+    mutation:
+      | typeof deleteMutation
+      | typeof copyMutation
+      | typeof updateMutation;
+    mutationFunction: () => void;
+    operation: string;
+  }) => {
+    return (
+      <button
+        onClick={mutationFunction}
+        disabled={mutation.status === 'pending'}
+      >
+        {operation}
+      </button>
+    );
+  };
+
+  const EditJobApplicationFormButton = () => {
+    return (
+      <button disabled={updateMutation.status === 'pending'}>
+        {updateMutation.status === 'pending' ? 'Editing...' : 'Edit'}
+      </button>
     );
   };
 
@@ -133,41 +163,30 @@ export function DataTableRowActions<TData extends ExistingJobApplication>({
         <DropdownMenuContent align="end" className="w-[160px]">
           <DropdownMenuItem>
             <DialogTrigger asChild>
-              <button
-                className="flex flex-row items-center"
-                disabled={updateMutation.status === 'pending'}
-              >
-                {updateMutation.status === 'pending' ? 'Editing...' : 'Edit'}
-              </button>
+              <EditJobApplicationFormButton />
             </DialogTrigger>
           </DropdownMenuItem>
-
           <DropdownMenuItem>
-            <button
-              onClick={handleCopy}
-              disabled={copyMutation.status === 'pending'}
-            >
-              {copyMutation.status === 'pending' ? 'Copying...' : 'Make a copy'}
-            </button>
+            <DropdownMenuItemButton
+              mutation={copyMutation}
+              mutationFunction={handleCopy}
+              operation={'Copy'}
+            />
           </DropdownMenuItem>
-
           <DropdownMenuItem>
-            <button
-              onClick={handleWatch}
-              disabled={updateMutation.status === 'pending'}
-            >
-              {updateMutation.status === 'pending' ? 'Updating...' : 'Watch'}
-            </button>
+            <DropdownMenuItemButton
+              mutation={updateMutation}
+              mutationFunction={handleWatch}
+              operation={row.original.watching ? 'Unwatch' : 'Watch'}
+            />
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-
           <DropdownMenuItem>
-            <button
-              onClick={handleDelete}
-              disabled={deleteMutation.status === 'pending'}
-            >
-              {deleteMutation.status === 'pending' ? 'Deleting...' : 'Delete'}
-            </button>
+            <DropdownMenuItemButton
+              mutation={deleteMutation}
+              mutationFunction={handleDelete}
+              operation={'Delete'}
+            />
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
