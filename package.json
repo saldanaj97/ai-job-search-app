@@ -11,7 +11,12 @@
     "lint": "next lint",
     "start": "next start",
     "prettier:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
-    "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\""
+    "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "docker:build": "docker compose build",
+    "docker:up": "docker compose up",
+    "docker:down": "docker compose down",
+    "docker:test": "docker compose up --build -d && npm run test && docker compose down",
+    "docker:clean": "docker compose down -v --rmi all --remove-orphans"
   },
   "dependencies": {
     "@heroicons/react": "^2.1.5",
