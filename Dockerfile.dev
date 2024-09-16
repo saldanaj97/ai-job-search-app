@@ -1,0 +1,25 @@
+FROM node:18
+
+WORKDIR /app
+
+RUN npm install -g pnpm
+
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install
+
+COPY prisma ./prisma/
+
+COPY . .
+
+# Generate Prisma client
+RUN pnpm prisma generate
+
+EXPOSE 3000
+EXPOSE 5555
+
+# Use a shell script as entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["pnpm", "dev"]

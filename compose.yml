@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ${DOCKERFILE:-Dockerfile.dev}
+    ports:
+      - '3000:3000'
+      - '5555:5555'
+    volumes:
+      - .:/app
+      - /app/node_modules
+      # - ./prisma:/app/prisma
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - DATABASE_URL=${DATABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}
+      - NEXT_PUBLIC_SUPABASE_ANON_KEY=${NEXT_PUBLIC_SUPABASE_ANON_KEY}

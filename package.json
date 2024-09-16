@@ -7,7 +7,6 @@
     "build": "next build",
     "db:refresh": "prisma db pull && prisma generate",
     "db:studio": "prisma studio",
-    "postinstall": "prisma generate",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
