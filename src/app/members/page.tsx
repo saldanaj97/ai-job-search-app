@@ -22,6 +22,12 @@ export default function Members({ user }: { user: User }) {
         >
           <Button>Application Tracker</Button>
         </a>
+        <a
+          href="../members/resume-builder"
+          className="flex w-full flex-row justify-center"
+        >
+          <Button>Resume Builder</Button>
+        </a>
       </div>
     </div>
   );
