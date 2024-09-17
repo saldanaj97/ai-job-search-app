@@ -13,7 +13,6 @@ import { Separator } from '~/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { Textarea } from '~/components/ui/textarea';
 
-import { CodeViewer } from './components/code-viewer';
 import { MaxLengthSelector } from './components/maxlength-selector';
 import { ModelSelector } from './components/model-selector';
 import { PresetActions } from './components/preset-actions';
@@ -56,7 +55,6 @@ export default function ResumeBuilderPage() {
             <PresetSelector presets={presets} />
             <PresetSave />
             <div className="hidden space-x-2 md:flex">
-              <CodeViewer />
               <PresetShare />
             </div>
             <PresetActions />

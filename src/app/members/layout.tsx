@@ -15,7 +15,7 @@ export default async function MembersLayout({
       <MemberNavbar>
         <AuthComponent />
       </MemberNavbar>
-      <div className="flex-column flex items-center justify-center gap-4">
+      <div className="flex flex-col items-center justify-center gap-4">
         {children}
       </div>
       <Footer />
