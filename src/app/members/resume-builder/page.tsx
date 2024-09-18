@@ -13,6 +13,12 @@ import { Separator } from '~/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '~/components/ui/tabs';
 import { Textarea } from '~/components/ui/textarea';
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '~/components/ui/accordion';
 import { MaxLengthSelector } from './components/maxlength-selector';
 import { ModelSelector } from './components/model-selector';
 import { PresetActions } from './components/preset-actions';
@@ -30,191 +36,82 @@ export const metadata: Metadata = {
 };
 
 // TODO - Update the function names to be more descriptive
+//      - Check mark on each dropdown after completion of form field
 
-function ColumnOne() {
+function ComponentHeader() {
   return (
-    <>
-      <div className="grid gap-2">
-        <HoverCard openDelay={200}>
-          <HoverCardTrigger asChild>
-            <span className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              Mode
-            </span>
-          </HoverCardTrigger>
-          <HoverCardContent className="w-[320px] text-sm" side="left">
-            Choose the interface that best suits your task. You can provide: a
-            simple prompt to complete, starting and ending text to insert a
-            completion within, or some text with instructions to edit it.
-          </HoverCardContent>
-        </HoverCard>
-        <TabsList className="grid grid-cols-3">
-          <TabsTrigger value="complete">
-            <span className="sr-only">Complete</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="none"
-              className="h-5 w-5"
-            >
-              <rect
-                x="4"
-                y="3"
-                width="12"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-              <rect
-                x="4"
-                y="7"
-                width="12"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-              <rect
-                x="4"
-                y="11"
-                width="3"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-              <rect
-                x="4"
-                y="15"
-                width="3"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-              <rect
-                x="8.5"
-                y="11"
-                width="3"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-              <rect
-                x="8.5"
-                y="15"
-                width="3"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-              <rect
-                x="13"
-                y="11"
-                width="3"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-            </svg>
-          </TabsTrigger>
-          <TabsTrigger value="insert">
-            <span className="sr-only">Insert</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="none"
-              className="h-5 w-5"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M14.491 7.769a.888.888 0 0 1 .287.648.888.888 0 0 1-.287.648l-3.916 3.667a1.013 1.013 0 0 1-.692.268c-.26 0-.509-.097-.692-.268L5.275 9.065A.886.886 0 0 1 5 8.42a.889.889 0 0 1 .287-.64c.181-.17.427-.267.683-.269.257-.002.504.09.69.258L8.903 9.87V3.917c0-.243.103-.477.287-.649.183-.171.432-.268.692-.268.26 0 .509.097.692.268a.888.888 0 0 1 .287.649V9.87l2.245-2.102c.183-.172.432-.269.692-.269.26 0 .508.097.692.269Z"
-                fill="currentColor"
-              ></path>
-              <rect
-                x="4"
-                y="15"
-                width="3"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-              <rect
-                x="8.5"
-                y="15"
-                width="3"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-              <rect
-                x="13"
-                y="15"
-                width="3"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-            </svg>
-          </TabsTrigger>
-          <TabsTrigger value="edit">
-            <span className="sr-only">Edit</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="none"
-              className="h-5 w-5"
-            >
-              <rect
-                x="4"
-                y="3"
-                width="12"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-              <rect
-                x="4"
-                y="7"
-                width="12"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-              <rect
-                x="4"
-                y="11"
-                width="3"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-              <rect
-                x="4"
-                y="15"
-                width="4"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-              <rect
-                x="8.5"
-                y="11"
-                width="3"
-                height="2"
-                rx="1"
-                fill="currentColor"
-              ></rect>
-              <path
-                d="M17.154 11.346a1.182 1.182 0 0 0-1.671 0L11 15.829V17.5h1.671l4.483-4.483a1.182 1.182 0 0 0 0-1.671Z"
-                fill="currentColor"
-              ></path>
-            </svg>
-          </TabsTrigger>
-        </TabsList>
+    <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
+      <h2 className="flex w-full flex-row text-lg font-semibold">
+        Resume Builder
+      </h2>
+      <div className="ml-auto flex w-full space-x-2 sm:justify-end">
+        <PresetSelector presets={presets} />
+        <PresetSave />
+        <div className="hidden space-x-2 md:flex">
+          <PresetShare />
+        </div>
+        <PresetActions />
       </div>
-      <ModelSelector types={types} models={models} />
-      <TemperatureSelector defaultValue={[0.56]} />
-      <MaxLengthSelector defaultValue={[256]} />
-      <TopPSelector defaultValue={[0.9]} />
-    </>
+    </div>
+  );
+}
+
+function UserInformationColumn() {
+  return (
+    <div className="flex flex-col">
+      <h2 className="pb-4 text-lg font-bold">Content</h2>
+      <Separator />
+      <Accordion type="single" collapsible className="w-full">
+        <AccordionItem value="item-1">
+          <AccordionTrigger>Personal Information</AccordionTrigger>
+          <AccordionContent>
+            Yes. It adheres to the WAI-ARIA design pattern.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-2">
+          <AccordionTrigger>Professional Summary</AccordionTrigger>
+          <AccordionContent>
+            Yes. It comes with default styles that matches the other
+            components&apos; aesthetic.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-3">
+          <AccordionTrigger>Employment History</AccordionTrigger>
+          <AccordionContent>
+            Yes. It&apos;s animated by default, but you can disable it if you
+            prefer.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-4">
+          <AccordionTrigger>Education</AccordionTrigger>
+          <AccordionContent>
+            Yes. It&apos;s animated by default, but you can disable it if you
+            prefer.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-5">
+          <AccordionTrigger>Websites & Social Links</AccordionTrigger>
+          <AccordionContent>
+            Yes. It&apos;s animated by default, but you can disable it if you
+            prefer.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-6">
+          <AccordionTrigger>Skills</AccordionTrigger>
+          <AccordionContent>
+            Yes. It&apos;s animated by default, but you can disable it if you
+            prefer.
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="item-7">
+          <AccordionTrigger>Hobbies</AccordionTrigger>
+          <AccordionContent>
+            Yes. It&apos;s animated by default, but you can disable it if you
+            prefer.
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
   );
 }
 
@@ -493,25 +390,13 @@ export default function ResumeBuilderPage() {
         />
       </div>
       <div className="hidden h-full flex-col md:flex">
-        <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
-          <h2 className="flex w-full flex-row text-lg font-semibold">
-            Resume Builder
-          </h2>
-          <div className="ml-auto flex w-full space-x-2 sm:justify-end">
-            <PresetSelector presets={presets} />
-            <PresetSave />
-            <div className="hidden space-x-2 md:flex">
-              <PresetShare />
-            </div>
-            <PresetActions />
-          </div>
-        </div>
+        <ComponentHeader />
         <Separator />
         <Tabs defaultValue="complete" className="flex-1">
           <div className="container h-full py-6">
             <div className="grid h-full items-stretch gap-6 md:grid-cols-[1fr_4fr_1fr]">
               <div className="hidden flex-col space-y-4 sm:flex md:order-1">
-                <ColumnOne />
+                <UserInformationColumn />
               </div>
               <div className="md:order-2">
                 <ResumePreviewArea />
