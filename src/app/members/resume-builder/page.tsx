@@ -58,10 +58,10 @@ function ComponentHeader() {
 
 function UserInformationColumn() {
   return (
-    <div className="flex flex-col">
+    <div className="flex h-full w-full flex-col">
       <h2 className="pb-4 text-lg font-bold">Content</h2>
       <Separator />
-      <Accordion type="single" collapsible className="w-full">
+      <Accordion type="single" collapsible className="w-full space-y-2">
         <AccordionItem value="item-1">
           <AccordionTrigger>Personal Information</AccordionTrigger>
           <AccordionContent>
@@ -122,7 +122,7 @@ function ResumePreviewArea() {
         <div className="flex h-full flex-col space-y-4">
           <Textarea
             placeholder="Resume Preview Will Be Here"
-            className="min-h-[400px] flex-1 p-4 md:min-h-[700px] lg:min-h-[700px]"
+            className="min-h-[400px] flex-1 border-0 bg-gray-500/10 p-4 shadow-lg md:min-h-[700px] lg:min-h-[700px]"
           />
           <div className="flex items-center space-x-2">
             <Button>Submit</Button>
@@ -393,12 +393,12 @@ export default function ResumeBuilderPage() {
         <ComponentHeader />
         <Separator />
         <Tabs defaultValue="complete" className="flex-1">
-          <div className="container h-full py-6">
-            <div className="grid h-full items-stretch gap-6 md:grid-cols-[1fr_4fr_1fr]">
-              <div className="hidden flex-col space-y-4 sm:flex md:order-1">
+          <div className="container h-full">
+            <div className="grid h-full items-stretch gap-6 bg-background py-4 md:grid-cols-[1fr_4fr_1fr]">
+              <div className="hidden flex-col sm:flex md:order-1">
                 <UserInformationColumn />
               </div>
-              <div className="md:order-2">
+              <div className="rounded-md md:order-2">
                 <ResumePreviewArea />
               </div>
               <div className="hidden flex-col space-y-4 sm:flex md:order-3">
