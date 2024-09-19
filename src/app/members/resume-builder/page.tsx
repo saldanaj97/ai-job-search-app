@@ -19,6 +19,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '~/components/ui/accordion';
+import { Certifications } from './components/forms/certifications-form';
+import { Education } from './components/forms/education-form';
+import { EmploymentHistory } from './components/forms/employment-history-form';
+import { ExtraLinks } from './components/forms/extra-links-form';
+import { PersonalInfo } from './components/forms/personal-info-form';
+import { ProfessionalSummary } from './components/forms/professional-summary-form';
+import { Skills } from './components/forms/skills-form';
 import { MaxLengthSelector } from './components/maxlength-selector';
 import { ModelSelector } from './components/model-selector';
 import { PresetActions } from './components/preset-actions';
@@ -65,49 +72,43 @@ function UserInformationColumn() {
         <AccordionItem value="item-1">
           <AccordionTrigger>Personal Information</AccordionTrigger>
           <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
+            <PersonalInfo />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
           <AccordionTrigger>Professional Summary</AccordionTrigger>
           <AccordionContent>
-            Yes. It comes with default styles that matches the other
-            components&apos; aesthetic.
+            <ProfessionalSummary />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
           <AccordionTrigger>Employment History</AccordionTrigger>
           <AccordionContent>
-            Yes. It&apos;s animated by default, but you can disable it if you
-            prefer.
+            <EmploymentHistory />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-4">
           <AccordionTrigger>Education</AccordionTrigger>
           <AccordionContent>
-            Yes. It&apos;s animated by default, but you can disable it if you
-            prefer.
+            <Education />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-5">
           <AccordionTrigger>Websites & Social Links</AccordionTrigger>
           <AccordionContent>
-            Yes. It&apos;s animated by default, but you can disable it if you
-            prefer.
+            <ExtraLinks />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-6">
           <AccordionTrigger>Skills</AccordionTrigger>
           <AccordionContent>
-            Yes. It&apos;s animated by default, but you can disable it if you
-            prefer.
+            <Skills />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-7">
-          <AccordionTrigger>Hobbies</AccordionTrigger>
+          <AccordionTrigger>Certifications</AccordionTrigger>
           <AccordionContent>
-            Yes. It&apos;s animated by default, but you can disable it if you
-            prefer.
+            <Certifications />
           </AccordionContent>
         </AccordionItem>
       </Accordion>
