@@ -45,11 +45,19 @@ type CertificationsFormValues = {
   date: '';
 };
 
+type JobDetailsFormValues = {
+  jobTitle: '';
+  company?: '';
+  description?: '';
+  keywords?: '';
+};
+
 export type {
   CertificationsFormValues,
   EducationFormValues,
   EmploymentHistoryFormValues,
   ExtraLinksFormValues,
+  JobDetailsFormValues,
   PersonalInfoFormValues,
   ProfessionalSummaryFormValues,
   SkillsFormValues,

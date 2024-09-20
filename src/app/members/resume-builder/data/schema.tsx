@@ -48,3 +48,10 @@ export const CertificationsFormSchema = z.object({
   issuer: z.string().min(2, 'Issuer must be at least 2 characters'),
   date: z.string().min(2, 'Date must be at least 2 characters'),
 });
+
+export const JobDetailsFormSchema = z.object({
+  jobTitle: z.string().nullable(),
+  company: z.string().min(2, 'Company name must be at least 2 characters'),
+  description: z.string().nullable(),
+  keywords: z.string().nullable(),
+});
